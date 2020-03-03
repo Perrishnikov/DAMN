@@ -1,0 +1,128 @@
+
+:root {
+  --family-sans-serif: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  --is-size-1: 3rem;
+  --is-size-2: 2.5rem;
+  --is-size-3: 2rem;
+  --is-size-4: 1.5rem;
+  --is-size-5: 1.25rem;
+  --is-size-6: 1rem;
+  --is-size-7: .75rem;
+  --is-size-8: .65rem;
+  --is-size-9: .5rem;
+
+  --weight-light: 300;
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  --block-spacing: 1.5rem;
+  --easing: ease-out;
+  --speed: 86ms;
+
+
+  --black: #0A0A0A;
+  --black-bis: #121212;
+  --black-ter: #242424;
+  --grey-darker: #363636;
+  --grey-darker-dk: #292929;
+  --grey-dark: #4A4A4A;
+  --grey: #7A7A7A;
+  --grey-light: #B5B5B5;
+  --grey-lighter: #DBDBDB;
+  --white-ter: #F5F5F5;
+  --white-ter-dk: '';
+  --white-bis: #FAFAFA;
+  --white: #FFFFFF;
+  --white-dk: #f9f9f9;
+  /* --light: whitesmoke; */
+  /* --light-dk: #e8e8e8; */
+
+  --orange: #FF470F;
+  --yellow: #FFDD57;
+  --yellow-dk: #ffd83d;
+  --green: #23D160;
+  --green-dk: #20bc56;
+  --turquoise: #00D1B2;
+  --turquoise-dk: #00b89c;
+  --cyan: #209CEE;
+  --cyan-dk: #118fe4;
+  --blue: #3273DC;
+  --blue-dk: #2366d1;
+  --purple: #B86BFF;
+  --red: #FF3860;
+
+  --alpha: 0.25;
+  --box-shadow-spread: 0.125em;
+
+  /**Derived - references another variable. Used in classes */
+  --size-xsmall: var(--is-size-9);
+  --size-small: var(--is-size-8);
+  --size-normal: var(--is-size-6);
+  --size-medium: var(--is-size-5);
+  --size-large: var(--is-size-4);
+
+  --border: var(--grey-lighter);
+  --border-hover: var(--grey-lighter);
+
+  --text: var(--grey-dark);
+  /*$grey-dark*/
+  --text-light: var(--white-ter);
+  /*$grey*/
+  --text-strong: var(--grey);
+  
+  --text-hover: var(--grey-darker);
+  
+
+  --link: var(--blue);
+  /*$blue*/
+  --link-visited: var(--purple);
+  /*$purple*/
+  --link-hover: var(--grey-dark);
+  /*$grey-darker*/
+  --link-hover-border: var(--grey-light);
+  /*$grey-light*/
+  --link-focus: var(--grey-dark);
+  /*$grey-darker*/
+  --link-focus-border: var(--blue);
+  /*$blue*/
+  --link-active: var(--grey-dark);
+  /*$grey-darker*/
+  --link-active-border: var(--grey-dark);
+  /*grey-dark*/
+
+  /* --black: var(--black); Wont work*/
+  --black-hover: var(--white-bis);
+
+  --dark: var(--grey-darker);
+  --dark-hover: var(--grey-darker-dk);
+
+  /* --white: var(--white); Wont work*/
+  --white-hover: var(--white-dk);
+
+  --light: var(--white-ter);
+  --light-hover: var(--grey-lighter);
+  /*? check*/
+
+  /*$red*/
+  --danger: var(--red);
+  --danger-hover: var(--red-dk);
+
+  /*$yellow*/
+  --warning: var(--yellow);
+  --warning-hover: var(--yellow-dk);
+
+  /*$green*/
+  --success: var(--green);
+  --success-hover: var(--green-dk);
+
+  /*$cyan*/
+  --info: var(--cyan);
+  --info-hover: var(--cyan-dk);
+
+  --color-active: var(--color-2);
+  --color-icon-hover: var(--grey-lighter);
+  --color-icon-active: var(--light);
+
+}
