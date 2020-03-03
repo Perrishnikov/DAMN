@@ -1,41 +1,40 @@
-export const compLabelName = (name = '') => {
-    return `
+const CONST = {
+  SEARCH_NO_ACTIVE: 'No active partcode',
+  SEARCH_NOT_FOUND: 'Not found. Add a new partcode to database?',
+  // NO_PARTCODES: 'No partcodes found.'
+};
+
+const activeLabelName = label => {
+  return `
     <div class="labelName">
-    <span>${name}</span>
+    <span>${label && label.name ? label.name : ''}</span>
     </div>
   `;
 };
 
 
-export const compSearchResult = partcode => {
-  return `
+const activePartcode = partcode => {
+
+  if (partcode) {
+    return `
     <span>Active Partcode: </span>
     <div class="resultFound">
       <span>${partcode}</span>
       <svg class="navIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="bevel"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
     </div>
   `;
-};
-
-
-export const compNoSearchResult = message => {
-  return `
+  } else {
+    return `
     <div class="noResult">
       <svg class="navIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="bevel"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="8"></line></svg>
-      <span>${message}</span>
+      <span>${CONST.SEARCH_NO_ACTIVE}</span>
     </div>
   `;
+  }
 };
 
 
-export const compLabelType = () => {
-  return `
-  <div>Name Builder</div>
-  `;
-};
-
-
-export const compDataView = data => {
+const compDataView = data => {
   const placeholder = document.createElement('div');
   const style = `
     position: absolute;
@@ -66,3 +65,11 @@ export const compDataView = data => {
 
   return placeholder.firstElementChild;
 };
+
+const component = {
+  activeLabelName,
+  dataView: compDataView,
+  activePartcode,
+};
+
+export default component;

@@ -17,12 +17,19 @@ const PREFIX = {
   }
 };
 
+/**
+ * Table - Partcodes
+ */
 export const partcodes = new Map([
   ['12434', '12434'],
   ['00039', '00039'],
   ['13269', '13269'],
 ]);
 
+
+/**
+ * Table - Labels
+ */
 export const labels = new Map([
   [
     'empty', {
@@ -62,6 +69,20 @@ export const labels = new Map([
       bulk: null,
       version: 'N02',
       context: 'Dr Choice Manly 90 tabs (G)',
+      extension: 'pdf',
+      name: 'This is the name',
+      meta: {
+        date_created: ''
+      }
+    }
+  ], [
+    '12434', {
+      prefix: PREFIX.LBX,
+      partcode: partcodes['12434'],
+      bulk: null,
+      version: 'V02',
+      context: 'Hemp',
+      name: 'This is the name of 12434',
       extension: 'pdf',
       meta: {
         date_created: ''

@@ -1,15 +1,15 @@
-import { partcodes } from '../data/data.js';
-import state from '../data/state.js';
-import { compSearchResult, compNoSearchResult, compDataView, compLabelName } from '../components.js';
+import { partcodes, labels } from '../data/tables.js';
+import component from '../components.js';
+import {
+  setActivePartcode,
+  setActiveLabelKey,
+  mainReducer
+} from '../redux/reducers.js';
+import defaultState from '../redux/types.js';
 
+/** @type {import('../redux/types').Redux} */
 const { createStore } = window.Redux;
-
-
-const CONST = {
-  SEARCH_NO_ACTIVE: 'No active partcode',
-  SEARCH_NOT_FOUND: 'Not found. Add a new partcode to database?'
-};
-
+const store = createStore(mainReducer, defaultState);
 
 const handle = {
   searchInput: document.querySelector('#searchInput'),
@@ -18,18 +18,43 @@ const handle = {
 };
 
 
+function rerenderDOM() {
+  console.log('rerenderDOM');
+  const state = store.getState();
+
+
+  handle.searchResult.innerHTML = component.activePartcode(state.activePartcode);
+
+  const activeLabel = labels.get(state.activeLabelKey);
+  handle.activeLabelName.innerHTML = component.activeLabelName(activeLabel);
+
+  if (state.devMode) {
+    document.body.appendChild(component.dataView({ partcodes }));
+  }
+
+  // let previousValue = currentValue;
+  // currentValue = select(store.getState())
+  // if (previousValue !== currentValue) {
+  //   console.log(
+  //     'Some deep nested property changed from',
+  //     previousValue,
+  //     'to',
+  //     currentValue
+  //   )
+  // }
+}
+
 /** 
  * Nav 
  * Check if the partcode exists
  */
 function handleSearch(partcode) {
   if (partcode != '') {
-    const isValid = partcodes.has(partcode);
-    console.log(isValid);
-    return isValid;
+    const isFound = partcodes.has(partcode);
+
+    return isFound;
   }
 }
-
 
 
 function addListeners() {
@@ -41,20 +66,14 @@ function addListeners() {
 
       console.log('13');
       const partcode = handle.searchInput.value;
-      const isValidPartcode = handleSearch(partcode);
+      const isPartcodeListed = handleSearch(partcode);
 
-      if (isValidPartcode) {
+      if (isPartcodeListed) {
         handle.searchInput.value = '';
         handle.searchInput.blur();
 
-        //Nav search bar
-        state.setActivePartcode(partcode);
-        handle.searchResult.innerHTML = compSearchResult(state.getActivePartcode());
-
-        //Label name
-        state.setActiveLabelKey(null);
-        handle.activeLabelName.innerHTML = compLabelName(state.getActiveLabelKey().name);
-
+        store.dispatch(setActivePartcode(partcode));
+        store.dispatch(setActiveLabelKey(partcode));
       }
     }
   });
@@ -68,35 +87,13 @@ function addListeners() {
     const resultFound = e.target.closest(`.resultFound`);
 
     if (resultFound) {
-      state.setActivePartcode('');
-      handle.searchResult.innerHTML = compNoSearchResult(CONST.SEARCH_NO_ACTIVE);
-
-      state.setActiveLabelKey(null);
-      handle.activeLabelName.innerHTML = compLabelName(state.getActiveLabelKey().name);
+      store.dispatch(setActivePartcode(null));
+      store.dispatch(setActiveLabelKey(null));
     }
   });
 
 }
 
-
-function init() {
-
-  if (!state.getActivePartcode()) {
-    handle.searchResult.innerHTML = compNoSearchResult(CONST.SEARCH_NO_ACTIVE);
-  } else {
-    // We have an active partcode
-    handle.searchResult.innerHTML = compSearchResult(state.getActivePartcode());
-  }
-
-  if (state.getDevMode()) {
-    document.body.appendChild(compDataView({ partcodes: partcodes }));
-  }
-
-  if (state.getActiveLabelKey()) {
-    handle.activeLabelName.innerHTML = compLabelName(state.getActiveLabelKey().name);
-  }
-
-}
-
+store.subscribe(rerenderDOM);
 addListeners();
-init();
+rerenderDOM();
