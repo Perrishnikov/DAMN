@@ -25,7 +25,7 @@ export const partcodes = new Map([
 
 export const labels = new Map([
   [
-    'tester', {
+    'empty', {
       prefix: '',
       partcode: '',
       version: '',
@@ -33,6 +33,7 @@ export const labels = new Map([
       country: '',
       context: '',
       extension: '',
+      name: '',
       meta: {
         META_LABEL_ASSET_TYPE: '', // LABEL, CARTON, BLISTER
         META_LABEL_UPDATED_DATE: '', // from file properties
@@ -49,12 +50,13 @@ export const labels = new Map([
       version: 'N03',
       context: 'Dr Choice Women 90 tabs (G)',
       extension: 'pdf',
+      name: 'LBX00039.N03 Dr Choice Women 90 tabs (G).pdf',
       meta: {
         date_created: ''
       }
     }
   ], [
-    '00039', {
+    '00039x', {
       prefix: PREFIX.LBX,
       partcode: partcodes['00039'],
       bulk: null,

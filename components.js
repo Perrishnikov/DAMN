@@ -1,10 +1,11 @@
-export const compLabelName = name => {
-  return `
+export const compLabelName = (name = '') => {
+    return `
     <div class="labelName">
     <span>${name}</span>
     </div>
   `;
 };
+
 
 export const compSearchResult = partcode => {
   return `
@@ -16,6 +17,7 @@ export const compSearchResult = partcode => {
   `;
 };
 
+
 export const compNoSearchResult = message => {
   return `
     <div class="noResult">
@@ -25,11 +27,13 @@ export const compNoSearchResult = message => {
   `;
 };
 
-export const compNameBuilder = () => {
+
+export const compLabelType = () => {
   return `
   <div>Name Builder</div>
   `;
 };
+
 
 export const compDataView = data => {
   const placeholder = document.createElement('div');
@@ -57,7 +61,6 @@ export const compDataView = data => {
   }).join('')}
     </div>
   `;
-
 
   placeholder.innerHTML = html;
 

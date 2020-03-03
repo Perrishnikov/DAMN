@@ -17,11 +17,6 @@
   --weight-semibold: 600;
   --weight-bold: 700;
 
-  --block-spacing: 1.5rem;
-  --easing: ease-out;
-  --speed: 86ms;
-
-
   --black: #0A0A0A;
   --black-bis: #121212;
   --black-ter: #242424;
@@ -52,6 +47,10 @@
   --blue-dk: #2366d1;
   --purple: #B86BFF;
   --red: #FF3860;
+
+  --p-12px: 12px;
+  --p-8px: 8px;
+  --p-4px: 4px;
 
   --alpha: 0.25;
   --box-shadow-spread: 0.125em;
@@ -120,9 +119,5 @@
   /*$cyan*/
   --info: var(--cyan);
   --info-hover: var(--cyan-dk);
-
-  --color-active: var(--color-2);
-  --color-icon-hover: var(--grey-lighter);
-  --color-icon-active: var(--light);
 
 }

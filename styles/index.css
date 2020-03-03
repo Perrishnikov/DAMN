@@ -1,0 +1,57 @@
+@import './root.css';
+@import './nav.css';
+@import './nameReasults.css';
+@import './col-data.css';
+@import './col-labels.css';
+
+body {
+  line-height: 1.2;
+  font-size: var(--size-normal);
+  font-family: var(--family-sans-serif);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  height: calc(100vh - 96px);
+  cursor: default;
+}
+
+.content-wrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  /* margin-top: 48px; */
+  height: 100%;
+}
+.content-wrap>section:first-child {
+  margin-left: var(--p-12px);
+}
+.content-wrap>section:last-child {
+  margin-right: var(--p-12px);
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--p-12px);
+  margin-bottom: var(--p-12px);
+  width: 270px;
+  max-width: 270px;
+  background-color: pink;
+}
+
+.component {
+  display: flex;
+  align-items: center;
+  padding: var(--p-4px);
+  background-color: var(--grey-lighter);
+  border-radius: var(--p-8px);
+  min-height: 30px;
+  margin-bottom: var(--p-12px);
+}
+.component.row {
+  flex-direction: row;
+}
+.component.col {
+  flex-direction: column;
+}

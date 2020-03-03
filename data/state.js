@@ -1,13 +1,18 @@
+import { labels } from '../data/data.js';
+
 let activePartcode = '00039'; //string 12434 or 00039
 let devMode = true; //true false
-let activeLabelName = 'LBX00039.N03 Dr Choice Women 90 tabs (G).pdf';
+let activeLabelKey = '00039';
 
 const state = {
   getActivePartcode: () => activePartcode,
   setActivePartcode: (partcode) => { activePartcode = partcode; console.log(`activePartcode: ${activePartcode}`); },
   getDevMode: () => devMode,
-  getactiveLabelName: () => activeLabelName,
-  setactiveLabelName: name => { activeLabelName = name; console.log(`new dndFileName: ${name}`); }
+  getActiveLabelKey: () => { 
+    return activeLabelKey ? labels.get(activeLabelKey) : labels.get('empty'); 
+  },
+  setActiveLabelKey: (key) => { activeLabelKey = key; },
+  
 
 };
 

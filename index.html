@@ -4,19 +4,16 @@
 <head lang="en">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles/main.css" media="screen">
-  <link rel="stylesheet" href="styles/nav.css" media="screen">
-  <link rel="stylesheet" href="styles/body.css" media="screen">
+  <link rel="stylesheet" href="styles/index.css" media="screen">
   <title>Index</title>
 </head>
 
 <body>
-  <div id="nav">
+  <div class="nav">
     <div class="nav-left">
       <span>DAMN
         <span class="nav-subtitle">Digital Asset Manager - Names</span>
       </span>
-
     </div>
 
     <div class="nav-center">
@@ -35,17 +32,17 @@
 
   </div>
 
-  <div id="nameReasults">
+  <div class="nameResults">
     <div class="component row" id="activeLabelName"></div>
     <div class="nameResultsMessage"> Message</div>
   </div>
-  
 
-  <div id="content-wrap">
+
+  <div class="content-wrap">
 
     <section id="col-data">
       <div class="component row" id="searchResult"></div>
-      
+
       <!-- More Components -->
     </section>
 
@@ -68,7 +65,7 @@
     </section> -->
 
   </div>
-
+  <script type="module" src="https://unpkg.com/redux@4.0.5/dist/redux.js"></script>
   <script type="module" src="scripts/index.js"></script>
 </body>
 

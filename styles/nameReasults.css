@@ -1,0 +1,12 @@
+.nameResults {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  margin-top: 48px;
+  margin-right: var(--p-12px);
+  margin-left: var(--p-12px);
+}
+
+#activeLabelName {
+  font-size: var(--size-large);
+}
