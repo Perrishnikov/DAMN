@@ -4,6 +4,24 @@ const CONST = {
   // NO_PARTCODES: 'No partcodes found.'
 };
 
+
+export const activeLabelHistory = lables => {
+
+  // console.log(lables);
+  if (lables) {
+    return `
+    <div class="">
+    ${[...lables].map(label => {
+      // console.log(label);
+      return `<div style="padding-left:4px;">${label.name}</div>`;
+    }).join('')}
+    </div>
+    `;
+  }
+
+};
+
+
 const activeLabelName = label => {
   return `
     <div class="labelName">
@@ -70,6 +88,7 @@ const component = {
   activeLabelName,
   dataView: compDataView,
   activePartcode,
+  activeLabelHistory
 };
 
 export default component;

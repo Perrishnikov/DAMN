@@ -1,10 +1,12 @@
-import { partcodes, labels } from '../data/tables.js';
+
 import component from '../components.js';
 import {
   setActivePartcode,
   setActiveLabelKey,
   mainReducer
 } from '../redux/reducers.js';
+import connect from '../connect.js';
+
 import defaultState from '../redux/types.js';
 
 /** @type {import('../redux/types').Redux} */
@@ -15,20 +17,29 @@ const handle = {
   searchInput: document.querySelector('#searchInput'),
   activeLabelName: document.querySelector('#activeLabelName'),
   searchResult: document.querySelector('#searchResult'),
+  labelHistory: document.querySelector('#labelHistory'),
 };
 
 
 function rerenderDOM() {
-  console.log('rerenderDOM');
-  const state = store.getState();
+  console.log('re-renderDOM');
+
+  //States....
+  const activePartcode = store.getState().activePartcode;
+  const activeLabel = store.getState().activeLabel;
+  // console.log(`activePartcode: ${activePartcode}`);
+
+  //Database connections... 
+  const partcodes = connect.partcodes.getAllPartcodes();
+  const associatedLabels = connect.labels.getLabelsByPartcode(activePartcode);
 
 
-  handle.searchResult.innerHTML = component.activePartcode(state.activePartcode);
-
-  const activeLabel = labels.get(state.activeLabelKey);
+  //Components...
   handle.activeLabelName.innerHTML = component.activeLabelName(activeLabel);
+  handle.searchResult.innerHTML = component.activePartcode(activePartcode);
+  handle.labelHistory.innerHTML = component.activeLabelHistory(associatedLabels);
 
-  if (state.devMode) {
+  if (store.getState().devMode) {
     document.body.appendChild(component.dataView({ partcodes }));
   }
 
@@ -50,8 +61,8 @@ function rerenderDOM() {
  */
 function handleSearch(partcode) {
   if (partcode != '') {
-    const isFound = partcodes.has(partcode);
-
+    const isFound = connect.partcodes.hasPartcode(partcode);
+    // console.log(`isFound: ${isFound}`);
     return isFound;
   }
 }

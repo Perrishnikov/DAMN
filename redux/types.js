@@ -56,9 +56,9 @@
 
 /** 
  * @typedef {Object} State 
- * @property {String || null} activePartcode - active partcode
+ * @property {String} activePartcode - active partcode
  * @property {Boolean} devMode
- * @property {String || null} activeLabelKey - should be enum
+ * @property {String} activeLabelKey - should be enum
  */
 
  
@@ -66,7 +66,7 @@
 const defaultState = {
   activePartcode: '00039',
   devMode: true,
-  activeLabelKey: '00039',
+  activeLabelKey: '',
 };
 
 export default defaultState;

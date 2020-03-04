@@ -50,42 +50,72 @@ export const labels = new Map([
       }
     },
   ], [
-    '00039', {
+    'LBX00039.N03', {
       prefix: PREFIX.LBX,
-      partcode: partcodes['00039'],
+      partcode: partcodes.get('00039'),
       bulk: null,
       version: 'N03',
       context: 'Dr Choice Women 90 tabs (G)',
       extension: 'pdf',
       name: 'LBX00039.N03 Dr Choice Women 90 tabs (G).pdf',
       meta: {
-        date_created: ''
+        META_LABEL_ASSET_TYPE: '', // LABEL, CARTON, BLISTER
+        META_LABEL_UPDATED_DATE: '', // from file properties
+        META_LABEL_CREATED_BY: '', // from file properties
+        LABEL_PDF_PENDING: '',
+        LABEL_PDF_ACTIVE: '',
       }
     }
   ], [
-    '00039x', {
+    'LBX00039.N02', {
       prefix: PREFIX.LBX,
-      partcode: partcodes['00039'],
+      partcode: partcodes.get('00039'),
       bulk: null,
       version: 'N02',
       context: 'Dr Choice Manly 90 tabs (G)',
       extension: 'pdf',
-      name: 'This is the name',
+      name: 'LBX00039.N02 This is the name.pdf',
       meta: {
-        date_created: ''
+        META_LABEL_ASSET_TYPE: '', // LABEL, CARTON, BLISTER
+        META_LABEL_UPDATED_DATE: '', // from file properties
+        META_LABEL_CREATED_BY: '', // from file properties
+        LABEL_PDF_PENDING: '',
+        LABEL_PDF_ACTIVE: '',
       }
     }
   ], [
+    'LBX00039.N01', {
+      prefix: PREFIX.LBX,
+      partcode: partcodes.get('00039'),
+      bulk: null,
+      version: 'N01',
+      context: 'This is the name',
+      extension: 'pdf',
+      name: 'LBX00039.N01 This is the name.pdf',
+      meta: {
+        META_LABEL_ASSET_TYPE: '', // LABEL, CARTON, BLISTER
+        META_LABEL_UPDATED_DATE: '', // from file properties
+        META_LABEL_CREATED_BY: '', // from file properties
+        LABEL_PDF_PENDING: '',
+        LABEL_PDF_ACTIVE: '',
+      }
+    }
+  ],
+  [
     '12434', {
       prefix: PREFIX.LBX,
-      partcode: partcodes['12434'],
+      partcode: partcodes.get('12434'),
       bulk: null,
       version: 'V02',
       context: 'Hemp',
       name: 'This is the name of 12434',
       extension: 'pdf',
       meta: {
-        date_created: ''
+        META_LABEL_ASSET_TYPE: '', // LABEL, CARTON, BLISTER
+        META_LABEL_UPDATED_DATE: '', // from file properties
+        META_LABEL_CREATED_BY: '', // from file properties
+        LABEL_PDF_PENDING: '',
+        LABEL_PDF_ACTIVE: '',
       }
     }
   ]
