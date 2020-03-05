@@ -1,4 +1,14 @@
-import { partcodes, labels } from '../data/tables.js';
+import { partcodes, labels, PREFIXES } from '../data/tables.js';
+
+
+const getLabelByKey = labelName => {
+  const isFound = labels.has(labelName);
+  if (isFound) {
+    return labels.get(labelName);
+  } else {
+    return false;
+  }
+};
 
 
 /**
@@ -33,15 +43,20 @@ const hasPartcode = partcode => partcodes.has(partcode);
  */
 const getAllPartcodes = () => partcodes;
 
+const getAllPrefixes = () => PREFIXES;
 
 const connect = {
   labels: {
     getLabelsByPartcode,
+    getLabelByKey
   },
   partcodes: {
     hasPartcode,
     getAllPartcodes,
   },
+  prefixes: {
+    getAllPrefixes
+  }
 };
 
 export default connect;

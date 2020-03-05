@@ -1,6 +1,6 @@
 @import './root.css';
 @import './nav.css';
-@import './nameReasults.css';
+@import './labelName.css';
 @import './col-data.css';
 @import './col-labels.css';
 
@@ -37,7 +37,7 @@ section {
   margin-bottom: var(--p-12px);
   width: 270px;
   max-width: 270px;
-  background-color: pink;
+  /* background-color: pink; */
 }
 
 .component {

@@ -58,7 +58,7 @@
   /**Derived - references another variable. Used in classes */
   --size-xsmall: var(--is-size-9);
   --size-small: var(--is-size-8);
-  --size-normal: var(--is-size-6);
+  --size-normal: var(--is-size-7);
   --size-medium: var(--is-size-5);
   --size-large: var(--is-size-4);
 

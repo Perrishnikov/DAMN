@@ -1,20 +1,26 @@
 const CONST = {
   SEARCH_NO_ACTIVE: 'No active partcode',
   SEARCH_NOT_FOUND: 'Not found. Add a new partcode to database?',
-  // NO_PARTCODES: 'No partcodes found.'
+  NO_LABEL_HISTORY: 'No label history'
 };
 
 
-export const activeLabelHistory = lables => {
 
-  // console.log(lables);
-  if (lables) {
+const activePartcodeHistory = lables => {
+
+  console.log(lables);
+  if (lables.length > 1) {
     return `
-    <div class="">
+    
     ${[...lables].map(label => {
       // console.log(label);
-      return `<div style="padding-left:4px;">${label.name}</div>`;
+      return `<div data-name=${label.prefix.name}${label.partcode}.${label.version} class="labelHistoryItem">${label.name}</div>`;
     }).join('')}
+    `;
+  } else {
+    return `
+    <div class="labelHistoryItem">
+      <span>${''}</span>
     </div>
     `;
   }
@@ -24,7 +30,7 @@ export const activeLabelHistory = lables => {
 
 const activeLabelName = label => {
   return `
-    <div class="labelName">
+    <div class="">
     <span>${label && label.name ? label.name : ''}</span>
     </div>
   `;
@@ -36,7 +42,7 @@ const activePartcode = partcode => {
   if (partcode) {
     return `
     <span>Active Partcode: </span>
-    <div class="resultFound">
+    <div data-removeActivePartcode class="resultFound">
       <span>${partcode}</span>
       <svg class="navIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="bevel"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
     </div>
@@ -84,11 +90,73 @@ const compDataView = data => {
   return placeholder.firstElementChild;
 };
 
+
+const selectForPrefix = params => {
+  const { activeLabel, prefixes } = params;
+  const labelprefix = activeLabel.prefix.name;
+
+  return `
+    <select id="prefixSelect"> 
+
+      ${[...prefixes].map(([key, value]) => {
+    return `<option ${labelprefix == value.name ? 'selected' : ''} value="${value.name}">${value.name}</option>`;
+  }).join('')}
+
+    </select>
+  `;
+
+};
+
+const labelDetails = (params) => {
+  const { activeLabel } = params;
+
+  if (activeLabel) {
+    return `
+      
+      <!-- prefix -->
+      <div class="labelDetailGroup">
+        <div class="labelDetailSub">
+          <span>Prefix:</span>
+          
+          ${selectForPrefix(params)}
+        </div>
+        
+        <div class="labelDetailInfo">
+          <span>${activeLabel.prefix.desc}</span>
+          <span>${activeLabel.prefix.type}</span>
+        </div>
+      </div>
+      
+      <!-- version -->
+      <div class="labelDetailGroup">
+        <div class="labelDetailSub">
+          <span>Version:</span>
+          <input class="" id="labelDetailVersion" value="${activeLabel.version}">
+          <span></span>
+        </div>
+      </div>
+
+      <!-- context -->
+      <div class="labelDetailGroup">
+        <div class="labelDetailSub">
+          <span>Context:</span>
+          <input class="" id="labelDetailContext" value="${activeLabel.context}">
+        </div>
+      </div>
+
+    `;
+  } else {
+    return '';
+  }
+};
+
+
 const component = {
   activeLabelName,
   dataView: compDataView,
   activePartcode,
-  activeLabelHistory
+  activePartcodeHistory,
+  labelDetails,
 };
 
 export default component;

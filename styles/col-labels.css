@@ -1,6 +1,23 @@
 #labelHistory {
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
   height: 50%;
+  font-size: var(--size-small);
+  justify-content: flex-start;
+  margin-bottom: var(--p-12px);
+}
+.labelHistoryItem {
+  width:100%;
+  /* margin-top:var(--p-4px); */
+  padding: var(--p-4px);
+  border-radius: var(--p-4px);
+  cursor: pointer;
+  min-height: 20px;
+}
+.labelHistoryItem:hover {
+  background: var(--grey);
+  color: var(--text-light);
 }
 #labelDnd {
   /* align-self: flex-end; */

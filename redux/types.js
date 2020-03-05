@@ -58,15 +58,36 @@
  * @typedef {Object} State 
  * @property {String} activePartcode - active partcode
  * @property {Boolean} devMode
- * @property {String} activeLabelKey - should be enum
+ * @property {Boolean} isEditing 
+ * @property {Label} activeLabel - should be enum
  */
 
- 
- /** @type {State} */
+
+/** @type {State} */
 const defaultState = {
   activePartcode: '00039',
   devMode: true,
-  activeLabelKey: '',
+  isEditing: false,
+  activeLabel: {
+    prefix: {
+      name: 'LBX',
+      desc: 'Enzymatic Therapy older design box',
+      type: 'CARTON'
+    },
+    partcode: '00039',
+    bulk: null,
+    version: 'N02',
+    context: 'Dr Choice Manly 90 tabs (G)',
+    extension: 'pdf',
+    name: 'LBX00039.N02 This is the name.pdf',
+    meta: {
+      META_LABEL_ASSET_TYPE: 'CARTON', // LABEL, CARTON, BLISTER
+      META_LABEL_UPDATED_DATE: 'Hum', // from file properties
+      META_LABEL_CREATED_BY: 'Hex', // from file properties
+      LABEL_PDF_PENDING: 'Hilbert',
+      LABEL_PDF_ACTIVE: 'Hey',
+    }
+  }
 };
 
 export default defaultState;
