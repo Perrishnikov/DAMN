@@ -140,7 +140,9 @@ const labelDetails = (params) => {
       <div class="labelDetailGroup">
         <div class="labelDetailSub">
           <span>Context:</span>
-          <input class="" id="labelDetailContext" value="${activeLabel.context}">
+          <div id="labelDetailContext" contenteditable="true">
+            ${activeLabel.context}
+          </div>
         </div>
       </div>
 

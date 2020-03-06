@@ -133,6 +133,7 @@ function addListeners() {
     if (e.target.id === 'labelDetailVersion') {
       console.log(`update temp label with new version: ${e.target.value}`);
     }
+    
 
   });
 }
