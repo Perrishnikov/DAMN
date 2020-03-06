@@ -8,7 +8,7 @@ const CONST = {
 
 const activePartcodeHistory = lables => {
 
-  console.log(lables);
+  // console.log(lables);
   if (lables.length > 1) {
     return `
     

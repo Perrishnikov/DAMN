@@ -4,6 +4,11 @@ const TYPE = {
   POUCH: 'POUCH'
 };
 
+const LABEL_GROUP_STATUS = {
+  ACTIVE: 'ACTIVE',
+  HISTORY: 'HISTORY'
+};
+
 export const PREFIXES = new Map([
   ['LE', {
     name: 'LE',
@@ -140,5 +145,50 @@ export const labels = new Map([
     }
   ]
 ]);
+
+const images = new Map([
+  ['00039', '00039.MAIN.01.jpg']
+]);
+
+/** 
+ * Groups
+ */
+export const labelGroups = new Map([
+  ['12434', [{
+    partcode: partcodes.get('12434'),
+    date: '',
+    labels: []
+  }]],
+  ['00039', [{
+    partcode: partcodes.get('00039'),
+    date: '',
+    groupName: 'LG0003',
+    status: LABEL_GROUP_STATUS.ACTIVE,
+    labels: [
+      labels.get('LBX00039.N03')
+    ]
+  }, {
+    partcode: partcodes.get('00039'),
+    date: '',
+    groupName: 'LG0002',
+    comment: '',
+    status: LABEL_GROUP_STATUS.HISTORY,
+    labels: [
+      labels.get('LBX00039.N02')
+    ],
+    images: [
+      images.get('00039.MAIN.01.jpg')
+    ]
+  }, {
+    partcode: partcodes.get('00039'),
+    date: '',
+    groupName: 'LG0001',
+    status: LABEL_GROUP_STATUS.HISTORY,
+    labels: [
+      labels.get('LBX00039.N01')
+    ]
+  }]],
+]);
+
 
 
