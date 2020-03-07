@@ -4,13 +4,13 @@ import { partcodes, labels, PREFIXES, labelGroups } from '../data/tables.js';
 const getLabelGroupsByPartcode = partcode => {
   let o = {
     activeLabelGroup: '',
-    historyLabelGroups: ''
+    otherLabelGroups: ''
   };
 
   if (labelGroups.has(partcode)) {
     o.activeLabelGroup = labelGroups.get(partcode).find(group => group.status === 'ACTIVE'),
     
-    o.historyLabelGroups = labelGroups.get(partcode).filter(group => group.status === 'HISTORY');
+    o.otherLabelGroups = labelGroups.get(partcode).filter(group => group.status === 'HISTORY');
   }
 
   return o;

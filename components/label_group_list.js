@@ -1,8 +1,8 @@
-const label_group_history = labelGroups => {
+const label_group_list = labelGroups => {
 
   if (labelGroups.length > 1) {
     return `
-    <div>Label Group History: </div>
+    <div>Label Group List: </div>
     ${[...labelGroups].map(group => {
       // console.log(group);
       return `<div class="">${group.groupName}</div>`;
@@ -17,4 +17,5 @@ const label_group_history = labelGroups => {
   }
 };
 
-export default label_group_history;
+export default label_group_list;
+

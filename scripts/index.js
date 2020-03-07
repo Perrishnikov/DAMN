@@ -9,7 +9,9 @@ import connect from '../connect.js';
 
 import label_group_new from '../components/label_group_new.js';
 import label_group_active from '../components/label_group_active.js';
-import label_group_history from '../components/label_group_history.js';
+import label_group_list from '../components/label_group_list.js';
+import labels_list from '../components/labels_list.js';
+import label_dnd from '../components/label_dnd.js';
 
 import defaultState from '../redux/types.js';
 
@@ -21,11 +23,12 @@ const handle = {
   searchInput: document.querySelector('#searchInput'),
   activeLabelName: document.querySelector('#activeLabelName'),
   activePartcode: document.querySelector('#activePartcode'),
-  labels_history: document.querySelector('#labels_history'),
+  labels_list: document.querySelector('#labels_list'),
   labelDetails: document.querySelector('#labelDetails'),
   label_group_new: document.querySelector('#label_group_new'),
   label_group_active: document.querySelector('#label_group_active'),
-  label_group_history: document.querySelector('#label_group_history')
+  label_group_list: document.querySelector('#label_group_list'),
+  label_dnd: document.querySelector('#label_dnd'),
 };
 
 
@@ -47,20 +50,23 @@ function rerenderDOM() {
   const partcodes = connect.partcodes.getAllPartcodes();
   const associatedLabels = connect.labels.getLabelsByPartcode(activePartcode);
   const prefixes = connect.prefixes.getAllPrefixes();
-  const { activeLabelGroup, historyLabelGroups } = connect.labelGroups.getLabelGroupsByPartcode(activePartcode);
+  const { activeLabelGroup, otherLabelGroups } = connect.labelGroups.getLabelGroupsByPartcode(activePartcode);
 
 
   //Components...
   handle.activePartcode.innerHTML = component.activePartcode(activePartcode);
   handle.activeLabelName.innerHTML = component.activeLabelName(activeLabel);
-  handle.labels_history.innerHTML = component.activePartcodeHistory(associatedLabels);
+  // handle.labels_list.innerHTML = component.labels_list(associatedLabels);
   handle.labelDetails.innerHTML = component.labelDetails({ activeLabel, prefixes });
 
+  render(handle.labels_list, labels_list(associatedLabels));
   render(handle.label_group_new, label_group_new(activePartcode));
   // handle.label_group_new.innerHTML = label_group_new(activePartcode);
   render(handle.label_group_active, label_group_active(activeLabelGroup));
 
-  render(handle.label_group_history, label_group_history(historyLabelGroups))
+  render(handle.label_group_list, label_group_list(otherLabelGroups));
+
+  render(handle.label_dnd, label_dnd());
 
   if (store.getState().devMode) {
     document.body.appendChild(component.dataView({ partcodes }));

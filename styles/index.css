@@ -2,7 +2,11 @@
 @import './nav.css';
 @import './labelName.css';
 @import './col-data.css';
-@import './col-labels.css';
+@import '../components/label_group_active.css';
+@import '../components/label_group_new.css';
+@import '../components/label_dnd.css';
+@import '../components/labels_list.css';
+
 
 body {
   line-height: 1.2;
@@ -46,12 +50,18 @@ section {
   padding: var(--p-4px);
   background-color: var(--grey-lighter);
   border-radius: var(--p-8px);
-  min-height: 30px;
+  /* min-height: 30px; */
+  max-height: 100%;
   margin-bottom: var(--p-12px);
+  flex-grow: 1;
 }
 .component.row {
   flex-direction: row;
 }
 .component.col {
+  flex-direction: column;
+}
+.flex-col{
+  display: flex;
   flex-direction: column;
 }

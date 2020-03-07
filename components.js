@@ -6,26 +6,26 @@ const CONST = {
 
 
 
-const activePartcodeHistory = lables => {
+// const activePartcodeHistory = lables => {
 
-  // console.log(lables);
-  if (lables.length > 1) {
-    return `
+//   // console.log(lables);
+//   if (lables.length > 1) {
+//     return `
     
-    ${[...lables].map(label => {
-      // console.log(label);
-      return `<div data-name=${label.prefix.name}${label.partcode}.${label.version} class="labelHistoryItem">${label.name}</div>`;
-    }).join('')}
-    `;
-  } else {
-    return `
-    <div class="labelHistoryItem">
-      <span>${''}</span>
-    </div>
-    `;
-  }
+//     ${[...lables].map(label => {
+//       // console.log(label);
+//       return `<div data-name=${label.prefix.name}${label.partcode}.${label.version} class="labelHistoryItem">${label.name}</div>`;
+//     }).join('')}
+//     `;
+//   } else {
+//     return `
+//     <div class="labelHistoryItem">
+//       <span>${''}</span>
+//     </div>
+//     `;
+//   }
 
-};
+// };
 
 
 const activeLabelName = label => {
@@ -157,7 +157,7 @@ const component = {
   activeLabelName,
   dataView: compDataView,
   activePartcode,
-  activePartcodeHistory,
+  // activePartcodeHistory,
   labelDetails,
 };
 

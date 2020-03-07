@@ -71,6 +71,24 @@ export const labels = new Map([
       }
     },
   ], [
+    'LG00039.A03', {
+      prefix: PREFIXES.get('LG'),
+      partcode: partcodes.get('00039'),
+      bulk: null,
+      country: '',
+      version: 'A03',
+      context: 'Label - Dr Choice Women 90 tabs (G)',
+      extension: 'pdf',
+      name: 'LG00039.A03 Dr Choice Women 90 tabs (G).pdf',
+      meta: {
+        META_LABEL_ASSET_TYPE: '', // LABEL, CARTON, BLISTER
+        META_LABEL_UPDATED_DATE: '', // from file properties
+        META_LABEL_CREATED_BY: '', // from file properties
+        LABEL_PDF_PENDING: '',
+        LABEL_PDF_ACTIVE: '',
+      }
+    }
+  ], [
     'LBX00039.N03', {
       prefix: PREFIXES.get('LBX'),
       partcode: partcodes.get('00039'),
@@ -159,13 +177,15 @@ export const labelGroups = new Map([
     date: '',
     labels: []
   }]],
-  ['00039', [{
+  ['00039', [
+    {
     partcode: partcodes.get('00039'),
     date: '',
     groupName: 'LG0003',
     status: LABEL_GROUP_STATUS.ACTIVE,
     labels: [
-      labels.get('LBX00039.N03')
+      labels.get('LBX00039.N03'),
+      labels.get('LG00039.A03')
     ]
   }, {
     partcode: partcodes.get('00039'),
@@ -187,7 +207,8 @@ export const labelGroups = new Map([
     labels: [
       labels.get('LBX00039.N01')
     ]
-  }]],
+  }
+]],
 ]);
 
 
