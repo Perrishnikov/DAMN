@@ -1,4 +1,4 @@
-const label_group_active = group => {
+const label_group_selected = group => {
 
   if (group) {
     const cartons = group.labels.filter(label => label.prefix.type == 'CARTON');
@@ -8,7 +8,7 @@ const label_group_active = group => {
     const pouches = group.labels.filter(label => label.prefix.type == 'POUCH');
 
     return `
-      <div>Active Label Group: <span>${group.groupName}</span></div>
+      <div>Selected Label Group: <span>${group.groupName}</span></div>
 
       <div>Cartons:</div>
       ${cartons.map(carton => {
@@ -42,4 +42,4 @@ const label_group_active = group => {
   }
 };
 
-export default label_group_active;
+export default label_group_selected;

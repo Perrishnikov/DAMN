@@ -1,11 +1,11 @@
-const label_group_list = labelGroups => {
+const label_group_list = (activePartcode, labelGroups) => {
 
   if (labelGroups.length > 1) {
     return `
     <div>Label Group List: </div>
     ${[...labelGroups].map(group => {
       // console.log(group);
-      return `<div class="">${group.groupName}</div>`;
+      return `<div data-group="${group.groupName}" data-partcode="${activePartcode}" class="lineItem">${group.groupName}</div>`;
     }).join('')}
     `;
   } else {

@@ -68,6 +68,7 @@ const defaultState = {
   activePartcode: '00039',
   devMode: true,
   isEditing: false,
+  selectedLabelGroup: '',
   activeLabel: {
     prefix: {
       name: 'LBX',

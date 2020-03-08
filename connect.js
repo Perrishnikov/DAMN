@@ -9,11 +9,23 @@ const getLabelGroupsByPartcode = partcode => {
 
   if (labelGroups.has(partcode)) {
     o.activeLabelGroup = labelGroups.get(partcode).find(group => group.status === 'ACTIVE'),
-    
+
     o.otherLabelGroups = labelGroups.get(partcode).filter(group => group.status === 'HISTORY');
   }
 
   return o;
+};
+
+
+const getLabelsByGroup = (activePartcode, groupName) => {
+  let labelsInGroup;
+
+  if (labelGroups.has(activePartcode)) {
+    labelsInGroup = labelGroups.get(activePartcode).find(group => group.groupName === groupName);
+
+  }
+
+  return labelsInGroup;
 };
 
 const getLabelByKey = labelName => {
@@ -73,7 +85,8 @@ const connect = {
     getAllPrefixes
   },
   labelGroups: {
-    getLabelGroupsByPartcode
+    getLabelGroupsByPartcode,
+    getLabelsByGroup
   }
 };
 
