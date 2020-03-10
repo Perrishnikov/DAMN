@@ -16,7 +16,7 @@
 }
 
 .groupIsActive{
-  background-color: pink;
+  background-color: var(--cyan);
 }
 
 .groupIsSelected{

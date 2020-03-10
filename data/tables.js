@@ -133,7 +133,7 @@ export const labels = new Map([
       version: 'N01',
       context: 'This is the name',
       extension: 'pdf',
-      name: 'LBX00039.N01 This is the name.pdf',
+      name: 'LBN00039.N01 This is the name.pdf',
       meta: {
         META_LABEL_ASSET_TYPE: '', // LABEL, CARTON, BLISTER
         META_LABEL_UPDATED_DATE: '', // from file properties
@@ -205,7 +205,7 @@ export const labelGroups = new Map([
       groupName: 'LG0001',
       status: LABEL_GROUP_STATUS.HISTORY,
       labels: [
-        labels.get('LBX00039.N01')
+        labels.get('LBN00039.N01')
       ]
     }
   ]],

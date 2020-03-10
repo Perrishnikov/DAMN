@@ -2,7 +2,6 @@
 @import './nav.css';
 @import './labelName.css';
 @import './col-data.css';
-@import '../components/label_group_selected.css';
 @import '../components/label_group_new.css';
 @import '../components/label_dnd.css';
 @import '../components/labels_list.css';

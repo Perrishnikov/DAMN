@@ -1,3 +1,20 @@
+const selectForPrefix = params => {
+  const { activeLabel, prefixes } = params;
+  const labelprefix = activeLabel.prefix.name;
+
+  return `
+    <select id="prefixSelect"> 
+
+      ${[...prefixes].map(([key, value]) => {
+    return `<option ${labelprefix == value.name ? 'selected' : ''} value="${value.name}">${value.name}</option>`;
+  }).join('')}
+
+    </select>
+  `;
+
+};
+
+
 const label_details = params => {
 
   const { selectedLabel, prefixes } = params;

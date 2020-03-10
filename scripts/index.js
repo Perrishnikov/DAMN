@@ -77,8 +77,9 @@ function rerenderDOM() {
   /* Label Groups New */
   render(handle.label_group_new, label_group_new(activePartcode, activePartcode));
 
-  /* Label Groups All */
+  /* Label Groups for partcode */
   render(handle.label_group_list, label_group_list(
+    selectedLabel,
     selectedLabelGroup,
     associatedGroups)
   );
@@ -169,14 +170,9 @@ function addListeners() {
     }
 
     if (labelGroupSelected) {
-      // const partcode = labelGroupSelect.dataset.partcode;
       const labelGroupName = labelGroupSelected.dataset.group;
-      // console.log(labelGroupName);
-      // const group = handleGroupSelect(partcode, labelGroupName);
 
-      // console.log(group);
       store.dispatch(setSelectedGroup(labelGroupName));
-      // handleGroupSelect(labelGroupSelected);
     }
 
     if (labelSelected) {

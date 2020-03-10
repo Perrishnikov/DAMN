@@ -51,7 +51,7 @@
   background-color: var(--grey-lighter);
   border-radius: var(--p-8px);
   min-height: 20px;
-  background-color: pink;
+  /* background-color: pink; */
   margin-bottom: var(--p-4px);
 }
 
