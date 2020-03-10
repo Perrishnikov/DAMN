@@ -1,8 +1,9 @@
 const { produce } = window.immer;
 
 const SET_ACTIVE_PARTCODE = 'SET_ACTIVE_PARTCODE';
-const SET_ACTIVE_LABEL = 'SET_ACTIVE_LABEL';
-const SET_LABEL_GROUP = 'SET_LABEL_GROUP';
+const SET_SELECTED_LABEL = 'SET_SELECTED_LABEL';
+const SET_SELECTED_GROUP = 'SET_SELECTED_GROUP';
+const SET_LABEL_GROUPS = 'SET_LABEL_GROUPS';
 
 /** 
  * ACTIONS 
@@ -14,17 +15,24 @@ export function setActivePartcode(partcode) {
   };
 }
 
-export function setActiveLabel(label) {
+export function setSelectedLabel(label) {
   return {
-    type: SET_ACTIVE_LABEL,
+    type: SET_SELECTED_LABEL,
     label
   };
 }
 
-export function setSelectedGroup(group) {
+export function setSelectedGroup(groupName) {
   return {
-    type: SET_LABEL_GROUP,
-    group
+    type: SET_SELECTED_GROUP,
+    groupName
+  };
+}
+
+export function setLabelGroups(groups) {
+  return {
+    type: SET_LABEL_GROUPS,
+    groups
   };
 }
 
@@ -41,14 +49,19 @@ export const mainReducer = (previous = {}, action) => produce(previous, draft =>
       return;
     }
 
-    case SET_ACTIVE_LABEL: {
+    case SET_SELECTED_LABEL: {
       // console.log(`SET_ACTIVE_LABEL: `,action.label);
-      draft.activeLabel = action.label;
+      draft.selectedLabel = action.label;
       return;
     }
 
-    case SET_LABEL_GROUP: {
-      draft.selectedLabelGroup = action.group;
+    case SET_LABEL_GROUPS: {
+      draft.labelGroups = action.groups;
+      return;
+    }
+
+    case SET_SELECTED_GROUP: {
+      draft.selectedLabelGroup = action.groupName;
       return;
     }
 

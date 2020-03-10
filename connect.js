@@ -2,18 +2,21 @@ import { partcodes, labels, PREFIXES, labelGroups } from '../data/tables.js';
 
 
 const getLabelGroupsByPartcode = partcode => {
-  let o = {
-    activeLabelGroup: '',
-    otherLabelGroups: ''
-  };
+  // let o = {
+  //   activeLabelGroup: '',
+  //   otherLabelGroups: ''
+  // };
 
   if (labelGroups.has(partcode)) {
-    o.activeLabelGroup = labelGroups.get(partcode).find(group => group.status === 'ACTIVE'),
+    // o.activeLabelGroup = labelGroups.get(partcode).find(group => group.status === 'ACTIVE'),
 
-    o.otherLabelGroups = labelGroups.get(partcode).filter(group => group.status === 'HISTORY');
+    // o.otherLabelGroups = labelGroups.get(partcode).filter(group => group.status === 'HISTORY');
+
+    return labelGroups.get(partcode);
   }
 
-  return o;
+  // return o;
+  
 };
 
 

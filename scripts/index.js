@@ -2,19 +2,20 @@
 import component from '../components.js';
 import {
   setActivePartcode,
-  setActiveLabel,
+  setSelectedLabel,
   setSelectedGroup,
+  setLabelGroups,
   mainReducer
 } from '../redux/reducers.js';
 import connect from '../connect.js';
 
 import label_group_new from '../components/label_group_new.js';
-import label_group_selected from '../components/label_group_selected.js';
+// import label_group_selected from '../components/label_group_selected.js';
 import label_group_list from '../components/label_group_list.js';
 import labels_list from '../components/labels_list.js';
 // import label_dnd from '../components/label_dnd.js';
 import label_new from '../components/label_new.js';
-
+import label_details from '../components/label_details.js';
 import defaultState from '../redux/types.js';
 
 /** @type {import('../redux/types').Redux} */
@@ -26,10 +27,10 @@ const handle = {
   activeLabelName: document.querySelector('#activeLabelName'),
   activePartcode: document.querySelector('#activePartcode'),
   labels_list: document.querySelector('#labels_list'),
-  labelDetails: document.querySelector('#labelDetails'),
+  label_details: document.querySelector('#labelDetails'),
   label_new: document.querySelector('#label_new'),
   label_group_new: document.querySelector('#label_group_new'),
-  label_group_selected: document.querySelector('#label_group_selected'),
+  // label_group_selected: document.querySelector('#label_group_selected'),
   label_group_list: document.querySelector('#label_group_list'),
   label_dnd: document.querySelector('#label_dnd'),
 };
@@ -42,42 +43,60 @@ function render(comp, data) {
 
 function rerenderDOM() {
   console.log('re-renderDOM');
+  // console.log(store.getState());
+
 
   //States....
   const activePartcode = store.getState().activePartcode;
-  const activeLabel = store.getState().activeLabel;
+  const selectedLabel = store.getState().selectedLabel;
+  // const labelGroups = store.getState().labelGroups;
+  const selectedLabelGroup = store.getState().selectedLabelGroup;
   // console.log(`activePartcode: ${activePartcode}`);
   // console.log(activeLabel);
 
+
   //Database connections... 
-  const partcodes = connect.partcodes.getAllPartcodes();
   const associatedLabels = connect.labels.getLabelsByPartcode(activePartcode);
+  const associatedGroups = connect.labelGroups.getLabelGroupsByPartcode(activePartcode);
   const prefixes = connect.prefixes.getAllPrefixes();
-  const { activeLabelGroup, otherLabelGroups } = connect.labelGroups.getLabelGroupsByPartcode(activePartcode);
 
 
   //Components...
   handle.activePartcode.innerHTML = component.activePartcode(activePartcode);
-  handle.activeLabelName.innerHTML = component.activeLabelName(activeLabel);
-  // handle.labels_list.innerHTML = component.labels_list(associatedLabels);
+  handle.activeLabelName.innerHTML = component.activeLabelName(selectedLabel);
 
-  //Label
+
+  /** Label Details */
+  /* New Label */
   render(handle.label_new, label_new(activePartcode));
+  /* Label Details */
+  render(handle.label_details, label_details({ selectedLabel, prefixes }));
 
-  handle.labelDetails.innerHTML = component.labelDetails({ activeLabel, prefixes });
 
-  render(handle.labels_list, labels_list(associatedLabels));
+  /** Label Groups */
+  /* Label Groups New */
+  render(handle.label_group_new, label_group_new(activePartcode, activePartcode));
 
-  //Label Group
-  render(handle.label_group_new, label_group_new(activePartcode));
-  // handle.label_group_new.innerHTML = label_group_new(activePartcode);
-  render(handle.label_group_selected, label_group_selected(activeLabelGroup));
+  /* Label Groups All */
+  render(handle.label_group_list, label_group_list(
+    selectedLabelGroup,
+    associatedGroups)
+  );
 
-  render(handle.label_group_list, label_group_list(activePartcode, otherLabelGroups));
+  /* Labels List */
+  render(handle.labels_list, labels_list(
+    selectedLabel,
+    associatedLabels)
+  );
 
-  // render(handle.label_dnd, label_dnd());
+
+
+  // render(handle.label_group_selected, label_group_selected(activeLabelGroup));
+
+
 
   if (store.getState().devMode) {
+    const partcodes = connect.partcodes.getAllPartcodes();
     document.body.appendChild(component.dataView({ partcodes }));
   }
 
@@ -111,12 +130,6 @@ function handleLabelSelect(labelName) {
   return isFound;
 }
 
-function handleGroupSelect(activePartcode, group) {
-  const isFound = connect.labelGroups.getLabelsByGroup(activePartcode, group);
-  console.log(isFound);
-  return isFound;
-}
-
 
 function addListeners() {
   /** 
@@ -145,29 +158,32 @@ function addListeners() {
    */
   window.addEventListener('click', e => {
     const removeActivePartcode = e.target.closest(`.resultFound`);
-    const labelListSelect = e.target.closest(`[data-name]`);
-    const labelGroupSelect = e.target.closest(`[data-group]`);
+    const labelSelected = e.target.closest(`[data-name]`);
+    const labelGroupSelected = e.target.closest(`[data-group]`);
 
     if (removeActivePartcode) {
       store.dispatch(setActivePartcode(''));
-      store.dispatch(setActiveLabel(''));
+      store.dispatch(setSelectedLabel(''));
+      store.dispatch(setSelectedGroup(''));
+      store.dispatch(setLabelGroups(''));
     }
 
-    if (labelGroupSelect) {
-      const partcode = labelGroupSelect.dataset.partcode;
-      const labelGroupName = labelGroupSelect.dataset.group;
-      console.log(labelGroupName);
-      const group = handleGroupSelect(partcode, labelGroupName);
+    if (labelGroupSelected) {
+      // const partcode = labelGroupSelect.dataset.partcode;
+      const labelGroupName = labelGroupSelected.dataset.group;
+      // console.log(labelGroupName);
+      // const group = handleGroupSelect(partcode, labelGroupName);
 
-      console.log(group);
-      store.dispatch(setSelectedGroup(group));
+      // console.log(group);
+      store.dispatch(setSelectedGroup(labelGroupName));
+      // handleGroupSelect(labelGroupSelected);
     }
 
-    if (labelListSelect) {
-      const labelHistoryName = labelListSelect.dataset.name;
+    if (labelSelected) {
+      const labelHistoryName = labelSelected.dataset.name;
       const label = handleLabelSelect(labelHistoryName);
 
-      store.dispatch(setActiveLabel(label));
+      store.dispatch(setSelectedLabel(label));
     }
 
     // Toggles the New Label Group options

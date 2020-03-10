@@ -15,6 +15,14 @@
   /* padding-bottom: 20px; */
 }
 
+.groupIsActive{
+  background-color: pink;
+}
+
+.groupIsSelected{
+  border: 1px solid black;
+}
+
 .closed{ 
   visibility: hidden;
   height: 0;

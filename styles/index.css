@@ -6,7 +6,7 @@
 @import '../components/label_group_new.css';
 @import '../components/label_dnd.css';
 @import '../components/labels_list.css';
-
+@import '../components/label_group_list.css';
 
 body {
   line-height: 1.2;

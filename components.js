@@ -108,22 +108,22 @@ const selectForPrefix = params => {
 };
 
 const labelDetails = (params) => {
-  const { activeLabel } = params;
+  const { selectedLabel, prefixes } = params;
 
-  if (activeLabel) {
+  if (selectedLabel) {
     return `
       
       <!-- prefix -->
       <div class="labelDetailGroup">
         <div class="labelDetailSub">
           <span>Prefix:</span>
+          <span></span>
           
-          ${selectForPrefix(params)}
         </div>
         
         <div class="labelDetailInfo">
-          <span>${activeLabel.prefix.desc}</span>
-          <span>${activeLabel.prefix.type}</span>
+          <span>${selectedLabel.prefix.desc}</span>
+          <span>${selectedLabel.prefix.type}</span>
         </div>
       </div>
       
@@ -131,7 +131,7 @@ const labelDetails = (params) => {
       <div class="labelDetailGroup">
         <div class="labelDetailSub">
           <span>Version:</span>
-          <input class="" id="labelDetailVersion" value="${activeLabel.version}">
+          <input class="" id="labelDetailVersion" value="${selectedLabel.version}">
           <span></span>
         </div>
       </div>
@@ -141,7 +141,7 @@ const labelDetails = (params) => {
         <div class="labelDetailSub">
           <span>Context:</span>
           <div id="labelDetailContext" contenteditable="true">
-            ${activeLabel.context}
+            ${selectedLabel.context}
           </div>
         </div>
       </div>
@@ -158,7 +158,7 @@ const component = {
   dataView: compDataView,
   activePartcode,
   // activePartcodeHistory,
-  labelDetails,
+  // labelDetails,
 };
 
 export default component;
