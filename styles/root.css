@@ -11,6 +11,13 @@
   --is-size-8: .65rem;
   --is-size-9: .5rem;
 
+  --size-xsmall: var(--is-size-8);
+  --size-small: var(--is-size-7);
+  --size-normal: var(--is-size-6);
+  --size-medium: var(--is-size-5);
+  --size-large: var(--is-size-4);
+
+  
   --weight-light: 300;
   --weight-normal: 400;
   --weight-medium: 500;
@@ -50,17 +57,14 @@
 
   --p-12px: 12px;
   --p-8px: 8px;
+  --p-6px: 6px;
   --p-4px: 4px;
 
   --alpha: 0.25;
   --box-shadow-spread: 0.125em;
 
   /**Derived - references another variable. Used in classes */
-  --size-xsmall: var(--is-size-9);
-  --size-small: var(--is-size-8);
-  --size-normal: var(--is-size-7);
-  --size-medium: var(--is-size-5);
-  --size-large: var(--is-size-4);
+
 
   --border: var(--grey-lighter);
   --border-hover: var(--grey-lighter);

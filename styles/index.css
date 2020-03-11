@@ -1,20 +1,20 @@
 @import './root.css';
 @import './nav.css';
-@import './labelName.css';
+/* @import './labelName.css'; */
 @import './col-data.css';
 @import '../components/label_group_new.css';
 @import '../components/label_dnd.css';
 @import '../components/labels_list.css';
 @import '../components/label_group_list.css';
+@import '../components/active_partcode.css';
 
 body {
-  line-height: 1.2;
+  line-height: 1.3;
   font-size: var(--size-normal);
   font-family: var(--family-sans-serif);
   color: var(--text);
   margin: 0;
   padding: 0;
-  height: calc(100vh - 96px);
   cursor: default;
 }
 
@@ -22,15 +22,10 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: space-between;
-  /* margin-top: 48px; */
-  height: 100%;
-}
-.content-wrap>section:first-child {
-  margin-left: var(--p-12px);
-}
-.content-wrap>section:last-child {
-  margin-right: var(--p-12px);
+  align-items: stretch;
+  height: 100vh;
+  padding-right: var(--p-6px);
+  padding-left: var(--p-6px);
 }
 
 section {
@@ -38,9 +33,9 @@ section {
   flex-direction: column;
   margin-top: var(--p-12px);
   margin-bottom: var(--p-12px);
-  width: 270px;
-  max-width: 270px;
-  /* background-color: pink; */
+  width: 25%;
+  margin-left:var(--p-6px);
+  margin-right: var(--p-6px);
 }
 
 .component {
@@ -51,28 +46,40 @@ section {
   background-color: var(--grey-lighter);
   border-radius: var(--p-8px);
   min-height: 30px;
-  /* max-height: 100%; */
   margin-bottom: var(--p-12px);
-  /* overflow-y: scroll; */
-  /* flex: 0 1 30px; */
-  
+
 }
-.flex-col{
+.flex-col {
   display: flex;
   flex-direction: column;
-  flex: 1 0 auto;
+  flex: 1 0 100%;
 }
-.flex-row{
+.flex-row {
   display: flex;
   flex-direction: row;
   align-items: center;
-  flex: 1 0 auto; /* needed to center vertically */
+  flex: 1 0 auto;
+  /* needed to center vertically */
 }
 
 .lineItem {
-  width:100%;
+  width: 100%;
   padding: var(--p-4px);
   border-radius: var(--p-4px);
   cursor: pointer;
   min-height: 20px;
+}
+
+
+.labelName {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  margin-top: 48px;
+  margin-right: var(--p-12px);
+  margin-left: var(--p-12px);
+}
+
+#activeLabelName {
+  font-size: var(--size-large);
 }

@@ -4,6 +4,7 @@ const SET_ACTIVE_PARTCODE = 'SET_ACTIVE_PARTCODE';
 const SET_SELECTED_LABEL = 'SET_SELECTED_LABEL';
 const SET_SELECTED_GROUP = 'SET_SELECTED_GROUP';
 const SET_LABEL_GROUPS = 'SET_LABEL_GROUPS';
+const RESET = 'RESET';
 
 /** 
  * ACTIONS 
@@ -36,6 +37,12 @@ export function setLabelGroups(groups) {
   };
 }
 
+export function reset(){
+  return {
+    type: RESET
+  };
+}
+
 /**
  * REDUCERS
  */
@@ -62,6 +69,14 @@ export const mainReducer = (previous = {}, action) => produce(previous, draft =>
 
     case SET_SELECTED_GROUP: {
       draft.selectedLabelGroup = action.groupName;
+      return;
+    }
+
+    case RESET: {
+      draft.activePartcode = '';
+      draft.selectedLabel = '';
+      draft.selectedLabelGroup = '';
+      draft.labelGroups = '';
       return;
     }
 

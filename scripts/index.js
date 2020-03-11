@@ -1,22 +1,22 @@
 
 import component from '../components.js';
+import defaultState from '../redux/types.js';
 import {
   setActivePartcode,
   setSelectedLabel,
   setSelectedGroup,
   setLabelGroups,
+  reset,
   mainReducer
 } from '../redux/reducers.js';
 import connect from '../connect.js';
 
 import label_group_new from '../components/label_group_new.js';
-// import label_group_selected from '../components/label_group_selected.js';
 import label_group_list from '../components/label_group_list.js';
 import labels_list from '../components/labels_list.js';
-// import label_dnd from '../components/label_dnd.js';
 import label_new from '../components/label_new.js';
 import label_details from '../components/label_details.js';
-import defaultState from '../redux/types.js';
+import { active_partcode, add_new_partcode } from '../components/active_partcode.js';
 
 /** @type {import('../redux/types').Redux} */
 const { createStore } = window.Redux;
@@ -25,12 +25,11 @@ const store = createStore(mainReducer, defaultState);
 const handle = {
   searchInput: document.querySelector('#searchInput'),
   activeLabelName: document.querySelector('#activeLabelName'),
-  activePartcode: document.querySelector('#activePartcode'),
+  active_partcode: document.querySelector('#active_partcode'),
   labels_list: document.querySelector('#labels_list'),
   label_details: document.querySelector('#labelDetails'),
   label_new: document.querySelector('#label_new'),
   label_group_new: document.querySelector('#label_group_new'),
-  // label_group_selected: document.querySelector('#label_group_selected'),
   label_group_list: document.querySelector('#label_group_list'),
   label_dnd: document.querySelector('#label_dnd'),
 };
@@ -62,21 +61,26 @@ function rerenderDOM() {
 
 
   //Components...
-  handle.activePartcode.innerHTML = component.activePartcode(activePartcode);
   handle.activeLabelName.innerHTML = component.activeLabelName(selectedLabel);
 
-
-  /** Label Details */
-  /* New Label */
-  render(handle.label_new, label_new(activePartcode));
+  /** 1st col */
+  render(handle.active_partcode, active_partcode(activePartcode));
   /* Label Details */
   render(handle.label_details, label_details({ selectedLabel, prefixes }));
 
 
-  /** Label Groups */
+  /** 2nd col */
+  /* New Label */
+  render(handle.label_new, label_new(activePartcode));
+  /* Labels List */
+  render(handle.labels_list, labels_list(
+    selectedLabel,
+    associatedLabels)
+  );
+
+  /** 3rd col */
   /* Label Groups New */
   render(handle.label_group_new, label_group_new(activePartcode, activePartcode));
-
   /* Label Groups for partcode */
   render(handle.label_group_list, label_group_list(
     selectedLabel,
@@ -84,11 +88,7 @@ function rerenderDOM() {
     associatedGroups)
   );
 
-  /* Labels List */
-  render(handle.labels_list, labels_list(
-    selectedLabel,
-    associatedLabels)
-  );
+
 
 
 
@@ -143,11 +143,18 @@ function addListeners() {
       const partcode = handle.searchInput.value;
       const isPartcodeListed = handlePartcodeSearch(partcode);
 
+      if (partcode === '') {
+        store.dispatch(reset());
+        return;
+      }
+
       if (isPartcodeListed) {
         handle.searchInput.value = '';
         handle.searchInput.blur();
 
         store.dispatch(setActivePartcode(partcode));
+      } else {
+        render(handle.active_partcode, add_new_partcode(partcode));
       }
     }
   });
@@ -163,10 +170,7 @@ function addListeners() {
     const labelGroupSelected = e.target.closest(`[data-group]`);
 
     if (removeActivePartcode) {
-      store.dispatch(setActivePartcode(''));
-      store.dispatch(setSelectedLabel(''));
-      store.dispatch(setSelectedGroup(''));
-      store.dispatch(setLabelGroups(''));
+      store.dispatch(reset());
     }
 
     if (labelGroupSelected) {
