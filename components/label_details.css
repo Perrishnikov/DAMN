@@ -1,0 +1,29 @@
+#label_details {
+  background-color: var(--grey-lighter);
+}
+.label-detail-label{
+
+}
+.label-detail-detail{
+  margin-left: var(--p-8px);
+}
+.label-detail-sub {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: var(--p-4px);
+  margin: var(--p-4px);
+}
+
+/* .labelDetailInfo {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  padding: var(--p-4px);
+  margin-left: var(--p-8px);
+  white-space: nowrap;
+  overflow: hidden;
+} */

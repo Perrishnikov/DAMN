@@ -70,6 +70,7 @@ const defaultState = {
   activePartcode: '00039',
   selectedLabelGroup: '',
   labelGroups: '',
+  pendingLabelGroup: new Map(),
   selectedLabel: ''
   // {
   //   prefix: {

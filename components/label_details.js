@@ -21,38 +21,33 @@ const label_details = params => {
 
   if (selectedLabel) {
     return `
-      
+      <div id="" class="flex-row">
+        <div class="component-head">Selected Label Details</div>
+      </div>
+
       <!-- prefix -->
-      <div class="labelDetailGroup">
-        <div class="labelDetailSub">
-          <span>Prefix:</span>
-          <span></span>
-          
-        </div>
-        
-        <div class="labelDetailInfo">
-          <span>${selectedLabel.prefix.desc}</span>
-          <span>${selectedLabel.prefix.type}</span>
-        </div>
+      <div class="label-detail-sub">
+        <span class="label-detail-label">Prefix:</span>
+        <span class="label-detail-detail"> ${selectedLabel.prefix.name} - </span>
+        <span class="label-detail-detail">${selectedLabel.prefix.type}</span>
       </div>
       
       <!-- version -->
-      <div class="labelDetailGroup">
-        <div class="labelDetailSub">
-          <span>Version:</span>
-          <input class="" id="labelDetailVersion" value="${selectedLabel.version}">
-          <span></span>
-        </div>
+      <div class="label-detail-sub">
+        <span class="label-detail-label">Version:</span>
+        <span class="label-detail-detail"> ${selectedLabel.version}</span>
       </div>
 
-      <!-- context -->
-      <div class="labelDetailGroup">
-        <div class="labelDetailSub">
-          <span>Context:</span>
-          <div id="labelDetailContext" contenteditable="true">
-            ${selectedLabel.context}
-          </div>
-        </div>
+      <!-- desc -->
+      <div class="label-detail-sub">
+        <span class="label-detail-label">Description:</span>
+        <div class="label-detail-detail" style="font-size:.8rem;" contenteditable="true"> ${selectedLabel.context}</div>
+      </div>
+      
+      <!-- meta -->
+      <div class="label-detail-sub">
+        <span class="label-detail-label">Meta:</span>
+        <span class="label-detail-detail">More stuff to read</span>
       </div>
 
     `;

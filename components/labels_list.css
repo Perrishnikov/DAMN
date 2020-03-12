@@ -1,5 +1,5 @@
 
-#labels_history {
+/* #labels_history {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -7,15 +7,14 @@
   font-size: var(--size-small);
   justify-content: flex-start;
   margin-bottom: var(--p-12px);
-}
-.labels_history_item {
+} */
+/* .labels_history_item {
   width:100%;
-  /* margin-top:var(--p-4px); */
   padding: var(--p-4px);
   border-radius: var(--p-4px);
   cursor: pointer;
   min-height: 20px;
-}
+} */
 .labels_history_item:hover {
   background: var(--grey);
   color: var(--text-light);

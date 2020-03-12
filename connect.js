@@ -16,7 +16,7 @@ const getLabelGroupsByPartcode = partcode => {
   }
 
   // return o;
-  
+
 };
 
 
@@ -73,6 +73,17 @@ const hasPartcode = partcode => partcodes.has(partcode);
  */
 const getAllPartcodes = () => partcodes;
 
+
+/**
+ * Adds new partcode to database
+ * @param {string} partcode 
+ */
+const setPartcode = partcode => {
+  partcodes.set(partcode, partcode);
+  return partcodes;
+
+};
+
 const getAllPrefixes = () => PREFIXES;
 
 const connect = {
@@ -83,6 +94,7 @@ const connect = {
   partcodes: {
     hasPartcode,
     getAllPartcodes,
+    setPartcode
   },
   prefixes: {
     getAllPrefixes

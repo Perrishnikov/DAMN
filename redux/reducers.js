@@ -5,10 +5,19 @@ const SET_SELECTED_LABEL = 'SET_SELECTED_LABEL';
 const SET_SELECTED_GROUP = 'SET_SELECTED_GROUP';
 const SET_LABEL_GROUPS = 'SET_LABEL_GROUPS';
 const RESET = 'RESET';
+const APPEND_PENDING_LABEL_GROUP = 'APPEND_PENDING_LABEL_GROUP';
 
 /** 
  * ACTIONS 
  */
+export function appendPendingLabelGroup({labelName, label}) {
+  return {
+    type: APPEND_PENDING_LABEL_GROUP,
+    labelName,
+    label
+  }
+}
+
 export function setActivePartcode(partcode) {
   return {
     type: SET_ACTIVE_PARTCODE,
@@ -37,7 +46,7 @@ export function setLabelGroups(groups) {
   };
 }
 
-export function reset(){
+export function reset() {
   return {
     type: RESET
   };
@@ -77,6 +86,17 @@ export const mainReducer = (previous = {}, action) => produce(previous, draft =>
       draft.selectedLabel = '';
       draft.selectedLabelGroup = '';
       draft.labelGroups = '';
+      return;
+    }
+
+    case APPEND_PENDING_LABEL_GROUP: {
+      // draft.pendingLabelGroup = [...previous.pendingLabelGroup, action.label]
+      // draft.pendingLabelGroup.set(action.label.name, action.label);
+      // draft.pendingLabelGroup[action.label.name] = action.label;   
+      let m = previous.pendingLabelGroup;
+      m.set(action.labelName, action.label) ;
+
+      draft.pendingLabelGroup = new Map(m);
       return;
     }
 

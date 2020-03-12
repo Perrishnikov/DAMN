@@ -5,17 +5,21 @@ const labels_list = (selectedLabel, labels) => {
     const partcode = labels[0].partcode;
 
     return `
-      <div class="">Label List for ${partcode}:</div>
+      <div id="" class="flex-row">
+        <div class="component-head">Label List for 
+        <input value="${partcode}"></input>
+        </div>
+      </div>
       ${[...labels].map(label => {
       // console.log(label);
-      const isSelected = selectedLabel.name == label.name ? 'groupIsSelected' : '';
+      const isSelected = selectedLabel.name == label.name ? 'selected' : '';
 
-      return `<div data-name=${label.prefix.name}${label.partcode}.${label.version} class="labels_history_item ${isSelected}">${label.name}</div>`;
+      return `<div draggable="true" data-name=${label.prefix.name}${label.partcode}.${label.version} class="component-item dnd-item ${isSelected}">${label.name}</div>`;
     }).join('')}
       `;
   } else {
     return `
-      <div class="labels_history_item">
+      <div class="">
         <span>${''}</span>
       </div>
       `;

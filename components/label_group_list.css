@@ -19,9 +19,6 @@
   background-color: var(--cyan);
 }
 
-.groupIsSelected{
-  border: 1px solid black;
-}
 
 .closed{ 
   visibility: hidden;

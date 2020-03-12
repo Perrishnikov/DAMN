@@ -7,6 +7,7 @@ import {
   setSelectedGroup,
   setLabelGroups,
   reset,
+  appendPendingLabelGroup,
   mainReducer
 } from '../redux/reducers.js';
 import connect from '../connect.js';
@@ -27,7 +28,7 @@ const handle = {
   activeLabelName: document.querySelector('#activeLabelName'),
   active_partcode: document.querySelector('#active_partcode'),
   labels_list: document.querySelector('#labels_list'),
-  label_details: document.querySelector('#labelDetails'),
+  label_details: document.querySelector('#label_details'),
   label_new: document.querySelector('#label_new'),
   label_group_new: document.querySelector('#label_group_new'),
   label_group_list: document.querySelector('#label_group_list'),
@@ -52,7 +53,7 @@ function rerenderDOM() {
   const selectedLabelGroup = store.getState().selectedLabelGroup;
   // console.log(`activePartcode: ${activePartcode}`);
   // console.log(activeLabel);
-
+  const pendingLabelGroup = store.getState().pendingLabelGroup;
 
   //Database connections... 
   const associatedLabels = connect.labels.getLabelsByPartcode(activePartcode);
@@ -61,7 +62,8 @@ function rerenderDOM() {
 
 
   //Components...
-  handle.activeLabelName.innerHTML = component.activeLabelName(selectedLabel);
+  // handle.activeLabelName.innerHTML = component.activeLabelName(selectedLabel);
+
 
   /** 1st col */
   render(handle.active_partcode, active_partcode(activePartcode));
@@ -80,13 +82,15 @@ function rerenderDOM() {
 
   /** 3rd col */
   /* Label Groups New */
-  render(handle.label_group_new, label_group_new(activePartcode, activePartcode));
+  render(handle.label_group_new, label_group_new(activePartcode, pendingLabelGroup));
   /* Label Groups for partcode */
   render(handle.label_group_list, label_group_list(
     selectedLabel,
     selectedLabelGroup,
     associatedGroups)
   );
+
+
 
 
 
@@ -132,6 +136,49 @@ function handleLabelSelect(labelName) {
 }
 
 
+function handleNewLabelDnd() {
+  const place = document.querySelector('#label_new');
+
+  place.addEventListener('ondragenter', e => {
+    console.log(`ondragenter`);
+    // document.getElementById('label_new').textContent = ''; 
+    event.stopPropagation();
+    event.preventDefault();
+  });
+
+  place.addEventListener('ondragover', e => {
+    console.log(`ondragover`);
+    event.stopPropagation();
+    event.preventDefault();
+  });
+  place.addEventListener('ondrop', e => {
+    console.log(`ondrop`);
+    event.stopPropagation();
+    event.preventDefault();
+    dodrop(e);
+  });
+
+  function dodrop(event) {
+    let dt = event.dataTransfer;
+    let files = dt.files;
+
+    let count = files.length;
+    output('File Count: ' + count + '\n');
+
+    for (let i = 0; i < files.length; i++) {
+      output(' File ' + i + ':\n(' + (typeof files[i]) + ') : <' + files[i] + ' > ' +
+        files[i].name + ' ' + files[i].size + '\n');
+    }
+  }
+
+  function output(text) {
+    document.getElementById('output').textContent += text;
+    //dump(text);
+  }
+
+}
+
+
 function addListeners() {
   /** 
    * Nav SearchInput 
@@ -168,6 +215,10 @@ function addListeners() {
     const removeActivePartcode = e.target.closest(`.resultFound`);
     const labelSelected = e.target.closest(`[data-name]`);
     const labelGroupSelected = e.target.closest(`[data-group]`);
+    // const newLabelGroup = e.target.closest('#toggle_label_group_new');
+    const addNewPartcode = e.target.closest('.newPartcodeButton');
+
+    handleNewLabelDnd();
 
     if (removeActivePartcode) {
       store.dispatch(reset());
@@ -187,8 +238,19 @@ function addListeners() {
     }
 
     // Toggles the New Label Group options
-    if (e.target.closest('#toggle_label_group_new')) {
-      document.querySelector('#newStuff').classList.toggle('closed');
+    // if (newLabelGroup) {
+    //   document.querySelector('#newStuff').classList.toggle('closed');
+    // }
+
+    if (addNewPartcode) {
+      const value = addNewPartcode.innerText;
+
+      connect.partcodes.setPartcode(value);
+
+      handle.searchInput.value = '';
+      handle.searchInput.blur();
+
+      store.dispatch(setActivePartcode(value));
     }
   });
 
@@ -212,3 +274,51 @@ function addListeners() {
 store.subscribe(rerenderDOM);
 addListeners();
 rerenderDOM();
+
+
+// DND for Label Groups
+window.addEventListener('DOMContentLoaded', () => {
+  console.log('DOMContentLoaded');
+
+  // Get the element by id
+  const dndItems = document.querySelectorAll('.dnd-item');
+
+  // Add the ondragstart event listener
+  [...dndItems].forEach(item => {
+    item.addEventListener('dragstart', e => {
+      // console.dir(e);
+      e.currentTarget.style.border = '1px dashed red';
+      const name = e.target.dataset.name;
+      // Add the target element's id to the data transfer object
+      // console.log(`name: ${name}`);
+      e.dataTransfer.setData('text/plain', name);
+      // console.log(e.dataTransfer.getData('text'));
+    });
+  });
+
+
+  const dndLabelGroupTarget = document.querySelector('#label_group_new');
+
+  dndLabelGroupTarget.addEventListener('dragover', e => {
+    // console.log("dragOver");
+    e.preventDefault();
+  });
+
+  dndLabelGroupTarget.addEventListener('drop', e => {
+    // console.log(e);
+    e.preventDefault();
+    // Get the data, which is the id of the drop target
+    let labelName = e.dataTransfer.getData('text');
+    console.log(`labelName: ${labelName}`)
+    // console.log(partcode);
+    let lbl = connect.labels.getLabelByKey(labelName);
+
+    console.log(lbl);
+    // dndLabelGroupTarget.appendChild(document.querySelector(`[data-name="${data}"]`));
+    store.dispatch(appendPendingLabelGroup({ labelName, label: lbl }));
+
+    // Clear the drag data cache (for all formats/types)
+    e.dataTransfer.clearData();
+  });
+
+});

@@ -1,25 +1,3 @@
-#label_group_new{
-
-}
-
-#toggle_label_group_new{
-  cursor: pointer;
-  min-height: 30px;
-}
-
-#newStuff{
-  cursor: default;
-  flex: 1 0 auto;
-  /* padding: 20px; */
-  /* height: 100%; */
-  /* padding-bottom: 20px; */
-}
-
-.closed{ 
-  visibility: hidden;
-  height: 0;
-}
-
 .newStuffItem{
   /* width:100%; */
   padding: var(--p-4px);
