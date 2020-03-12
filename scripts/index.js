@@ -254,10 +254,11 @@ function addListeners() {
     }
   });
 
+
   /**
    * handles changing prefix and version 
    */
-  window.addEventListener('change', (e) => {
+  window.addEventListener('change', e => {
 
     if (e.target.id === 'prefixSelect') {
       console.log(`update temp label with new prefix: ${e.target.value}`);
@@ -269,56 +270,83 @@ function addListeners() {
 
 
   });
-}
-
-store.subscribe(rerenderDOM);
-addListeners();
-rerenderDOM();
 
 
-// DND for Label Groups
-window.addEventListener('DOMContentLoaded', () => {
-  console.log('DOMContentLoaded');
+  /** 
+   * Add DND listeners
+   * DND for Label Groups
+   */
+  window.addEventListener('dragstart', e => {
+    const dndItemName = e.target.closest('.dnd-item').dataset.name;
+    // console.dir(dndItemName);
 
-  // Get the element by id
-  const dndItems = document.querySelectorAll('.dnd-item');
+    // Clear the drag data cache (for all formats/types)
+    e.dataTransfer.clearData();
+    e.dataTransfer.setData('text/plain', dndItemName);
 
-  // Add the ondragstart event listener
-  [...dndItems].forEach(item => {
-    item.addEventListener('dragstart', e => {
-      // console.dir(e);
-      e.currentTarget.style.border = '1px dashed red';
-      const name = e.target.dataset.name;
-      // Add the target element's id to the data transfer object
-      // console.log(`name: ${name}`);
-      e.dataTransfer.setData('text/plain', name);
-      // console.log(e.dataTransfer.getData('text'));
-    });
+
+    e.target.closest('.dnd-item').style.border = '1px dashed red';
+
+    // let labelName = e.dataTransfer.getData('text');
+    // console.log(`dragstart labelName: ${labelName}`);
   });
 
 
-  const dndLabelGroupTarget = document.querySelector('#label_group_new');
-
-  dndLabelGroupTarget.addEventListener('dragover', e => {
-    // console.log("dragOver");
-    e.preventDefault();
-  });
-
-  dndLabelGroupTarget.addEventListener('drop', e => {
+  //If you want to allow a drop, you must prevent the default handling by cancelling both the dragenter and dragover events.
+  handle.label_group_new.addEventListener('dragenter', e => e.preventDefault());
+  handle.label_group_new.addEventListener('dragover', e => e.preventDefault());
+  handle.label_group_new.addEventListener('drop', e => {
     // console.log(e);
     e.preventDefault();
-    // Get the data, which is the id of the drop target
+
+    // Get the data
     let labelName = e.dataTransfer.getData('text');
-    console.log(`labelName: ${labelName}`)
+    // console.log(`drop labelName: ${labelName}`);
+
     // console.log(partcode);
     let lbl = connect.labels.getLabelByKey(labelName);
 
     console.log(lbl);
-    // dndLabelGroupTarget.appendChild(document.querySelector(`[data-name="${data}"]`));
     store.dispatch(appendPendingLabelGroup({ labelName, label: lbl }));
-
-    // Clear the drag data cache (for all formats/types)
-    e.dataTransfer.clearData();
   });
+}
 
+
+window.addEventListener('DOMContentLoaded', function () {
+  store.subscribe(rerenderDOM);
+  addListeners();
+  rerenderDOM();
 });
+
+
+
+
+
+
+  // const dndLabelGroupTarget = document.querySelector('#label_group_new');
+
+  // dndLabelGroupTarget.addEventListener('dragover', e => {
+  //   // console.log("dragOver");
+  //   e.preventDefault();
+  // });
+
+  // dndLabelGroupTarget.addEventListener('drop', e => {
+  //   // console.log(e);
+  //   e.preventDefault();
+
+  //   // Get the data, which is the id of the drop target
+  //   let labelName = e.dataTransfer.getData('text');
+
+  //   // console.log(partcode);
+  //   let lbl = connect.labels.getLabelByKey(labelName);
+
+  //   console.log(lbl);
+  //   // dndLabelGroupTarget.appendChild(document.querySelector(`[data-name="${data}"]`));
+  //   store.dispatch(appendPendingLabelGroup({ labelName, label: lbl }));
+
+
+  //   // console.log(`labelName after clear: ${labelName}`);
+  //   // console.log(e.dataTransfer.getData('text'));
+  // });
+
+

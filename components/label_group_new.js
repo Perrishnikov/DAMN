@@ -1,24 +1,28 @@
 const weHaveLabels = labels => {
-  console.log(labels);
 
-  return `
+    return `
     ${[...labels].map(([key, value]) => {
-
+      // console.log(value);
       return `
       <div>${value.context}</div>
       `;
-    }).join('')}
+    }).join('')}`;
 
-    <div id="" class="flex-col">
-    <div class="flex-row newStuffItem">
-      <button>submit</button>
-      <button>reset</button>
-    </div>
-  </div>
-  `;
+  // return `
+  //   ${labels.map(label => {
 
+  //     return `
+  //     <div>${label.context}</div>
+  //     `;
+  //   }).join('')}
 
-
+  //   <div id="" class="flex-col">
+  //     <div class="flex-row newStuffItem">
+  //       <button>submit</button>
+  //       <button>reset</button>
+  //     </div>
+  //   </div>
+  // `;
 };
 
 

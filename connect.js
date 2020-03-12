@@ -34,6 +34,8 @@ const getLabelsByGroup = (activePartcode, groupName) => {
 const getLabelByKey = labelName => {
   const isFound = labels.has(labelName);
   if (isFound) {
+    // console.log(`____________labelName: ${labelName}`);
+    // console.log(labels);
     return labels.get(labelName);
   } else {
     return false;

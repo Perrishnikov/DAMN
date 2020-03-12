@@ -10,7 +10,7 @@ const APPEND_PENDING_LABEL_GROUP = 'APPEND_PENDING_LABEL_GROUP';
 /** 
  * ACTIONS 
  */
-export function appendPendingLabelGroup({labelName, label}) {
+export function appendPendingLabelGroup({ labelName, label }) {
   return {
     type: APPEND_PENDING_LABEL_GROUP,
     labelName,
@@ -86,6 +86,7 @@ export const mainReducer = (previous = {}, action) => produce(previous, draft =>
       draft.selectedLabel = '';
       draft.selectedLabelGroup = '';
       draft.labelGroups = '';
+      draft.pendingLabelGroup = new Map();
       return;
     }
 
@@ -94,8 +95,9 @@ export const mainReducer = (previous = {}, action) => produce(previous, draft =>
       // draft.pendingLabelGroup.set(action.label.name, action.label);
       // draft.pendingLabelGroup[action.label.name] = action.label;   
       let m = previous.pendingLabelGroup;
-      m.set(action.labelName, action.label) ;
-
+      m.set(action.labelName, action.label);
+      // console.log(new Map([action.labelName], action.label));
+      // draft.pendingLabelGroup = new Map(previous.pendingLabelGroup,[action.labelName, action.label])
       draft.pendingLabelGroup = new Map(m);
       return;
     }
