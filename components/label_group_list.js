@@ -77,7 +77,7 @@ const label_group_list = (selectedLabel, selectedLabelGroup, labelGroups) => {
       console.log(group);
       //${isSelected ? groupDetails(group, selectedLabel) : ``}
       return `
-        <div data-group="${group.groupName}" class="${isSelected}">
+        <div data-group="${group.groupName}" class="label-group ${isSelected}">
           <span class="">${group.groupName}</span>
           ${isActive === 'groupIsActive' ? `
           <a class="button ${isActive}">ACTIVE since <...date></a>` : 

@@ -17,6 +17,8 @@ import label_group_list from '../components/label_group_list.js';
 import labels_list from '../components/labels_list.js';
 import label_new from '../components/label_new.js';
 import label_details from '../components/label_details.js';
+import image_new from '../components/image_new.js';
+import images_list from '../components/images_list.js';
 import { active_partcode, add_new_partcode } from '../components/active_partcode.js';
 
 /** @type {import('../redux/types').Redux} */
@@ -33,6 +35,8 @@ const handle = {
   label_group_new: document.querySelector('#label_group_new'),
   label_group_list: document.querySelector('#label_group_list'),
   label_dnd: document.querySelector('#label_dnd'),
+  image_new: document.querySelector('#image_new'),
+  image_list: document.querySelector('#image_list'),
 };
 
 
@@ -60,10 +64,8 @@ function rerenderDOM() {
   const associatedGroups = connect.labelGroups.getLabelGroupsByPartcode(activePartcode);
   const prefixes = connect.prefixes.getAllPrefixes();
 
-
-  //Components...
-  // handle.activeLabelName.innerHTML = component.activeLabelName(selectedLabel);
-
+  const selectedImage = ''; //! 
+  const associatedImages = ''; //! 
 
   /** 1st col */
   render(handle.active_partcode, active_partcode(activePartcode));
@@ -91,9 +93,12 @@ function rerenderDOM() {
   );
 
 
-
-
-
+  /** 4th column Images */
+  render(handle.image_new, image_new(activePartcode));
+  render(handle.images_list, images_list(
+    selectedImage,
+    associatedImages
+  ));
 
 
   // render(handle.label_group_selected, label_group_selected(activeLabelGroup));

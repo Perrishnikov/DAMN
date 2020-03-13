@@ -1,4 +1,4 @@
-const labels_list = (selectedLabel, labels) => {
+const image_list = (selectedLabel, labels) => {
 
   // console.log(lables);
   if (labels.length > 1) {
@@ -29,4 +29,4 @@ const labels_list = (selectedLabel, labels) => {
   }
 };
 
-export default labels_list;
+export default image_list;

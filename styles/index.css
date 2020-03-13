@@ -8,7 +8,7 @@
 /* @import '../components/label_dnd.css'; */
 @import '../components/label_group_list.css';
 @import '../components/label_group_new.css';
-@import '../components/label_new.css';
+/* @import '../components/label_new.css'; */
 @import '../components/labels_list.css';
 
 
@@ -52,10 +52,12 @@ section {
   border-radius: var(--p-8px);
   min-height: 30px;
   margin-bottom: var(--p-12px);
+  flex: 0 1 auto;
 }
 .component.empty {
   /* border:0; */
   border: 1px solid transparent;
+  flex: 0 0 auto;
 }
 .component-head {
   font-size: var(--size-normal);
