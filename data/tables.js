@@ -6,8 +6,18 @@ const TYPE = {
 
 const LABEL_GROUP_STATUS = {
   ACTIVE: 'ACTIVE',
-  HISTORY: 'HISTORY'
+  HISTORY: 'HISTORY', 
+  PENDING:'PENDING', //label created group - its approved
+  REJECTED: 'REVIEW' //kicked back from someone (image team)
 };
+
+class LG_Status{
+  currentStatus = '';
+  lastStatus = '';
+  dateCreated = '';
+  dateUpdated = '';
+  lastUpdatedBy = '';
+} 
 
 export const PREFIXES = new Map([
   ['LE', {
@@ -178,6 +188,16 @@ export const labelGroups = new Map([
     labels: []
   }]],
   ['00039', [
+    {
+      // partcode: partcodes.get('00039'),
+      date: '',
+      groupName: 'LG0005',
+      status: LABEL_GROUP_STATUS.PENDING,
+      labels: [
+        labels.get('LBX00039.N03'),
+        labels.get('LG00039.A03')
+      ]
+    },
     {
       // partcode: partcodes.get('00039'),
       date: '',

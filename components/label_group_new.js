@@ -28,15 +28,21 @@ const label_group_new = (partcode, pendingLabelGroup, selectedLabel) => {
     </div>
 
     ${pendingLabelGroup.size > 0 ? `
-      <div id="" class="component-head">
-        <span>Group Name:</span>
-        <input value="placeholder"></input>
-      </div>
-      ${weHaveLabels(selectedLabel, pendingLabelGroup)}
-        <div class="flex-row button-box">
-          <a class="button is-primary is-outlined">Create Group</a>
-          <a class="button is-primary is-outlined">Discard</a>
-        </div>` : ''}
+      <div class="label-group">
+        <div id="" class="component-head">
+          <span>Group Name:</span>
+          <input value="placeholder"></input>
+        </div>
+
+      
+        ${weHaveLabels(selectedLabel, pendingLabelGroup)}
+
+          <div class="flex-row button-box">
+            <a class="button is-primary is-outlined">Create Group</a>
+            <a class="button is-primary is-outlined">Discard</a>
+          </div>
+        </div>
+        ` : ''}
     
     
     

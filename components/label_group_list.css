@@ -18,7 +18,9 @@
 .button.groupIsActive{
   background-color: var(--cyan);
 }
-
+.button.groupIsPending{
+  background-color: var(--warning);
+}
 
 .closed{ 
   visibility: hidden;

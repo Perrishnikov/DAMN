@@ -19,7 +19,7 @@ import label_new from '../components/label_new.js';
 import label_details from '../components/label_details.js';
 import image_new from '../components/image_new.js';
 import images_list from '../components/images_list.js';
-import { active_partcode, add_new_partcode } from '../components/active_partcode.js';
+// import { active_partcode, add_new_partcode } from '../components/active_partcode.js';
 
 /** @type {import('../redux/types').Redux} */
 const { createStore } = window.Redux;
@@ -28,7 +28,7 @@ const store = createStore(mainReducer, defaultState);
 const handle = {
   searchInput: document.querySelector('#searchInput'),
   activeLabelName: document.querySelector('#activeLabelName'),
-  active_partcode: document.querySelector('#active_partcode'),
+  // active_partcode: document.querySelector('#active_partcode'),
   labels_list: document.querySelector('#labels_list'),
   label_details: document.querySelector('#label_details'),
   label_new: document.querySelector('#label_new'),
@@ -64,11 +64,17 @@ function rerenderDOM() {
   const associatedGroups = connect.labelGroups.getLabelGroupsByPartcode(activePartcode);
   const prefixes = connect.prefixes.getAllPrefixes();
 
+  console.log(associatedGroups);
   const selectedImage = ''; //! 
   const associatedImages = ''; //! 
 
+
+  /** Nav */
+  handle.searchInput.value = activePartcode;
+
+
   /** 1st col */
-  render(handle.active_partcode, active_partcode(activePartcode));
+  // render(handle.active_partcode, active_partcode(activePartcode));
   /* Label Details */
   render(handle.label_details, label_details({ selectedLabel, prefixes }));
 
@@ -201,12 +207,13 @@ function addListeners() {
       }
 
       if (isPartcodeListed) {
-        handle.searchInput.value = '';
+        // handle.searchInput.value = '';
+        handle.searchInput.value = partcode;
         handle.searchInput.blur();
 
         store.dispatch(setActivePartcode(partcode));
       } else {
-        render(handle.active_partcode, add_new_partcode(partcode));
+        // render(handle.active_partcode, add_new_partcode(partcode));
       }
     }
   });
@@ -220,7 +227,6 @@ function addListeners() {
     const removeActivePartcode = e.target.closest(`.resultFound`);
     const labelSelected = e.target.closest(`[data-name]`);
     const labelGroupSelected = e.target.closest(`[data-group]`);
-    // const newLabelGroup = e.target.closest('#toggle_label_group_new');
     const addNewPartcode = e.target.closest('.newPartcodeButton');
 
     handleNewLabelDnd();

@@ -25,31 +25,38 @@ const label_details = params => {
         <div class="component-head">Selected Label Details</div>
       </div>
 
-      <!-- prefix -->
-      <div class="label-detail-sub">
-        <span class="label-detail-label">Prefix:</span>
-        <span class="label-detail-detail"> ${selectedLabel.prefix.name} - </span>
-        <span class="label-detail-detail">${selectedLabel.prefix.type}</span>
-      </div>
-      
-      <!-- version -->
-      <div class="label-detail-sub">
-        <span class="label-detail-label">Version:</span>
-        <span class="label-detail-detail"> ${selectedLabel.version}</span>
-      </div>
+      <div class="label-group">
+        <!-- prefix -->
+        <div class="label-detail-sub">
+          <span class="label-detail-label">Prefix:</span>
+          <span class="label-detail-detail"> ${selectedLabel.prefix.name} - </span>
+          <span class="label-detail-detail">${selectedLabel.prefix.type}</span>
+        </div>
+        
+        <!-- partcode --> 
+        <div class="label-detail-sub">
+          <span class="label-detail-label">Partcode:</span>
+          <span class="label-detail-detail"> ${selectedLabel.partcode}</span>
+        </div>
 
-      <!-- desc -->
-      <div class="label-detail-sub">
-        <span class="label-detail-label">Description:</span>
-        <div class="label-detail-detail" style="font-size:.8rem;" contenteditable="true"> ${selectedLabel.context}</div>
-      </div>
-      
-      <!-- meta -->
-      <div class="label-detail-sub">
-        <span class="label-detail-label">Meta:</span>
-        <span class="label-detail-detail">More stuff to read</span>
-      </div>
+        <!-- version -->
+        <div class="label-detail-sub">
+          <span class="label-detail-label">Version:</span>
+          <span class="label-detail-detail"> ${selectedLabel.version}</span>
+        </div>
 
+        <!-- desc -->
+        <div class="label-detail-sub">
+          <span class="label-detail-label">Description:</span>
+          <div class="label-detail-detail" style="font-size:.8rem;" contenteditable="true"> ${selectedLabel.context}</div>
+        </div>
+        
+        <!-- meta -->
+        <div class="label-detail-sub">
+          <span class="label-detail-label">Meta:</span>
+          <span class="label-detail-detail">More stuff to read</span>
+        </div>
+      </div>
     `;
   } else {
     return '';

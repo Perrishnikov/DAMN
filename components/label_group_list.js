@@ -61,7 +61,7 @@ const weHaveLabels = (selectedLabel, labels) => {
 
 const label_group_list = (selectedLabel, selectedLabelGroup, labelGroups) => {
 
-  if (labelGroups.length > 1) {
+  if (labelGroups && labelGroups.length > 1) {
 
     return `
     <div id="" class="flex-row">
@@ -70,18 +70,22 @@ const label_group_list = (selectedLabel, selectedLabelGroup, labelGroups) => {
 
     
     ${[...labelGroups].map(group => {
-      const isActive = group.status == 'ACTIVE' ? 'groupIsActive' : '';
+      let status = '';
+
+      switch(group.status){
+        case 'ACTIVE': status = 'groupIsActive';
+        break;
+        case 'PENDING': status = 'groupIsPending';
+        break;
+        default: '';
+      }
 
       const isSelected = selectedLabelGroup == group.groupName ? 'groupIsSelected' : '';
 
-      // console.log(group);
-      //${isSelected ? groupDetails(group, selectedLabel) : ``}
       return `
         <div data-group="${group.groupName}" class="label-group ${isSelected}">
           <span class="">${group.groupName}</span>
-          ${isActive === 'groupIsActive' ? `
-          <a class="button ${isActive}">ACTIVE since <...date></a>` : 
-          `<a class="button ${isActive}">RETIRED on <...date></a>`}
+          <a class="button ${status}">${group.status}</a>
 
           ${weHaveLabels(selectedLabel, group.labels)}
           
