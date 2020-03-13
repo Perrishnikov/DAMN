@@ -1,32 +1,23 @@
-const weHaveLabels = labels => {
+const weHaveLabels = (selectedLabel, labels) => {
 
-    return `
-    ${[...labels].map(([key, value]) => {
-      // console.log(value);
+  return `
+    ${[...labels].map(([key, label]) => {
+      console.log(label);
+      const isSelected = selectedLabel.name == label.name ? 'selected' : '';
+
+
       return `
-      <div>${value.context}</div>
-      `;
-    }).join('')}`;
-
-  // return `
-  //   ${labels.map(label => {
-
-  //     return `
-  //     <div>${label.context}</div>
-  //     `;
-  //   }).join('')}
-
-  //   <div id="" class="flex-col">
-  //     <div class="flex-row newStuffItem">
-  //       <button>submit</button>
-  //       <button>reset</button>
-  //     </div>
-  //   </div>
-  // `;
+        <div data-name=${label.prefix.name}${label.partcode}.${label.version} class="component-item ${isSelected}">
+          <span style="font-weight: 600;">${label.prefix.type}</span>
+          <span> - ${label.name}</span>
+        </div>`;
+    }).join('')}
+    `;
 };
 
 
-const label_group_new = (partcode, pendingLabelGroup) => {
+const label_group_new = (partcode, pendingLabelGroup, selectedLabel) => {
+  console.log(pendingLabelGroup.size);
   if (partcode) {
     return `
     <div id="" class="flex-row">
@@ -36,8 +27,19 @@ const label_group_new = (partcode, pendingLabelGroup) => {
       <div class="component-head">New Label Group</div>
     </div>
 
-    ${pendingLabelGroup ? weHaveLabels(pendingLabelGroup) : ''}
-
+    ${pendingLabelGroup.size > 0 ? `
+      <div id="" class="component-head">
+        <span>Group Name:</span>
+        <input value="placeholder"></input>
+      </div>
+      ${weHaveLabels(selectedLabel, pendingLabelGroup)}
+        <div class="flex-row button-box">
+          <a class="button is-primary is-outlined">Create Group</a>
+          <a class="button is-primary is-outlined">Discard</a>
+        </div>` : ''}
+    
+    
+    
   `;
   } else {
     return ``;

@@ -59,7 +59,7 @@ export const labels = new Map([
       bulk: '',
       country: '',
       oto: 'boolean',
-      context: '',
+      description: '',
       extension: '',
       name: '',
       meta: {
@@ -77,7 +77,7 @@ export const labels = new Map([
       bulk: null,
       country: '',
       version: 'A03',
-      context: 'Label - Dr Choice Women 90 tabs (G)',
+      description: 'Label - Dr Choice Women 90 tabs (G)',
       extension: 'pdf',
       name: 'LG00039.A03 Dr Choice Women 90 tabs (G).pdf',
       meta: {
@@ -95,7 +95,7 @@ export const labels = new Map([
       bulk: null,
       country: '',
       version: 'N03',
-      context: 'Dr Choice Women 90 tabs (G)',
+      description: 'Dr Choice Women 90 tabs (G)',
       extension: 'pdf',
       name: 'LBX00039.N03 Dr Choice Women 90 tabs (G).pdf',
       meta: {
@@ -113,7 +113,7 @@ export const labels = new Map([
       bulk: null,
       country: '',
       version: 'N02',
-      context: 'Dr Choice Manly 90 tabs (G)',
+      description: 'Dr Choice Manly 90 tabs (G)',
       extension: 'pdf',
       name: 'LBX00039.N02 This is the name.pdf',
       meta: {
@@ -131,7 +131,7 @@ export const labels = new Map([
       bulk: null,
       country: '',
       version: 'N01',
-      context: 'This is the name',
+      description: 'This is the name',
       extension: 'pdf',
       name: 'LBN00039.N01 This is the name.pdf',
       meta: {
@@ -150,7 +150,7 @@ export const labels = new Map([
       bulk: null,
       country: '',
       version: 'V02',
-      context: 'Hemp',
+      description: 'Hemp',
       name: 'This is the name of 12434',
       extension: 'pdf',
       meta: {

@@ -82,7 +82,7 @@ function rerenderDOM() {
 
   /** 3rd col */
   /* Label Groups New */
-  render(handle.label_group_new, label_group_new(activePartcode, pendingLabelGroup));
+  render(handle.label_group_new, label_group_new(activePartcode, pendingLabelGroup, selectedLabel));
   /* Label Groups for partcode */
   render(handle.label_group_list, label_group_list(
     selectedLabel,
@@ -317,36 +317,3 @@ window.addEventListener('DOMContentLoaded', function () {
   addListeners();
   rerenderDOM();
 });
-
-
-
-
-
-
-  // const dndLabelGroupTarget = document.querySelector('#label_group_new');
-
-  // dndLabelGroupTarget.addEventListener('dragover', e => {
-  //   // console.log("dragOver");
-  //   e.preventDefault();
-  // });
-
-  // dndLabelGroupTarget.addEventListener('drop', e => {
-  //   // console.log(e);
-  //   e.preventDefault();
-
-  //   // Get the data, which is the id of the drop target
-  //   let labelName = e.dataTransfer.getData('text');
-
-  //   // console.log(partcode);
-  //   let lbl = connect.labels.getLabelByKey(labelName);
-
-  //   console.log(lbl);
-  //   // dndLabelGroupTarget.appendChild(document.querySelector(`[data-name="${data}"]`));
-  //   store.dispatch(appendPendingLabelGroup({ labelName, label: lbl }));
-
-
-  //   // console.log(`labelName after clear: ${labelName}`);
-  //   // console.log(e.dataTransfer.getData('text'));
-  // });
-
-

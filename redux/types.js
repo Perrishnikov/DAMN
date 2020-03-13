@@ -66,7 +66,7 @@
 /** @type {State} */
 const defaultState = {
   devMode: false,
-  isEditing: false,
+  // isEditing: false,
   activePartcode: '00039',
   selectedLabelGroup: '',
   labelGroups: '',

@@ -15,10 +15,10 @@
   cursor: pointer;
   min-height: 20px;
 } */
-.labels_history_item:hover {
+/* .labels_history_item:hover {
   background: var(--grey);
   color: var(--text-light);
 }
 .groupIsSelected{
   border: 1px solid black;
-}
+} */

@@ -1,7 +1,20 @@
-.newStuffItem{
-  /* width:100%; */
+/* .newStuffItem{
+ 
   padding: var(--p-4px);
   border-radius: var(--p-4px);
   cursor: pointer;
   min-height: 20px;
+} */
+
+.label-group-item {
+  background-color: darkgrey;
+}
+.button-box {
+  margin: var(--p-4px);
+  margin-top: var(--p-12px);
+  min-height: 16px;
+  box-sizing: border-box;
+}
+.button-box>.button:first-child{
+  margin-right: 20px;
 }

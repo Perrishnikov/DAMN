@@ -15,9 +15,9 @@ const groupDetails = (group, selectedLabel) => {
       const isSelected = selectedLabel.name == carton.name ? 'groupIsSelected' : '';
 
       return `
-    <div data-name=${carton.prefix.name}${carton.partcode}.${carton.version} class="labels_history_item ${isSelected}">${carton.name}</div>
-    `;
-  })}
+      <div data-name=${carton.prefix.name}${carton.partcode}.${carton.version} class="labels_history_item ${isSelected}">${carton.name}</div>
+      `;
+    })}
 
     <div>Labels:</div>
     ${labels.map(label => {
@@ -42,30 +42,52 @@ const groupDetails = (group, selectedLabel) => {
 
 
 };
+const weHaveLabels = (selectedLabel, labels) => {
 
+  return `
+    ${labels.map(label => {
+      console.log(label);
+      const isSelected = selectedLabel.name == label.name ? 'selected' : '';
+
+
+      return `
+        <div data-name=${label.prefix.name}${label.partcode}.${label.version} class="component-item ${isSelected}">
+          <span style="font-weight: 600;">${label.prefix.type}</span>
+          <span> - ${label.name}</span>
+        </div>`;
+    }).join('')}
+    `;
+};
 
 const label_group_list = (selectedLabel, selectedLabelGroup, labelGroups) => {
 
-  if (labelGroups && labelGroups.length > 1) {
+  if (labelGroups.length > 1) {
 
     return `
-    <div>Label Group List: </div>
+    <div id="" class="flex-row">
+      <div class="component-head">Label Group List</div>
+    </div>
+
+    
     ${[...labelGroups].map(group => {
       const isActive = group.status == 'ACTIVE' ? 'groupIsActive' : '';
 
       const isSelected = selectedLabelGroup == group.groupName ? 'groupIsSelected' : '';
 
-      // console.log(group);
+      console.log(group);
+      //${isSelected ? groupDetails(group, selectedLabel) : ``}
       return `
-        <div data-group="${group.groupName}" class="lineItem ${isSelected}">
-        <span class="${isActive}"> ${group.groupName} ${isActive === 'groupIsActive' ? `- ACTIVE` : ``}</span>
-        
-        ${!isActive ? `<button>Activate</button>` : ``}
+        <div data-group="${group.groupName}" class="${isSelected}">
+          <span class="">${group.groupName}</span>
+          ${isActive === 'groupIsActive' ? `
+          <a class="button ${isActive}">ACTIVE since <...date></a>` : 
+          `<a class="button ${isActive}">RETIRED on <...date></a>`}
 
-          ${isSelected ? groupDetails(group, selectedLabel) : ``}
+          ${weHaveLabels(selectedLabel, group.labels)}
+          
         </div>`;
-    }).join('')}
-    `;
+
+    }).join('')}`;
   } else {
     return `
     <div class="">

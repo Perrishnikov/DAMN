@@ -15,7 +15,7 @@ const labels_list = (selectedLabel, labels) => {
       const isSelected = selectedLabel.name == label.name ? 'selected' : '';
 
       return `<div draggable="true" data-name=${label.prefix.name}${label.partcode}.${label.version} class="component-item dnd-item ${isSelected}">${label.name}</div>`;
-    }).join('')}
+      }).join('')}
       `;
   } else {
     return `

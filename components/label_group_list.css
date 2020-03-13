@@ -15,7 +15,7 @@
   /* padding-bottom: 20px; */
 }
 
-.groupIsActive{
+.button.groupIsActive{
   background-color: var(--cyan);
 }
 

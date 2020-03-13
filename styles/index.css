@@ -5,7 +5,7 @@
 
 @import '../components/active_partcode.css';
 @import '../components/label_details.css';
-@import '../components/label_dnd.css';
+/* @import '../components/label_dnd.css'; */
 @import '../components/label_group_list.css';
 @import '../components/label_group_new.css';
 @import '../components/label_new.css';
@@ -45,10 +45,9 @@ section {
 /* COMPONENTS *******************************/
 .component {
   display: flex;
-  /* align-items: center; */
   flex-direction: column;
-  padding: var(--p-4px);
-  /* color: var(--text-strong); */
+  padding-left: var(--p-4px);
+  padding-right: var(--p-4px);
   border: 1px solid var(--text-strong);
   border-radius: var(--p-8px);
   min-height: 30px;
@@ -61,7 +60,9 @@ section {
 .component-head {
   font-size: var(--size-normal);
   font-weight: var(--weight-bold);
-  margin-left: var(--p-4px);
+  margin-left: var(--p-6px);
+  margin-top: var(--p-6px);
+  margin-bottom: var(--p-6px);
 }
 .component-head-icon {
   margin-left: var(--p-4px);
@@ -72,7 +73,7 @@ section {
   margin-left: var(--p-12px);
   outline: 0;
   border: 0;
-  border-radius: 22px;
+  border-radius: var(--p-4px);
   box-sizing: border-box;
   padding: var(--p-4px);
   border: 1px solid var(--text-strong);
@@ -142,3 +143,21 @@ section {
 }
 
 .is-outlined {}
+
+.button {
+  border-radius: var(--p-4px);
+  background-color: #fff;
+  border-color: #dbdbdb;
+  border-width: 1px;
+  color: #363636;
+  cursor: pointer;
+  justify-content: center;
+  /* padding-bottom: calc(.4em - 1px);
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: calc(.4em - 1px); */
+  font-size: var(--size-small);
+  padding: var(--p-4px) var(--p-12px);
+  text-align: center;
+  white-space: nowrap;
+}
