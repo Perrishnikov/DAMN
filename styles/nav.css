@@ -17,7 +17,7 @@
   width: 50%;
   flex-wrap: nowrap;
   overflow: hidden;
-  min-width:230px;
+  min-width: 230px;
 }
 .nav-center {
   display: flex;
@@ -34,7 +34,7 @@
   padding-right: 12px;
 }
 
-.nav-subtitle{
+.nav-subtitle {
   /* align-self: flex-end; */
   font-size: var(--size-normal);
   margin-left: 12px;
@@ -73,4 +73,13 @@
 }
 .nav-link:hover {
   color: var(--text-hover);
+}
+
+.searchMessage {
+  position: absolute;
+  left: calc(100vw / 2 - 175px);
+  top: 84px;
+  width: 350px;
+  background-color: antiquewhite;
+  border-radius: var(--p-6px);
 }

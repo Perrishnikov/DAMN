@@ -5,6 +5,10 @@
   cursor: pointer;
   min-height: 20px;
 } */
+#newLabelGroupName{
+  /* width: 100%; */
+
+}
 
 .label-group{
   margin-bottom: var(--p-4px);

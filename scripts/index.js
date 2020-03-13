@@ -19,7 +19,7 @@ import label_new from '../components/label_new.js';
 import label_details from '../components/label_details.js';
 import image_new from '../components/image_new.js';
 import images_list from '../components/images_list.js';
-// import { active_partcode, add_new_partcode } from '../components/active_partcode.js';
+import { active_partcode, add_new_partcode } from '../components/active_partcode.js';
 
 /** @type {import('../redux/types').Redux} */
 const { createStore } = window.Redux;
@@ -28,7 +28,7 @@ const store = createStore(mainReducer, defaultState);
 const handle = {
   searchInput: document.querySelector('#searchInput'),
   activeLabelName: document.querySelector('#activeLabelName'),
-  // active_partcode: document.querySelector('#active_partcode'),
+  active_partcode: document.querySelector('#active_partcode'),
   labels_list: document.querySelector('#labels_list'),
   label_details: document.querySelector('#label_details'),
   label_new: document.querySelector('#label_new'),
@@ -53,9 +53,8 @@ function rerenderDOM() {
   //States....
   const activePartcode = store.getState().activePartcode;
   const selectedLabel = store.getState().selectedLabel;
-  // const labelGroups = store.getState().labelGroups;
   const selectedLabelGroup = store.getState().selectedLabelGroup;
-  // console.log(`activePartcode: ${activePartcode}`);
+  console.log(`activePartcode: ${activePartcode}`);
   // console.log(activeLabel);
   const pendingLabelGroup = store.getState().pendingLabelGroup;
 
@@ -64,7 +63,6 @@ function rerenderDOM() {
   const associatedGroups = connect.labelGroups.getLabelGroupsByPartcode(activePartcode);
   const prefixes = connect.prefixes.getAllPrefixes();
 
-  console.log(associatedGroups);
   const selectedImage = ''; //! 
   const associatedImages = ''; //! 
 
@@ -115,17 +113,7 @@ function rerenderDOM() {
     const partcodes = connect.partcodes.getAllPartcodes();
     document.body.appendChild(component.dataView({ partcodes }));
   }
-
-  // let previousValue = currentValue;
-  // currentValue = select(store.getState())
-  // if (previousValue !== currentValue) {
-  //   console.log(
-  //     'Some deep nested property changed from',
-  //     previousValue,
-  //     'to',
-  //     currentValue
-  //   )
-  // }
+  
 }
 
 /** 
@@ -200,8 +188,10 @@ function addListeners() {
       console.log('13');
       const partcode = handle.searchInput.value;
       const isPartcodeListed = handlePartcodeSearch(partcode);
+      console.log(`partcode: ${partcode}; isListed: ${isPartcodeListed}`);
 
       if (partcode === '') {
+        handle.searchInput.value = '';
         store.dispatch(reset());
         return;
       }
@@ -213,7 +203,7 @@ function addListeners() {
 
         store.dispatch(setActivePartcode(partcode));
       } else {
-        // render(handle.active_partcode, add_new_partcode(partcode));
+        render(handle.active_partcode, add_new_partcode(partcode));
       }
     }
   });
@@ -224,7 +214,7 @@ function addListeners() {
    * clicks on partcode
    */
   window.addEventListener('click', e => {
-    const removeActivePartcode = e.target.closest(`.resultFound`);
+    // const removeActivePartcode = e.target.closest(`.resultFound`);
     const labelSelected = e.target.closest(`[data-name]`);
     const labelGroupSelected = e.target.closest(`[data-group]`);
     const addNewPartcode = e.target.closest('.newPartcodeButton');

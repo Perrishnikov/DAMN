@@ -31,7 +31,7 @@ const label_group_new = (partcode, pendingLabelGroup, selectedLabel) => {
       <div class="label-group">
         <div id="" class="component-head">
           <span>Group Name:</span>
-          <input value="placeholder"></input>
+          <input id="newLabelGroupName" value="placeholder"></input>
         </div>
 
       
