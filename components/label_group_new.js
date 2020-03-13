@@ -17,7 +17,7 @@ const weHaveLabels = (selectedLabel, labels) => {
 
 
 const label_group_new = (partcode, pendingLabelGroup, selectedLabel) => {
-  console.log(pendingLabelGroup.size);
+  // console.log(pendingLabelGroup.size);
   if (partcode) {
     return `
     <div id="" class="flex-row">

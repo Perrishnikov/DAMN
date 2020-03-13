@@ -36,7 +36,7 @@ const handle = {
   label_group_list: document.querySelector('#label_group_list'),
   label_dnd: document.querySelector('#label_dnd'),
   image_new: document.querySelector('#image_new'),
-  image_list: document.querySelector('#image_list'),
+  images_list: document.querySelector('#images_list'),
 };
 
 

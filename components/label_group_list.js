@@ -46,7 +46,7 @@ const weHaveLabels = (selectedLabel, labels) => {
 
   return `
     ${labels.map(label => {
-      console.log(label);
+      // console.log(label);
       const isSelected = selectedLabel.name == label.name ? 'selected' : '';
 
 
@@ -74,7 +74,7 @@ const label_group_list = (selectedLabel, selectedLabelGroup, labelGroups) => {
 
       const isSelected = selectedLabelGroup == group.groupName ? 'groupIsSelected' : '';
 
-      console.log(group);
+      // console.log(group);
       //${isSelected ? groupDetails(group, selectedLabel) : ``}
       return `
         <div data-group="${group.groupName}" class="label-group ${isSelected}">
