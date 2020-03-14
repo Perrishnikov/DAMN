@@ -1,9 +1,9 @@
 @import './root.css';
-@import './nav.css';
+@import '../components/nav.css';
 /* @import './labelName.css'; */
 @import './col-data.css';
 
-@import '../components/active_partcode.css';
+/* @import '../components/active_partcode.css'; */
 @import '../components/label_details.css';
 /* @import '../components/label_dnd.css'; */
 @import '../components/label_group_list.css';
@@ -144,6 +144,12 @@ section {
 
 .is-warning {
   background-color: var(--warning);
+}
+.is-success {
+  background-color: var(--success);
+}
+.is-primary{
+  background-color: var(--turquoise);
 }
 
 .is-outlined {}

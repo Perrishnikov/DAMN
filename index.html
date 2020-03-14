@@ -10,58 +10,28 @@
 
 <body>
   <div style="height: 100vh" class="flex-col">
-    <div class="nav">
-      <div class="nav-left">
-        <span>DAMN
-          <span class="nav-subtitle">Digital Asset Manager Names</span>
-        </span>
-      </div>
 
-      <div class="nav-center">
-        <svg class="navIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7A7A7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="bevel">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-        <input class="nav-search" id="searchInput" placeholder="search for partcode">
-        <div class="navIcon"></div>
-      </div>
-
-      <div class="nav-right">
-        <div class="nav-link">Help</div>
-        <div class="nav-link">Admin (logged in)</div>
-      </div>
-
-      <div id="active_partcode" class="searchMessage">hello</div>
-
-    </div>
-
-    <!-- Active Label Name -->
-    <!-- <div id="active_partcode" class="labelName"> -->
-      <!-- <div class="component" id="activeLabelName"></div> -->
-      <!-- <div class="nameResultsMessage"></div> -->
-    <!-- </div> -->
-
+    <div id="nav" class="nav"></div>
 
     <div class="content-wrap">
 
-      <!-- 1st col -->
-      <section id="">
-        <div class="component empty" id=""></div>
+      <!-- 1st col Label Detail -->
+      <section>
+        <div class="component empty"></div>
         <!-- <div class="component" id="active_partcode"></div> -->
         <div class="component" id="label_details"></div>
       </section>
 
-      <!-- 2nd col -->
+      <!-- 2nd col Label List-->
       <section>
         <div class="component dnd-target" id="label_new"></div>
         <div class="component" id="labels_list"></div>
 
       </section>
 
-      <!-- 3rd col -->
-      <section id="" class="">
-        <!-- Labels Groups -->
-        <div class="component empty" id=""></div>
+      <!-- 3rd col Labels Group -->
+      <section>
+        <div class="component empty"></div>
         <div class="component dnd-target" id="label_group_new"></div>
         <div class="component" id="label_group_list"></div>
       </section>
