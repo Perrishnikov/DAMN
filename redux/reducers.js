@@ -1,6 +1,7 @@
 const { produce } = window.immer;
 
 const SET_ACTIVE_PARTCODE = 'SET_ACTIVE_PARTCODE';
+const SET_LABELLIST_PARTCODE = 'SET_LABELLIST_PARTCODE'
 const SET_SELECTED_LABEL = 'SET_SELECTED_LABEL';
 const SET_SELECTED_GROUP = 'SET_SELECTED_GROUP';
 const SET_LABEL_GROUPS = 'SET_LABEL_GROUPS';
@@ -10,6 +11,13 @@ const APPEND_PENDING_LABEL_GROUP = 'APPEND_PENDING_LABEL_GROUP';
 /** 
  * ACTIONS 
  */
+export function setLabelListPartcode(partcode) {
+  return {
+    type: SET_LABELLIST_PARTCODE,
+    partcode
+  };
+}
+
 export function appendPendingLabelGroup({ labelName, label }) {
   return {
     type: APPEND_PENDING_LABEL_GROUP,
@@ -65,6 +73,11 @@ export const mainReducer = (previous = {}, action) => produce(previous, draft =>
       return;
     }
 
+    case SET_LABELLIST_PARTCODE: {
+      draft.labelListPartcode = action.partcode;
+      return;
+    }
+
     case SET_SELECTED_LABEL: {
       // console.log(`SET_ACTIVE_LABEL: `,action.label);
       draft.selectedLabel = action.label;
@@ -87,6 +100,7 @@ export const mainReducer = (previous = {}, action) => produce(previous, draft =>
       draft.selectedLabelGroup = '';
       draft.labelGroups = '';
       draft.pendingLabelGroup = new Map();
+      draft.labelListPartcode = '';
       return;
     }
 

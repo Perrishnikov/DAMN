@@ -64,7 +64,7 @@ export const labels = new Map([
   [
     'empty', {
       prefix: '',
-      partcode: '',
+      partcode: 'blah',
       version: '',
       bulk: '',
       country: '',

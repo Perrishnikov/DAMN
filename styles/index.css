@@ -152,7 +152,9 @@ section {
   background-color: var(--turquoise);
 }
 
-.is-outlined {}
+/* .is-warning .is-outlined  {
+  border: 1px solid var(--warning);
+} */
 
 .button {
   border-radius: var(--p-4px);

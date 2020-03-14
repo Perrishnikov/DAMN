@@ -54,7 +54,7 @@ const getLabelsByPartcode = partcode => {
   // console.log(labels);
   [...labels].forEach(([key, value]) => {
     // console.log(`partcode: ${partcode} - key: ${key}, value...`,value);
-    if (value.partcode == partcode) {
+    if (value.partcode === partcode) {
       // o[key] = value;
       a.push(value);
     }

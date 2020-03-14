@@ -60,6 +60,7 @@
  * @property {Boolean} devMode
  * @property {Boolean} isEditing 
  * @property {Label} activeLabel - should be enum
+ * @property {String} labelListPartcode
  */
 
 
@@ -71,6 +72,7 @@ const defaultState = {
   selectedLabelGroup: '',
   labelGroups: '',
   pendingLabelGroup: new Map(),
+  labelListPartcode: '',
   selectedLabel: ''
   // {
   //   prefix: {

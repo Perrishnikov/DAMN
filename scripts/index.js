@@ -5,7 +5,7 @@ import {
   setActivePartcode,
   setSelectedLabel,
   setSelectedGroup,
-  setLabelGroups,
+  setLabelListPartcode,
   reset,
   appendPendingLabelGroup,
   mainReducer
@@ -54,14 +54,21 @@ function rerenderDOM() {
 
   //States....
   const activePartcode = store.getState().activePartcode;
+  const labelListPartcode = store.getState().labelListPartcode;
+  // console.log(`labelListPartcode: ${labelListPartcode}`);
   const selectedLabel = store.getState().selectedLabel;
   const selectedLabelGroup = store.getState().selectedLabelGroup;
-  console.log(`activePartcode: ${activePartcode}`);
+  // console.log(`activePartcode: ${activePartcode}`);
   // console.log(activeLabel);
   const pendingLabelGroup = store.getState().pendingLabelGroup;
 
   //Database connections... 
-  const associatedLabels = connect.labels.getLabelsByPartcode(activePartcode);
+    // if labelListSearchPartcode use it, if not, use activePartcode
+  const associatedLabels = connect.labels.getLabelsByPartcode(
+    labelListPartcode ? labelListPartcode : activePartcode);
+    
+    // console.log(associatedLabels);
+
   const associatedGroups = connect.labelGroups.getLabelGroupsByPartcode(activePartcode);
   const prefixes = connect.prefixes.getAllPrefixes();
 
@@ -70,7 +77,7 @@ function rerenderDOM() {
 
 
   /** Nav */
-  render(handle.nav, nav({activePartcode}));
+  render(handle.nav, nav({ activePartcode }));
   // handle.searchInput.value = activePartcode;
 
 
@@ -84,9 +91,11 @@ function rerenderDOM() {
   /* New Label */
   render(handle.label_new, label_new(activePartcode));
   /* Labels List */
-  render(handle.labels_list, labels_list(
+  render(handle.labels_list, labels_list({
+    activePartcode,
     selectedLabel,
-    associatedLabels)
+    associatedLabels
+  })
   );
 
   /** 3rd col */
@@ -181,31 +190,74 @@ function addListeners() {
   /** 
    * Nav SearchInput 
    */
-  handle.nav.addEventListener('keyup', e => {
+  document.addEventListener('keyup', e => {
+
+
     if (e.keyCode === 13) {
-      const searchInput = document.querySelector('#searchInput');
       console.log('13');
-      const partcode = searchInput.value;
+      const searchInput = document.querySelector('#searchInput');
+      const labelListSearch = document.querySelector('#labelListSearch');
 
-      const isPartcodeListed = handlePartcodeSearch(partcode);
-      // console.log(`partcode: ${partcode}; isListed: ${isPartcodeListed}`);
+      // ActivePartcodeSearch
+      if (document.activeElement === searchInput) {
+        const partcode = searchInput.value;
 
-      if (partcode === '') {
-        searchInput.value = '';
-        store.dispatch(reset());
-        return;
+        const isPartcodeListed = handlePartcodeSearch(partcode);
+        // console.log(`partcode: ${partcode}; isListed: ${isPartcodeListed}`);
+
+        if (partcode === '') {
+          searchInput.value = '';
+          store.dispatch(reset());
+          return;
+        }
+
+
+        if (isPartcodeListed) {
+          searchInput.value = partcode;
+
+          store.dispatch(reset());
+          store.dispatch(setActivePartcode(partcode));
+          // render(handle.nav, nav({ existingPartcode: partcode }));
+        } else {
+
+          render(handle.nav, nav({ newPartcode: partcode }));
+        }
       }
 
-      if (isPartcodeListed) {
-        searchInput.value = partcode;
-      
-        store.dispatch(reset());
-        store.dispatch(setActivePartcode(partcode));
-        // render(handle.nav, nav({ existingPartcode: partcode }));
-      } else {
+      /** 
+       * LabelListSearch
+       * Whenever a new ActivePartcode is created, search here too
+       * Can have a labelListSearch that doesnt match ActivePartcode.
+       */
+      if (document.activeElement === labelListSearch) {
+        const partcode = labelListSearch.value;
 
-        render(handle.nav, nav({ newPartcode: partcode }));
+        const isPartcodeListed = handlePartcodeSearch(partcode);
+        console.log(`partcode: ${partcode}; isListed: ${isPartcodeListed}`);
+
+        if (partcode === '') {
+          labelListSearch.value = store.getState().activePartcode;
+          // store.dispatch(reset());
+          return;
+        }
+
+
+        if (isPartcodeListed) {
+          labelListSearch.value = partcode;
+
+          // store.dispatch(reset());
+          store.dispatch(setLabelListPartcode(partcode));
+          // render(handle.labels_list, labels_list({ existingPartcode: partcode }));
+        } else {
+
+          // render(handle.nav, nav({ newPartcode: partcode }));
+        }
+
+        
       }
+
+
+
     }
   });
 
@@ -251,7 +303,7 @@ function addListeners() {
       store.dispatch(setActivePartcode(value));
     }
 
-    if(cancelPartcode){
+    if (cancelPartcode) {
       store.dispatch(setActivePartcode(store.getState().activePartcode));
     }
   });
