@@ -72,8 +72,8 @@ function rerenderDOM() {
   // console.log(associatedLabels);
 
   const associatedGroups = connect.labelGroups.getLabelGroupsByPartcode(activePartcode);
-  console.log(associatedGroups);
-  
+  // console.log(associatedGroups);
+
   const prefixes = connect.prefixes.getAllPrefixes();
 
   const selectedImage = ''; //! 
@@ -103,22 +103,28 @@ function rerenderDOM() {
   );
 
   /** 3rd col */
-  /* Label Groups New */
-  render(handle.label_group_new, label_group_new(activePartcode, pendingLabelGroup, selectedLabel));
-  /* Label Groups for partcode */
-  render(handle.label_group_list, label_group_list(
-    selectedLabel,
-    // selectedLabelGroup,
-    associatedGroups)
-  );
+  {
+    /* Label Groups New */
+    render(handle.label_group_new, label_group_new(activePartcode, pendingLabelGroup, selectedLabel));
+    /* Label Groups for partcode */
+    render(handle.label_group_list, label_group_list(
+      selectedLabel,
+      // selectedLabelGroup,
+      associatedGroups)
+    );
+  }
+
 
 
   /** 4th column Images */
-  render(handle.image_new, image_new(activePartcode));
-  render(handle.images_list, images_list(
-    selectedImage,
-    associatedImages
-  ));
+  {
+    render(handle.image_new, image_new(activePartcode));
+    render(handle.images_list, images_list(
+      selectedImage,
+      associatedImages
+    ));
+  }
+
 
 
   if (store.getState().devMode) {
@@ -144,6 +150,52 @@ function handleLabelSelect(labelName) {
   const isFound = connect.labels.getLabelByKey(labelName);
   // console.log(isFound);
   return isFound;
+}
+
+
+/**
+ * Update Tables with new Status for Label Groups
+ * @param {} activePartcode 
+ * @param {*} groupName 
+ * @param {*} newStatus 
+ */
+function updateLabelGroupStatus(activePartcode, groupName, newStatus) {
+  const associatedGroups = connect.labelGroups.getLabelGroupsByPartcode(activePartcode);
+  const groupToUpdate = associatedGroups.find(group => group.groupName === groupName);
+
+  console.log(activePartcode);
+  console.log(groupName);
+  console.log(newStatus);
+  console.log(associatedGroups);
+
+  if (newStatus === 'ACTIVE') {
+    const otherActive = associatedGroups.find(group => group.status === newStatus);
+    console.log(otherActive);
+    otherActive.status = 'HISTORY';
+
+    groupToUpdate.imageDate = 'Date.Now()';
+    groupToUpdate.imagePerson = 'Logged In User';
+    groupToUpdate.status = newStatus;
+
+  } else if (newStatus === 'REJECTED') {
+
+    groupToUpdate.labelPerson = 'Logged in User';
+    groupToUpdate.labelDate = 'Date.Now()';
+    groupToUpdate.status = newStatus;
+
+  } else if (newStatus === 'PENDING') {
+    const otherPending = associatedGroups.find(group => group.status === newStatus);
+
+    if (otherPending) {
+      console.error('Existing PENDING');
+
+    } else {
+      console.log(`okay to PEND`);
+    }
+  }
+
+  console.log(groupToUpdate);
+  rerenderDOM();
 }
 
 
@@ -272,23 +324,32 @@ function addListeners() {
   window.addEventListener('click', e => {
     const removeActivePartcode = e.target.closest(`.resultFound`);
     const labelSelected = e.target.closest(`[data-name]`);
-    // const labelGroupSelected = e.target.closest(`[data-group]`);
     const createPartcode = e.target.closest('[data-createPartcode]');
     const cancelPartcode = document.querySelector('#cancelPartcode');
     const labelActivate = e.target.closest('#labelActivate');
     const labelReject = e.target.closest('#labelReject');
     const labelCreateGroup = e.target.closest('#labelCreateGroup');
     const labelDiscardGroup = e.target.closest('#labelDiscardGroup');
+    const dataGroup = e.target.closest('[data-group');
+
     e.preventDefault();
 
     handleNewLabelDnd();
 
     if (labelActivate) {
       console.log(`labelActivate`);
+      const activePartcode = store.getState().activePartcode;
+      const groupName = dataGroup.dataset.group;
+
+      updateLabelGroupStatus(activePartcode, groupName, 'ACTIVE');
     }
 
     if (labelReject) {
       console.log(`labelReject`);
+      const activePartcode = store.getState().activePartcode;
+      const groupName = dataGroup.dataset.group;
+
+      updateLabelGroupStatus(activePartcode, groupName, 'REJECTED');
     }
 
     if (labelDiscardGroup) {
@@ -301,18 +362,16 @@ function addListeners() {
       const activePartcode = store.getState().activePartcode;
       // console.log(`activePartcode: ${activePartcode}`);
       const newGroupName = document.querySelector('#newLabelGroupName').value;
-    
+
       const pendingLabelGroup = store.getState().pendingLabelGroup;
       // console.log(pendingLabelGroup);
 
       const updatedGroups = connect.labelGroups.updateLabelGroupByPartcode(
-        activePartcode, 
+        activePartcode,
         pendingLabelGroup,
         newGroupName);
 
-      console.log(updatedGroups);
 
-      
       store.dispatch(deletePendingLabelGroup());
     }
 

@@ -2,38 +2,22 @@ import { partcodes, labels, PREFIXES, labelGroups, LabelGroup } from '../data/ta
 
 
 const updateLabelGroupByPartcode = (activePartcode, pendingLabelGroup, newGroupName) => {
-  // console.log(pendingLabelGroup);
 
   if (labelGroups.has(activePartcode)) {
-
-    // for (let [key, value] of pendingLabelGroup.entries()) {
-    //   // console.log(key + ' = ' + value)
-    //   console.log(value);
-    // }
 
     const ls = [...pendingLabelGroup].map(([key, value]) => {
       return value;
     });
 
-    console.log(ls);
     const newGroup = new LabelGroup(newGroupName, ls);
-    console.log(newGroup);
     const oldGroups = labelGroups.get(activePartcode);
-    // let lg = labelGroups.get(activePartcode);
-    // console.log(lg);
-
-    // lg.push(newGroup);
 
     labelGroups.set(activePartcode, [newGroup, ...oldGroups]);
-
-    // labelsInGroup = labelGroups.get(activePartcode).find(group => group.groupName === groupName);
-
-
 
     return labelGroups.get(activePartcode);
   }
   else {
-    console.log('partcode not found');
+    console.warn('partcode not found');
   }
 };
 
