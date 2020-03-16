@@ -100,10 +100,10 @@ section {
 }
 
 /* end COPONENTS ***************************/
-/* .dnd-target {
-  background-color: aquamarine;
+.dnd-target {
+  /* background-color: aquamarine; */
   min-height: 60px;
-} */
+}
 /* .dnd-item {
   cursor: grab;
 } */

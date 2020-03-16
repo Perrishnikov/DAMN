@@ -41,6 +41,7 @@ export function setSelectedLabel(label) {
     label
   };
 }
+
 export function createLabelGroup (data){
   return {
     type: CREATE_LABEL_GROUP,

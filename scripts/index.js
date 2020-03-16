@@ -391,20 +391,25 @@ function addListeners() {
   handle.label_group_new.addEventListener('dragenter', e => e.preventDefault());
   handle.label_group_new.addEventListener('dragover', e => e.preventDefault());
   handle.label_group_new.addEventListener('drop', e => {
-    // console.log(e);
-    e.preventDefault();
+    const pending = document.querySelector('[data-status="PENDING"]');
 
-    // [...document.querySelectorAll('.dnd-labelItem')].forEach(item => item.classList.remove('active'));
+    if (!pending) {
+      // console.log(e);
+      e.preventDefault();
 
-    // Get the data
-    let labelName = e.dataTransfer.getData('text');
-    // console.log(`drop labelName: ${labelName}`);
+      // [...document.querySelectorAll('.dnd-labelItem')].forEach(item => item.classList.remove('active'));
 
-    // console.log(partcode);
-    let lbl = connect.labels.getLabelByKey(labelName);
+      // Get the data
+      let labelName = e.dataTransfer.getData('text');
+      // console.log(`drop labelName: ${labelName}`);
 
-    // console.log(lbl);
-    store.dispatch(appendPendingLabelGroup({ labelName, label: lbl }));
+      // console.log(partcode);
+      let lbl = connect.labels.getLabelByKey(labelName);
+
+      // console.log(lbl);
+      store.dispatch(appendPendingLabelGroup({ labelName, label: lbl }));
+    }
+
   });
 
 }
@@ -415,7 +420,8 @@ function addListeners() {
    * DND for Label Groups
    */
 function addDragListeners() {
-  [...document.querySelectorAll('.dnd-labelItem')].forEach(i => i.removeEventListener('dragstart', e => { return }));
+  const pending = document.querySelector('[data-status="PENDING"]');
+
 
   [...document.querySelectorAll('.dnd-labelItem')].forEach(i => {
 
@@ -430,8 +436,15 @@ function addDragListeners() {
 
       e.target.closest('.dnd-labelItem').classList.add('active');
 
-      document.querySelector('.dnd-labelGroup-target').classList.add('active');
-      document.querySelector('[data-status="PENDING"]').classList.add('dnd-labelGroup-target', 'active');
+      
+
+      if (pending) {
+        pending.classList.add('dnd-labelGroup-target', 'active');
+      } else {
+        document.querySelector('.dnd-labelGroup-target').classList.add('active');
+        return;
+      }
+
 
       // let labelName = e.dataTransfer.getData('text');
       // console.log(`dragstart labelName: ${labelName}`);
@@ -439,16 +452,58 @@ function addDragListeners() {
 
     /** removes drag classes when done */
     i.addEventListener('dragend', e => {
-      // console.log(e);
+
       e.srcElement.classList.remove('active');
 
       document.querySelector('.dnd-labelGroup-target').classList.remove('active');
+
       [...document.querySelectorAll('.dnd-labelItem')].forEach(item => item.classList.remove('active'));
-      
-      document.querySelector('[data-status="PENDING"]').classList.remove('dnd-labelGroup-target', 'active');
+
+      if (pending) {
+
+        pending.classList.remove('dnd-labelGroup-target', 'active');
+      }
+
     });
 
+
   });
+
+
+
+  if (pending) {
+    pending.addEventListener('dragenter', e => e.preventDefault());
+    pending.addEventListener('dragover', e => e.preventDefault());
+
+    pending.addEventListener('drop', e => {
+      // console.log(e);
+      e.preventDefault();
+
+      // [...document.querySelectorAll('.dnd-labelItem')].forEach(item => item.classList.remove('active'));
+
+
+      // let labelName = e.dataTransfer.getData('text');
+      // // console.log(`drop labelName: ${labelName}`);
+
+      // // console.log(partcode);
+      // let lbl = connect.labels.getLabelByKey(labelName);
+
+      // console.log(lbl);
+      // store.dispatch(appendPendingLabelGroup({ labelName, label: lbl }));
+
+      // const activePartcode = store.getState().activePartcode;
+      // // console.log(`activePartcode: ${activePartcode}`);
+      // const groupName = pending.dataset.group;
+      // const pendingLabelGroup = store.getState().pendingLabelGroup;
+      // const updatedGroups = connect.labelGroups.updateLabelGroupByPartcode(
+      //   activePartcode,
+      //   groupName,
+      //   newGroupName);
+      //   console.log(updatedGroups);
+    });
+  }
+
+
 
 
 }
@@ -458,5 +513,4 @@ window.addEventListener('DOMContentLoaded', function () {
 
   rerenderDOM();
   addListeners();
-  addDragListeners();
 });
