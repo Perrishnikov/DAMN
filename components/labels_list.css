@@ -22,3 +22,10 @@
 .groupIsSelected{
   border: 1px solid black;
 } */
+#labelListSearch{
+  border-radius: var(--p-4px);
+  border: 0;
+  box-sizing: border-box;
+  padding: 8px;
+  outline: 0;
+}
