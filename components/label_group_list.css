@@ -1,10 +1,10 @@
 .labelGroupStatus{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  align-items: center;
+  flex: 1 0 auto;
 }
 .groupStatus{
   flex-grow: 1;
+  align-items: center;
   margin-left: var(--p-8px);
 }
 .sinceDate{
@@ -25,7 +25,26 @@ font-size: var(--size-small);
   padding-right: .75em;
   white-space: nowrap;
 }
-
+.edit {
+  align-items: center;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  color: #4a4a4a;
+  display: inline-flex;
+  font-size: .75rem;
+  height: 2em;
+  justify-content: center;
+  line-height: 1.5;
+  padding-left: .75em;
+  padding-right: .75em;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.edit:hover {
+  border-color: #b5b5b5;
+  color: #363636;
+  stroke-width: 2px;;
+}
 #toggle_label_group_new{
   cursor: pointer;
   min-height: 30px;

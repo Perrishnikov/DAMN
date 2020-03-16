@@ -42,14 +42,19 @@ const label_group_list = (selectedLabel, labelGroups) => {
 
       return `
         <div data-group="${group.groupName}" class="label-group ${''}">
-          <div class="labelGroupStatus">
+
+          <div class="flex-row labelGroupStatus">
             <span class="">${group.groupName}</span>
-            <div class="groupStatus">
+
+            <div class="flex-row groupStatus">
               <span class="tag ${status}">${group.status}</span>
-              
+              ${group.status !== 'HISTORY' ? `
+              <svg class="edit" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="bevel"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>
+              ` : ``}
             </div>
             
             <span class="sinceDate">Since ${group.statusDate}</span>
+
           </div>
           
 

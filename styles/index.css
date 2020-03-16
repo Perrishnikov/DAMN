@@ -52,7 +52,7 @@ section {
   border-radius: var(--p-8px);
   min-height: 32px;
   margin-bottom: var(--p-12px);
-  flex: 0 1 auto;
+  /* flex: 0 1 auto; */
 }
 .component.empty {
   /* border:0; */
@@ -66,6 +66,7 @@ section {
   margin-left: var(--p-6px);
   margin-top: var(--p-6px);
   margin-bottom: var(--p-6px);
+  flex-shrink: 0;
 }
 .component-head-icon {
   margin-left: var(--p-4px);
@@ -146,10 +147,13 @@ section {
 .is-info {
   background-color: var(--info);
 }
-
 .tag.is-warning,
 .is-warning {
   background-color: var(--warning);
+}
+.tag.is-danger,
+.is-danger {
+  background-color: var(--danger);
 }
 .is-success {
   background-color: var(--success);

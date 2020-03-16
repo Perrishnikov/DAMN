@@ -163,14 +163,13 @@ function updateLabelGroupStatus(activePartcode, groupName, newStatus) {
   const associatedGroups = connect.labelGroups.getLabelGroupsByPartcode(activePartcode);
   const groupToUpdate = associatedGroups.find(group => group.groupName === groupName);
 
-  console.log(activePartcode);
-  console.log(groupName);
-  console.log(newStatus);
-  console.log(associatedGroups);
+  // console.log(activePartcode);
+  // console.log(groupName);
+  // console.log(newStatus);
+  // console.log(associatedGroups);
 
   if (newStatus === 'ACTIVE') {
     const otherActive = associatedGroups.find(group => group.status === newStatus);
-    console.log(otherActive);
     otherActive.status = 'HISTORY';
 
     groupToUpdate.imageDate = 'Date.Now()';
