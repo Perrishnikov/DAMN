@@ -7,6 +7,8 @@ const CREATE_LABEL_GROUP = 'CREATE_LABEL_GROUP';
 const SET_LABEL_GROUP_STATUS = 'SET_LABEL_GROUP_STATUS';
 const RESET = 'RESET';
 const APPEND_PENDING_LABEL_GROUP = 'APPEND_PENDING_LABEL_GROUP';
+const DELETE_PENDING_LABEL_GROUP = 'DELETE_PENDING_LABEL_GROUP';
+const CREATE_NEW_LABEL_GROUP = 'CREATE_NEW_LABEL_GROUP';
 
 /** 
  * ACTIONS 
@@ -46,6 +48,8 @@ export function createLabelGroup (data){
   };
 }
 
+
+/** Label Groups */
 export function setLabelGroupStatusByGroupName(groups) {
   return {
     type: SET_LABEL_GROUP_STATUS,
@@ -53,6 +57,21 @@ export function setLabelGroupStatusByGroupName(groups) {
   };
 }
 
+export function createNewLabelGroup({group, partcode}){
+  return {
+    type: CREATE_NEW_LABEL_GROUP,
+    group,
+    partcode
+  };
+}
+
+export function deletePendingLabelGroup(){
+  return {
+    type: DELETE_PENDING_LABEL_GROUP
+  };
+}
+
+/** Reset */
 export function reset() {
   return {
     type: RESET
@@ -83,9 +102,9 @@ export const mainReducer = (previous = {}, action) => produce(previous, draft =>
       return;
     }
 
-    case SET_LABEL_GROUP_STATUS: {
+    case DELETE_PENDING_LABEL_GROUP: {
 
-      // draft.labelGroups = action.groups;
+      draft.pendingLabelGroup = new Map();
       return;
     }
 
@@ -101,6 +120,22 @@ export const mainReducer = (previous = {}, action) => produce(previous, draft =>
       draft.labelGroups = new Map();
       draft.pendingLabelGroup = new Map();
       draft.labelListPartcode = '';
+      return;
+    }
+
+    case CREATE_NEW_LABEL_GROUP: {
+      
+
+      let g = previous.labelGroups;
+
+      // for (let [key, value] of g) {
+      //   console.log(key + ' = ' + value)
+      // }
+      // console.log(g);
+      // console.log(action);
+      // g.set(action.partcode, action.group);
+
+      // draft.labelGroups.set(action.partcode , g);
       return;
     }
 

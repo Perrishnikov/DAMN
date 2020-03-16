@@ -60,7 +60,7 @@
  * @property {String} labelListPartcode - search box value in Label List component
  * @property {Label} selectedLabel - Label data for selected partcode
  * @property {Boolean} devMode
- * @property {}  - ???
+ * @property {Map} pendingLabelGroup - Labels in New Label Group
  * @property {Map} labelGroups = all the groups for a partcode(key)
  */
 

@@ -9,7 +9,9 @@ import {
   setLabelListPartcode,
   reset,
   appendPendingLabelGroup,
+  deletePendingLabelGroup,
   setLabelGroupStatusByGroupName,
+  createNewLabelGroup,
   mainReducer
 } from '../redux/reducers.js';
 
@@ -55,7 +57,7 @@ function rerenderDOM() {
 
   //States....
   const activePartcode = store.getState().activePartcode;
-  console.log(`activePartcode: ${activePartcode}`);
+  // console.log(`activePartcode: ${activePartcode}`);
   const labelListPartcode = store.getState().labelListPartcode;
   // console.log(`labelListPartcode: ${labelListPartcode}`);
   const selectedLabel = store.getState().selectedLabel;
@@ -70,6 +72,8 @@ function rerenderDOM() {
   // console.log(associatedLabels);
 
   const associatedGroups = connect.labelGroups.getLabelGroupsByPartcode(activePartcode);
+  console.log(associatedGroups);
+  
   const prefixes = connect.prefixes.getAllPrefixes();
 
   const selectedImage = ''; //! 
@@ -289,10 +293,27 @@ function addListeners() {
 
     if (labelDiscardGroup) {
       console.log(`labelDiscardGroup`);
+      store.dispatch(deletePendingLabelGroup());
     }
 
     if (labelCreateGroup) {
       console.log(`labelCreateGroup`);
+      const activePartcode = store.getState().activePartcode;
+      // console.log(`activePartcode: ${activePartcode}`);
+      const newGroupName = document.querySelector('#newLabelGroupName').value;
+    
+      const pendingLabelGroup = store.getState().pendingLabelGroup;
+      // console.log(pendingLabelGroup);
+
+      const updatedGroups = connect.labelGroups.updateLabelGroupByPartcode(
+        activePartcode, 
+        pendingLabelGroup,
+        newGroupName);
+
+      console.log(updatedGroups);
+
+      
+      store.dispatch(deletePendingLabelGroup());
     }
 
 

@@ -2,7 +2,7 @@ const weHaveLabels = (selectedLabel, labels) => {
 
   return `
     ${[...labels].map(([key, label]) => {
-      console.log(label);
+      // console.log(label);
       const isSelected = selectedLabel.name == label.name ? 'selected' : '';
 
 

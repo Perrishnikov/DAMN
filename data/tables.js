@@ -241,5 +241,17 @@ export const labelGroups = new Map([
   ]],
 ]);
 
-
+export class LabelGroup {
+  constructor(groupName, newLabels){
+    this.date = '2050-12-30';
+    this.groupName = groupName;
+    this.status = LABEL_GROUP_STATUS.PENDING;
+    this.statusDate = 'Date.Now()';
+    this.labelDate = '';
+    this.labelPerson = 'Logged In User';
+    this.imageDate = '';
+    this.imagePerson = '';
+    this.labels = newLabels;
+  }
+}
 
