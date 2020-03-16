@@ -132,6 +132,8 @@ function rerenderDOM() {
     document.body.appendChild(component.dataView({ partcodes }));
   }
 
+  addDragListeners();
+
 }
 
 /** 
@@ -195,49 +197,6 @@ function updateLabelGroupStatus(activePartcode, groupName, newStatus) {
 
   console.log(groupToUpdate);
   rerenderDOM();
-}
-
-
-function handleNewLabelDnd() {
-  const place = document.querySelector('#label_new');
-
-  place.addEventListener('ondragenter', e => {
-    console.log(`ondragenter`);
-    // document.getElementById('label_new').textContent = ''; 
-    event.stopPropagation();
-    event.preventDefault();
-  });
-
-  place.addEventListener('ondragover', e => {
-    console.log(`ondragover`);
-    event.stopPropagation();
-    event.preventDefault();
-  });
-  place.addEventListener('ondrop', e => {
-    console.log(`ondrop`);
-    event.stopPropagation();
-    event.preventDefault();
-    dodrop(e);
-  });
-
-  function dodrop(event) {
-    let dt = event.dataTransfer;
-    let files = dt.files;
-
-    let count = files.length;
-    output('File Count: ' + count + '\n');
-
-    for (let i = 0; i < files.length; i++) {
-      output(' File ' + i + ':\n(' + (typeof files[i]) + ') : <' + files[i] + ' > ' +
-        files[i].name + ' ' + files[i].size + '\n');
-    }
-  }
-
-  function output(text) {
-    document.getElementById('output').textContent += text;
-    //dump(text);
-  }
-
 }
 
 
@@ -333,7 +292,7 @@ function addListeners() {
 
     e.preventDefault();
 
-    handleNewLabelDnd();
+    // handleNewLabelDnd();
 
     if (labelActivate) {
       console.log(`labelActivate`);
@@ -427,33 +386,15 @@ function addListeners() {
 
   });
 
-
-  /** 
-   * Add DND listeners
-   * DND for Label Groups
-   */
-  window.addEventListener('dragstart', e => {
-    const dndItemName = e.target.closest('.dnd-item').dataset.name;
-    // console.dir(dndItemName);
-
-    // Clear the drag data cache (for all formats/types)
-    e.dataTransfer.clearData();
-    e.dataTransfer.setData('text/plain', dndItemName);
-
-
-    e.target.closest('.dnd-item').style.border = '1px dashed red';
-
-    // let labelName = e.dataTransfer.getData('text');
-    // console.log(`dragstart labelName: ${labelName}`);
-  });
-
-
+  /** Drag Targets that dont disappear */
   //If you want to allow a drop, you must prevent the default handling by cancelling both the dragenter and dragover events.
   handle.label_group_new.addEventListener('dragenter', e => e.preventDefault());
   handle.label_group_new.addEventListener('dragover', e => e.preventDefault());
   handle.label_group_new.addEventListener('drop', e => {
     // console.log(e);
     e.preventDefault();
+
+    // [...document.querySelectorAll('.dnd-labelItem')].forEach(item => item.classList.remove('active'));
 
     // Get the data
     let labelName = e.dataTransfer.getData('text');
@@ -465,11 +406,57 @@ function addListeners() {
     // console.log(lbl);
     store.dispatch(appendPendingLabelGroup({ labelName, label: lbl }));
   });
+
 }
 
 
+/** 
+   * Add DND listeners
+   * DND for Label Groups
+   */
+function addDragListeners() {
+  [...document.querySelectorAll('.dnd-labelItem')].forEach(i => i.removeEventListener('dragstart', e => { return }));
+
+  [...document.querySelectorAll('.dnd-labelItem')].forEach(i => {
+
+    i.addEventListener('dragstart', e => {
+      const dndItemName = e.target.closest('.dnd-labelItem ').dataset.name;
+      // console.dir(dndItemName);
+
+      // Clear the drag data cache (for all formats/types)
+      e.dataTransfer.clearData();
+      e.dataTransfer.setData('text/plain', dndItemName);
+
+
+      e.target.closest('.dnd-labelItem').classList.add('active');
+
+      document.querySelector('.dnd-labelGroup-target').classList.add('active');
+      document.querySelector('[data-status="PENDING"]').classList.add('dnd-labelGroup-target', 'active');
+
+      // let labelName = e.dataTransfer.getData('text');
+      // console.log(`dragstart labelName: ${labelName}`);
+    });
+
+    /** removes drag classes when done */
+    i.addEventListener('dragend', e => {
+      // console.log(e);
+      e.srcElement.classList.remove('active');
+
+      document.querySelector('.dnd-labelGroup-target').classList.remove('active');
+      [...document.querySelectorAll('.dnd-labelItem')].forEach(item => item.classList.remove('active'));
+      
+      document.querySelector('[data-status="PENDING"]').classList.remove('dnd-labelGroup-target', 'active');
+    });
+
+  });
+
+
+}
+
 window.addEventListener('DOMContentLoaded', function () {
   store.subscribe(rerenderDOM);
-  addListeners();
+
   rerenderDOM();
+  addListeners();
+  addDragListeners();
 });

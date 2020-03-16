@@ -41,7 +41,7 @@ const label_group_list = (selectedLabel, labelGroups) => {
       // const isSelected = selectedLabelGroup == group.groupName ? 'groupIsSelected' : '';
 
       return `
-        <div data-group="${group.groupName}" class="label-group ${''}">
+        <div data-group="${group.groupName}" data-status="${group.status}" class="label-group ${''}">
 
           <div class="flex-row labelGroupStatus">
             <span class="">${group.groupName}</span>
