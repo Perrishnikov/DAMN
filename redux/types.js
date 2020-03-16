@@ -57,10 +57,11 @@
 /** 
  * @typedef {Object} State 
  * @property {String} activePartcode - active partcode
+ * @property {String} labelListPartcode - search box value in Label List component
+ * @property {Label} selectedLabel - Label data for selected partcode
  * @property {Boolean} devMode
- * @property {Boolean} isEditing 
- * @property {Label} activeLabel - should be enum
- * @property {String} labelListPartcode
+ * @property {}  - ???
+ * @property {Map} labelGroups = all the groups for a partcode(key)
  */
 
 
@@ -69,11 +70,15 @@ const defaultState = {
   devMode: false,
   // isEditing: false,
   activePartcode: '00039',
-  selectedLabelGroup: '',
-  labelGroups: '',
+  labelGroups: new Map(),
   pendingLabelGroup: new Map(),
-  labelListPartcode: '',
-  selectedLabel: ''
+  labelListPartcode: '', //String
+  user: {
+    name: 'Perry',
+    role: 'ADMIN' //ADMIN, LABEL, IMAGE
+  },
+  selectedLabel: '',
+
   // {
   //   prefix: {
   //     name: 'LBX',

@@ -35,15 +35,14 @@ const label_group_new = (partcode, pendingLabelGroup, selectedLabel) => {
         </div>
 
       
-        ${weHaveLabels(selectedLabel, pendingLabelGroup)}
+    ${weHaveLabels(selectedLabel, pendingLabelGroup)}
 
-          <div class="flex-row button-box">
-            <a class="button is-primary is-outlined">Create Group</a>
-            <a class="button is-primary is-outlined">Discard</a>
-          </div>
-        </div>
-        ` : ''}
-    
+      <div class="flex-row button-box">
+        <a id="labelCreateGroup" class="button is-primary is-outlined">Create Group</a>
+        <a id="labelDiscardGroup" class="button is-outlined">Discard</a>
+      </div>
+    </div>
+    ` : ''}
     
     
   `;

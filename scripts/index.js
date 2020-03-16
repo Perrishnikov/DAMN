@@ -1,16 +1,17 @@
 
 import component from '../components.js';
 import defaultState from '../redux/types.js';
+import connect from '../connect.js';
+
 import {
   setActivePartcode,
   setSelectedLabel,
-  setSelectedGroup,
   setLabelListPartcode,
   reset,
   appendPendingLabelGroup,
+  setLabelGroupStatusByGroupName,
   mainReducer
 } from '../redux/reducers.js';
-import connect from '../connect.js';
 
 import label_group_new from '../components/label_group_new.js';
 import label_group_list from '../components/label_group_list.js';
@@ -20,7 +21,6 @@ import label_details from '../components/label_details.js';
 import image_new from '../components/image_new.js';
 import images_list from '../components/images_list.js';
 import nav from '../components/nav.js';
-// import { active_partcode, add_new_partcode } from '../components/active_partcode.js';
 
 /** @type {import('../redux/types').Redux} */
 const { createStore } = window.Redux;
@@ -48,26 +48,26 @@ function render(comp, data) {
   comp.innerHTML = data;
 }
 
+
 function rerenderDOM() {
   console.log('re-renderDOM');
   // console.log(store.getState());
 
   //States....
   const activePartcode = store.getState().activePartcode;
+  console.log(`activePartcode: ${activePartcode}`);
   const labelListPartcode = store.getState().labelListPartcode;
   // console.log(`labelListPartcode: ${labelListPartcode}`);
   const selectedLabel = store.getState().selectedLabel;
-  const selectedLabelGroup = store.getState().selectedLabelGroup;
-  // console.log(`activePartcode: ${activePartcode}`);
-  // console.log(activeLabel);
+
   const pendingLabelGroup = store.getState().pendingLabelGroup;
 
   //Database connections... 
-    // if labelListSearchPartcode use it, if not, use activePartcode
+  // if labelListSearchPartcode use it, if not, use activePartcode
   const associatedLabels = connect.labels.getLabelsByPartcode(
     labelListPartcode ? labelListPartcode : activePartcode);
-    
-    // console.log(associatedLabels);
+
+  // console.log(associatedLabels);
 
   const associatedGroups = connect.labelGroups.getLabelGroupsByPartcode(activePartcode);
   const prefixes = connect.prefixes.getAllPrefixes();
@@ -104,7 +104,7 @@ function rerenderDOM() {
   /* Label Groups for partcode */
   render(handle.label_group_list, label_group_list(
     selectedLabel,
-    selectedLabelGroup,
+    // selectedLabelGroup,
     associatedGroups)
   );
 
@@ -217,7 +217,6 @@ function addListeners() {
 
           store.dispatch(reset());
           store.dispatch(setActivePartcode(partcode));
-          // render(handle.nav, nav({ existingPartcode: partcode }));
         } else {
 
           render(handle.nav, nav({ newPartcode: partcode }));
@@ -253,7 +252,7 @@ function addListeners() {
           // render(handle.nav, nav({ newPartcode: partcode }));
         }
 
-        
+
       }
 
 
@@ -269,32 +268,44 @@ function addListeners() {
   window.addEventListener('click', e => {
     const removeActivePartcode = e.target.closest(`.resultFound`);
     const labelSelected = e.target.closest(`[data-name]`);
-    const labelGroupSelected = e.target.closest(`[data-group]`);
+    // const labelGroupSelected = e.target.closest(`[data-group]`);
     const createPartcode = e.target.closest('[data-createPartcode]');
     const cancelPartcode = document.querySelector('#cancelPartcode');
     const labelActivate = e.target.closest('#labelActivate');
     const labelReject = e.target.closest('#labelReject');
+    const labelCreateGroup = e.target.closest('#labelCreateGroup');
+    const labelDiscardGroup = e.target.closest('#labelDiscardGroup');
     e.preventDefault();
 
     handleNewLabelDnd();
 
-    if (labelActivate){
+    if (labelActivate) {
       console.log(`labelActivate`);
     }
 
-    if(labelReject){
+    if (labelReject) {
       console.log(`labelReject`);
     }
+
+    if (labelDiscardGroup) {
+      console.log(`labelDiscardGroup`);
+    }
+
+    if (labelCreateGroup) {
+      console.log(`labelCreateGroup`);
+    }
+
 
     if (removeActivePartcode) {
       store.dispatch(reset());
     }
 
-    if (labelGroupSelected) {
-      const labelGroupName = labelGroupSelected.dataset.group;
+    // if (labelGroupSelected) {
+    //   console.log(`labelGroupSelected; setSelectedGroup`);
+    //   const labelGroupName = labelGroupSelected.dataset.group;
 
-      store.dispatch(setSelectedGroup(labelGroupName));
-    }
+    //   store.dispatch(setSelectedGroup(labelGroupName));
+    // }
 
     if (labelSelected) {
       const labelHistoryName = labelSelected.dataset.name;
@@ -309,8 +320,9 @@ function addListeners() {
       const value = createPartcode.dataset.createpartcode;
       // console.log(`value: ${value}`);
 
-      connect.partcodes.setPartcode(value);
+      connect.partcodes.setPartcode(value); //add to database, not state
 
+      store.dispatch(reset());
       store.dispatch(setActivePartcode(value));
     }
 

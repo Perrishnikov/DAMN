@@ -1,8 +1,8 @@
 const labels_list = ({activePartcode, selectedLabel, associatedLabels = null}) => {
 
   // console.log(associatedLabels);
-  if (associatedLabels && associatedLabels.length > 0) {
-    const partcode = associatedLabels[0].partcode;
+  if (activePartcode) {
+    const partcode = associatedLabels && associatedLabels.length > 0 ? associatedLabels[0].partcode : '';
     const notMatched = partcode != activePartcode ? 'is-warning' : '' ;
 
     return `

@@ -193,10 +193,11 @@ export const labelGroups = new Map([
       date: '',
       groupName: 'LG0005',
       status: LABEL_GROUP_STATUS.PENDING,
-      labelTeamDate: '2020-10-03',
-      labelTeamApproved: 'Joe Employee',
-      imageTeamDate: '',
-      imageTeamPerson: '',
+      statusDate: '2020-10-03',
+      labelDate: '2020-10-03',
+      labelPerson: 'Joe Employee',
+      imageDate: '',
+      imagePerson: '',
       labels: [
         labels.get('LBX00039.N03'),
         labels.get('LG00039.A03')
@@ -207,10 +208,11 @@ export const labelGroups = new Map([
       date: '',
       groupName: 'LG0003',
       status: LABEL_GROUP_STATUS.ACTIVE,
-      labelTeamDate: '2020-10-03',
-      labelTeamApproved: 'Joe Employee',
-      imageTeamDate: '2020-10-03',
-      imageTeamPerson: 'Jane Employee',
+      statusDate: '2020-11-03',
+      labelDate: '2020-10-03',
+      labelPerson: 'Joe Employee',
+      imageDate: '2020-10-03',
+      imagePerson: 'Jane Employee',
       labels: [
         labels.get('LBX00039.N03'),
         labels.get('LG00039.A03')
