@@ -272,8 +272,19 @@ function addListeners() {
     const labelGroupSelected = e.target.closest(`[data-group]`);
     const createPartcode = e.target.closest('[data-createPartcode]');
     const cancelPartcode = document.querySelector('#cancelPartcode');
+    const labelActivate = e.target.closest('#labelActivate');
+    const labelReject = e.target.closest('#labelReject');
+    e.preventDefault();
 
     handleNewLabelDnd();
+
+    if (labelActivate){
+      console.log(`labelActivate`);
+    }
+
+    if(labelReject){
+      console.log(`labelReject`);
+    }
 
     if (removeActivePartcode) {
       store.dispatch(reset());

@@ -73,9 +73,11 @@ const label_group_list = (selectedLabel, selectedLabelGroup, labelGroups) => {
       let status = '';
 
       switch(group.status){
-        case 'ACTIVE': status = 'groupIsActive';
+        // case 'ACTIVE': status = 'groupIsActive';
+        case 'ACTIVE': status = 'is-info';
         break;
-        case 'PENDING': status = 'groupIsPending';
+        // case 'PENDING': status = 'groupIsPending';
+        case 'PENDING': status = 'is-warning';
         break;
         default: '';
       }
@@ -84,11 +86,25 @@ const label_group_list = (selectedLabel, selectedLabelGroup, labelGroups) => {
 
       return `
         <div data-group="${group.groupName}" class="label-group ${isSelected}">
-          <span class="">${group.groupName}</span>
-          <a class="button ${status}">${group.status}</a>
+          <div class="labelGroupStatus">
+            <span class="">${group.groupName}</span>
+            <div class="groupStatus">
+              <span class="tag ${status}">${group.status}</span>
+              
+            </div>
+            
+            <span class="sinceDate">Since ${group.labelTeamDate}</span>
+          </div>
+          
 
           ${weHaveLabels(selectedLabel, group.labels)}
           
+          ${group.status === 'PENDING' ? `
+            <div style="margin-left:8px;padding:4px;">
+              <a class="button is-primary is-outlined" id="labelActivate">ACTIVATE</a>
+              <a style="margin-left:8px;" id="labelReject" class="button is-danger is-outlined">REJECT</a>
+              </div>
+              ` : ``}
         </div>`;
 
     }).join('')}`;

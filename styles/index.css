@@ -142,6 +142,12 @@ section {
   font-size: var(--size-normal);
 }
 
+.tag.is-info,
+.is-info {
+  background-color: var(--info);
+}
+
+.tag.is-warning,
 .is-warning {
   background-color: var(--warning);
 }
@@ -152,10 +158,29 @@ section {
   background-color: var(--turquoise);
 }
 
-/* .is-warning .is-outlined  {
-  border: 1px solid var(--warning);
-} */
+.button.is-danger.is-outlined {
+  background-color: transparent;
+  border-color: var(--danger);
+  color: var(--danger);
+  border: 1px solid var(--danger);;
+}
+.button.is-danger.is-outlined:hover {
+  background-color: var(--danger);
+  border-color: var(--danger);
+  color: var(--white);
+}
 
+.button.is-primary.is-outlined {
+  background-color: transparent;
+  border-color: var(--success);
+  color: var(--success);
+  border: 1px solid var(--success);;
+}
+.button.is-primary.is-outlined:hover {
+  background-color: #00d1b2;
+  border-color: #00d1b2;
+  color: #fff;
+}
 .button {
   border-radius: var(--p-4px);
   background-color: #fff;

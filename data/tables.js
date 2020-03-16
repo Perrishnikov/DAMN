@@ -8,16 +8,16 @@ const LABEL_GROUP_STATUS = {
   ACTIVE: 'ACTIVE',
   HISTORY: 'HISTORY', 
   PENDING:'PENDING', //label created group - its approved
-  REJECTED: 'REVIEW' //kicked back from someone (image team)
+  REJECTED: 'REJECTED' //kicked back from someone (image team)
 };
 
-class LG_Status{
-  currentStatus = '';
-  lastStatus = '';
-  dateCreated = '';
-  dateUpdated = '';
-  lastUpdatedBy = '';
-} 
+// class LG_Status{
+//   currentStatus = '';
+//   lastStatus = '';
+//   dateCreated = '';
+//   dateUpdated = '';
+//   lastUpdatedBy = '';
+// } 
 
 export const PREFIXES = new Map([
   ['LE', {
@@ -193,6 +193,10 @@ export const labelGroups = new Map([
       date: '',
       groupName: 'LG0005',
       status: LABEL_GROUP_STATUS.PENDING,
+      labelTeamDate: '2020-10-03',
+      labelTeamApproved: 'Joe Employee',
+      imageTeamDate: '',
+      imageTeamPerson: '',
       labels: [
         labels.get('LBX00039.N03'),
         labels.get('LG00039.A03')
@@ -203,6 +207,10 @@ export const labelGroups = new Map([
       date: '',
       groupName: 'LG0003',
       status: LABEL_GROUP_STATUS.ACTIVE,
+      labelTeamDate: '2020-10-03',
+      labelTeamApproved: 'Joe Employee',
+      imageTeamDate: '2020-10-03',
+      imageTeamPerson: 'Jane Employee',
       labels: [
         labels.get('LBX00039.N03'),
         labels.get('LG00039.A03')
