@@ -1,14 +1,18 @@
-/* .newStuffItem{
- 
-  padding: var(--p-4px);
-  border-radius: var(--p-4px);
-  cursor: pointer;
-  min-height: 20px;
-} */
-#newLabelGroupName{
-  /* width: 100%; */
-
+#labelDiscardGroup.button:hover{
+  background-color: transparent;
+  border-color: var(--danger);
+  color: var(--danger);
+  border: 1px solid var(--danger);
 }
+
+#labelCreateGroup.button:hover{
+  background-color: transparent;
+  border-color: var(--success);
+  color: var(--success);
+  border: 1px solid var(--success);
+}
+
+
 
 .label-group{
   margin-bottom: var(--p-4px);

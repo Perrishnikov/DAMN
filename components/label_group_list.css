@@ -1,14 +1,28 @@
-.labelGroupStatus{
+#labelReject:hover {
+  background-color: transparent;
+  border-color: var(--danger);
+  color: var(--danger);
+  border: 1px solid var(--danger);
+}
+#labelActivate:hover {
+  background-color: transparent;
+  border-color: var(--success);
+  color: var(--success);
+  border: 1px solid var(--success);
+}
+
+
+.labelGroupStatus {
   align-items: center;
   flex: 1 0 auto;
 }
-.groupStatus{
+.groupStatus {
   flex-grow: 1;
   align-items: center;
   margin-left: var(--p-8px);
 }
-.sinceDate{
-font-size: var(--size-small);
+.sinceDate {
+  font-size: var(--size-small);
 
 }
 .tag:not(body) {
@@ -43,14 +57,15 @@ font-size: var(--size-small);
 .edit:hover {
   border-color: #b5b5b5;
   color: #363636;
-  stroke-width: 2px;;
+  stroke-width: 2px;
+  ;
 }
-#toggle_label_group_new{
+#toggle_label_group_new {
   cursor: pointer;
   min-height: 30px;
 }
 
-#newStuff{
+#newStuff {
   cursor: default;
   flex: 1 0 auto;
   /* padding: 20px; */
@@ -58,19 +73,19 @@ font-size: var(--size-small);
   /* padding-bottom: 20px; */
 }
 
-.button.groupIsActive{
+.button.groupIsActive {
   background-color: var(--cyan);
 }
-.button.groupIsPending{
+.button.groupIsPending {
   background-color: var(--warning);
 }
 
-.closed{ 
+.closed {
   visibility: hidden;
   height: 0;
 }
 
-.newStuffItem{
+.newStuffItem {
   /* width:100%; */
   padding: var(--p-4px);
   border-radius: var(--p-4px);

@@ -179,7 +179,6 @@ section {
   border-color: var(--danger);
   color: var(--danger);
   border: 1px solid var(--danger);
-  ;
 }
 .button.is-danger.is-outlined:hover {
   background-color: var(--danger);
@@ -192,7 +191,6 @@ section {
   border-color: var(--success);
   color: var(--success);
   border: 1px solid var(--success);
-  ;
 }
 .button.is-primary.is-outlined:hover {
   background-color: #00d1b2;
@@ -202,11 +200,12 @@ section {
 .button {
   border-radius: var(--p-4px);
   background-color: #fff;
-  border-color: #dbdbdb;
+  border-color: var(--grey);
   border-width: 1px;
   color: #363636;
   cursor: pointer;
   justify-content: center;
+  border-style: solid;
   /* padding-bottom: calc(.4em - 1px);
   padding-left: 1em;
   padding-right: 1em;
