@@ -53,6 +53,7 @@ export const PREFIXES = new Map([
 export const partcodes = new Map([
   ['12434', '12434'],
   ['00039', '00039'],
+  ['00039C', '00039C'],
   ['13269', '13269'],
 ]);
 
@@ -152,8 +153,25 @@ export const labels = new Map([
         LABEL_PDF_ACTIVE: '',
       }
     }
-  ],
-  [
+  ],[
+    'LBN00039C.A', {
+      prefix: PREFIXES.get('LBN'),
+      partcode: partcodes.get('00039C'),
+      bulk: null,
+      country: '',
+      version: 'A',
+      description: '"C" version of 00039',
+      extension: 'pdf',
+      name: 'LBN00039C.A This is the name.pdf',
+      meta: {
+        META_LABEL_ASSET_TYPE: '', // LABEL, CARTON, BLISTER
+        META_LABEL_UPDATED_DATE: '', // from file properties
+        META_LABEL_CREATED_BY: '', // from file properties
+        LABEL_PDF_PENDING: '',
+        LABEL_PDF_ACTIVE: '',
+      }
+    }
+  ],[
     'LBN12434.V02', {
       prefix: PREFIXES.get('LBN'),
       partcode: partcodes.get('12434'),
