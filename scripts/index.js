@@ -436,7 +436,7 @@ function addDragListeners() {
 
       e.target.closest('.dnd-labelItem').classList.add('active');
 
-      
+
 
       if (pending) {
         pending.classList.add('dnd-labelGroup-target', 'active');
@@ -476,30 +476,23 @@ function addDragListeners() {
     pending.addEventListener('dragover', e => e.preventDefault());
 
     pending.addEventListener('drop', e => {
-      // console.log(e);
       e.preventDefault();
 
-      // [...document.querySelectorAll('.dnd-labelItem')].forEach(item => item.classList.remove('active'));
+      let labelName = e.dataTransfer.getData('text');
 
+      const activePartcode = store.getState().activePartcode;
+      // console.log(`activePartcode: ${activePartcode}`);
+      const groupName = pending.dataset.group;
+      // console.log(`groupName: ${groupName}`);
 
-      // let labelName = e.dataTransfer.getData('text');
-      // // console.log(`drop labelName: ${labelName}`);
+      const updatedGroups = connect.labelGroups.addToLabelGroup(
+        activePartcode,
+        groupName,
+        labelName);
 
-      // // console.log(partcode);
-      // let lbl = connect.labels.getLabelByKey(labelName);
+      // console.log(updatedGroups);
+      store.dispatch(setActivePartcode(activePartcode));
 
-      // console.log(lbl);
-      // store.dispatch(appendPendingLabelGroup({ labelName, label: lbl }));
-
-      // const activePartcode = store.getState().activePartcode;
-      // // console.log(`activePartcode: ${activePartcode}`);
-      // const groupName = pending.dataset.group;
-      // const pendingLabelGroup = store.getState().pendingLabelGroup;
-      // const updatedGroups = connect.labelGroups.updateLabelGroupByPartcode(
-      //   activePartcode,
-      //   groupName,
-      //   newGroupName);
-      //   console.log(updatedGroups);
     });
   }
 

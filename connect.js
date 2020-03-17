@@ -1,6 +1,23 @@
 import { partcodes, labels, PREFIXES, labelGroups, LabelGroup } from '../data/tables.js';
 
 
+const addToLabelGroup = (activePartcode, groupName, labelName) => {
+  const theLabel = labels.get(labelName);
+  // console.log(theLabel);
+  const theLabelGroups = labelGroups.get(activePartcode);
+
+  // console.log(theLabelGroups);
+  const theRightGroup = theLabelGroups.find(item => item.groupName === groupName);
+  // console.log(theRightGroup);
+
+  // theRightGroup.labels.push(theLabel);
+  theRightGroup.labels = [theLabel, ...theRightGroup.labels];
+
+  return labelGroups.get(activePartcode);
+
+};
+
+
 const updateLabelGroupByPartcode = (activePartcode, pendingLabelGroup, newGroupName) => {
 
   if (labelGroups.has(activePartcode)) {
@@ -125,6 +142,7 @@ const connect = {
     getLabelGroupsByPartcode,
     getLabelsByGroup,
     updateLabelGroupByPartcode,
+    addToLabelGroup,
   }
 };
 
