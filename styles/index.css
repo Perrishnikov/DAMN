@@ -96,6 +96,8 @@ section {
   box-sizing: border-box;
   background-color: var(--white-ter);
   border-radius: var(--p-4px);
+  display: flex;
+  align-items: center;
 }
 .component-item:hover {
   font-weight: var(--weight-bold);
@@ -103,6 +105,12 @@ section {
 }
 .component-item.selected {
   background-color: var(--grey-lighter);
+}
+[data-deletecomponentitem]:hover{
+  cursor: pointer;
+  color: var(--danger);
+  stroke: var(--danger);
+  stroke-width: 2px;
 }
 
 /* end COPONENTS ***************************/

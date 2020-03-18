@@ -18,7 +18,7 @@ const addToLabelGroup = (activePartcode, groupName, labelName) => {
 };
 
 
-const updateLabelGroupByPartcode = (activePartcode, pendingLabelGroup, newGroupName) => {
+const addLabelGroupByPartcode = (activePartcode, pendingLabelGroup, newGroupName) => {
 
   if (labelGroups.has(activePartcode)) {
 
@@ -37,6 +37,25 @@ const updateLabelGroupByPartcode = (activePartcode, pendingLabelGroup, newGroupN
     console.warn('partcode not found');
   }
 };
+
+
+const removeLabelGroupByGroupName = (activePartcode, groupName) => {
+
+  if (labelGroups.has(activePartcode)) {
+
+    let filtered = [...labelGroups.get(activePartcode)].filter(item => item.groupName !== groupName);
+    console.log(filtered);
+
+    return labelGroups.set(activePartcode, filtered);
+
+    // console.log(labelGroups.get(activePartcode));
+    // const newGroup = new LabelGroup(newGroupName, ls);
+  }
+  else {
+    console.warn('partcode not found');
+  }
+};
+
 
 const getLabelGroupsByPartcode = partcode => {
   // let o = {
@@ -141,8 +160,9 @@ const connect = {
   labelGroups: {
     getLabelGroupsByPartcode,
     getLabelsByGroup,
-    updateLabelGroupByPartcode,
+    addLabelGroupByPartcode,
     addToLabelGroup,
+    removeLabelGroupByGroupName,
   }
 };
 

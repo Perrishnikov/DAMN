@@ -10,6 +10,7 @@ import {
   reset,
   appendPendingLabelGroup,
   deletePendingLabelGroup,
+  removeFromPendingLabelGroup,
   setLabelGroupStatusByGroupName,
   createNewLabelGroup,
   mainReducer
@@ -289,6 +290,8 @@ function addListeners() {
     const labelCreateGroup = e.target.closest('#labelCreateGroup');
     const labelDiscardGroup = e.target.closest('#labelDiscardGroup');
     const dataGroup = e.target.closest('[data-group');
+    const labelDelete = document.querySelector('#labelDelete');
+    const deleteComponentitem = e.target.closest('[data-deletecomponentitem');
 
     e.preventDefault();
 
@@ -300,6 +303,20 @@ function addListeners() {
       const groupName = dataGroup.dataset.group;
 
       updateLabelGroupStatus(activePartcode, groupName, 'ACTIVE');
+    }
+
+    if (deleteComponentitem) {
+      const labelName = labelSelected.dataset.name;
+
+      store.dispatch(removeFromPendingLabelGroup(labelName));
+    }
+
+    if (labelDelete) {
+      const activePartcode = store.getState().activePartcode;
+      const groupName = dataGroup.dataset.group;
+
+      connect.labelGroups.removeLabelGroupByGroupName(activePartcode, groupName);
+      rerenderDOM();
     }
 
     if (labelReject) {
@@ -324,7 +341,7 @@ function addListeners() {
       const pendingLabelGroup = store.getState().pendingLabelGroup;
       // console.log(pendingLabelGroup);
 
-      const updatedGroups = connect.labelGroups.updateLabelGroupByPartcode(
+      const updatedGroups = connect.labelGroups.addLabelGroupByPartcode(
         activePartcode,
         pendingLabelGroup,
         newGroupName);

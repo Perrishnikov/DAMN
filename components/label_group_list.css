@@ -10,7 +10,12 @@
   color: var(--success);
   border: 1px solid var(--success);
 }
-
+#labelDelete{
+  background-color: transparent;
+  border-color: var(--danger);
+  color: var(--danger);
+  border: 1px solid var(--danger);
+}
 
 .labelGroupStatus {
   align-items: center;

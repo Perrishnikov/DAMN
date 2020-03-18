@@ -9,6 +9,7 @@ const RESET = 'RESET';
 const APPEND_PENDING_LABEL_GROUP = 'APPEND_PENDING_LABEL_GROUP';
 const DELETE_PENDING_LABEL_GROUP = 'DELETE_PENDING_LABEL_GROUP';
 const CREATE_NEW_LABEL_GROUP = 'CREATE_NEW_LABEL_GROUP';
+const REMOVE_FROM_PENDING_LABEL_GROUP = 'REMOVE_FROM_PENDING_LABEL_GROUP';
 
 /** 
  * ACTIONS 
@@ -17,6 +18,13 @@ export function setLabelListPartcode(partcode) {
   return {
     type: SET_LABELLIST_PARTCODE,
     partcode
+  };
+}
+
+export function removeFromPendingLabelGroup (labelName){
+  return {
+    type: REMOVE_FROM_PENDING_LABEL_GROUP,
+    labelName
   };
 }
 
@@ -124,19 +132,15 @@ export const mainReducer = (previous = {}, action) => produce(previous, draft =>
       return;
     }
 
-    case CREATE_NEW_LABEL_GROUP: {
+    // case CREATE_NEW_LABEL_GROUP: {
       
+    //   return;
+    // }
 
-      let g = previous.labelGroups;
+    case REMOVE_FROM_PENDING_LABEL_GROUP: {
+      previous.pendingLabelGroup.delete(action.labelName);
 
-      // for (let [key, value] of g) {
-      //   console.log(key + ' = ' + value)
-      // }
-      // console.log(g);
-      // console.log(action);
-      // g.set(action.partcode, action.group);
-
-      // draft.labelGroups.set(action.partcode , g);
+      draft.pendingLabelGroup = new Map(previous.pendingLabelGroup);
       return;
     }
 

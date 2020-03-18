@@ -9,7 +9,8 @@ const weHaveLabels = (selectedLabel, labels) => {
       return `
         <div data-name=${label.prefix.name}${label.partcode}.${label.version} class="component-item ${isSelected}">
           <span style="font-weight: 600;">${label.prefix.type}</span>
-          <span> - ${label.name}</span>
+          <span style="flex-grow:1"> - ${label.name}</span>
+          <svg data-deleteComponentItem="${label.name}" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="bevel"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
         </div>`;
     }).join('')}
     `;
@@ -35,7 +36,7 @@ const label_group_new = (partcode, pendingLabelGroup, selectedLabel) => {
       <div class="label-group">
         <div id="" class="component-head">
           <span>Group Name:</span>
-          <input id="newLabelGroupName" value="placeholder"></input>
+          <input id="newLabelGroupName" value="placeholder">
         </div>
 
       
@@ -43,7 +44,7 @@ const label_group_new = (partcode, pendingLabelGroup, selectedLabel) => {
 
         <div class="flex-row button-box">
           <a id="labelCreateGroup" class="button">Create Group</a>
-          <a id="labelDiscardGroup" class="button">Discard</a>
+          <a id="labelDiscardGroup" class="button">Discard Group</a>
         </div>
         
       </div>
