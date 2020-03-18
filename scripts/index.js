@@ -290,7 +290,7 @@ function addListeners() {
     const labelCreateGroup = e.target.closest('#labelCreateGroup');
     const labelDiscardGroup = e.target.closest('#labelDiscardGroup');
     const dataGroup = e.target.closest('[data-group');
-    const labelDelete = document.querySelector('#labelDelete');
+    const labelDelete = e.target.closest('#labelDelete');
     const deleteComponentitem = e.target.closest('[data-deletecomponentitem');
 
     e.preventDefault();
@@ -312,6 +312,7 @@ function addListeners() {
     }
 
     if (labelDelete) {
+      console.log(`labelDelete`);
       const activePartcode = store.getState().activePartcode;
       const groupName = dataGroup.dataset.group;
 
@@ -352,6 +353,7 @@ function addListeners() {
 
 
     if (removeActivePartcode) {
+      console.log(`removeActivePartcode`);
       store.dispatch(reset());
     }
 
