@@ -7,6 +7,7 @@ const label_new = partcode => {
       <path d="M14 3v5h5M18 21v-6M15 18h6" /></svg>
     
       <div class="component-head">Drag and Drop New Label</div>
+      
     </div>
 
   `;

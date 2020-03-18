@@ -20,8 +20,10 @@ const label_group_list = (selectedLabel, labelGroups) => {
   if (labelGroups && labelGroups.length > 1) {
 
     return `
-    <div id="" class="flex-row">
-      <div class="component-head">Label Group List</div>
+    <div id="" class="flex-col component-head">
+      <div class="flex-row">
+        <span>Label Group List</span>
+      </div>
     </div>
 
     
@@ -68,6 +70,7 @@ const label_group_list = (selectedLabel, labelGroups) => {
           ${group.status === 'REJECTED' ? `
             <div style="margin-left:8px;padding:4px;">
               <a class="button" id="labelActivate">ACTIVATE</a>
+              <a class="button" id="labelDelete">DELETE</a>
             </div>
             ` : ``}
 

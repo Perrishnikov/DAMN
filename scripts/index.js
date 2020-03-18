@@ -439,7 +439,7 @@ function addDragListeners() {
 
 
       if (pending) {
-        pending.classList.add('dnd-labelGroup-target', 'active');
+        pending.classList.add('grow', 'dnd-labelGroup-target', 'active');
       } else {
         document.querySelector('.dnd-labelGroup-target').classList.add('active');
         return;

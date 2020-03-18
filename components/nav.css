@@ -53,7 +53,7 @@
   outline: 0;
 }
 /* Maximum width */
-@media (max-width: 839px) {
+@media (max-width: 840px) {
   .nav-search {
     width: 25%;
   }

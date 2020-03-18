@@ -18,6 +18,10 @@ const weHaveLabels = (selectedLabel, labels) => {
 
 const label_group_new = (partcode, pendingLabelGroup, selectedLabel) => {
   // console.log(pendingLabelGroup.size);
+  if(pendingLabelGroup.size > 0){
+    document.querySelector('#label_group_new').classList.add('grow');
+  }
+
   if (partcode) {
     return `
     <div id="" class="flex-row">
@@ -35,13 +39,14 @@ const label_group_new = (partcode, pendingLabelGroup, selectedLabel) => {
         </div>
 
       
-    ${weHaveLabels(selectedLabel, pendingLabelGroup)}
+        ${weHaveLabels(selectedLabel, pendingLabelGroup)}
 
-      <div class="flex-row button-box">
-        <a id="labelCreateGroup" class="button">Create Group</a>
-        <a id="labelDiscardGroup" class="button">Discard</a>
+        <div class="flex-row button-box">
+          <a id="labelCreateGroup" class="button">Create Group</a>
+          <a id="labelDiscardGroup" class="button">Discard</a>
+        </div>
+        
       </div>
-    </div>
     ` : ''}
     
     
