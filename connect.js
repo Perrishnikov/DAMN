@@ -35,6 +35,16 @@ const addLabelGroupByPartcode = (activePartcode, pendingLabelGroup, newGroupName
   }
   else {
     console.warn('partcode not found');
+    const ls = [...pendingLabelGroup].map(([key, value]) => {
+      return value;
+    });
+
+    const newGroup = new LabelGroup(newGroupName, ls);
+
+    labelGroups.set(activePartcode, [newGroup]);
+
+    console.log(labelGroups);
+    return labelGroups.get(activePartcode);
   }
 };
 

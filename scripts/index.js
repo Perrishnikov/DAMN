@@ -58,7 +58,7 @@ function rerenderDOM() {
 
   //States....
   const activePartcode = store.getState().activePartcode;
-  // console.log(`activePartcode: ${activePartcode}`);
+  console.log(`activePartcode: ${activePartcode}`);
   const labelListPartcode = store.getState().labelListPartcode;
   // console.log(`labelListPartcode: ${labelListPartcode}`);
   const selectedLabel = store.getState().selectedLabel;
@@ -73,7 +73,7 @@ function rerenderDOM() {
   // console.log(associatedLabels);
 
   const associatedGroups = connect.labelGroups.getLabelGroupsByPartcode(activePartcode);
-  // console.log(associatedGroups);
+  console.log(associatedGroups);
 
   const prefixes = connect.prefixes.getAllPrefixes();
 
@@ -336,7 +336,7 @@ function addListeners() {
     if (labelCreateGroup) {
       console.log(`labelCreateGroup`);
       const activePartcode = store.getState().activePartcode;
-      // console.log(`activePartcode: ${activePartcode}`);
+      console.log(`activePartcode: ${activePartcode}`);
       const newGroupName = document.querySelector('#newLabelGroupName').value;
 
       const pendingLabelGroup = store.getState().pendingLabelGroup;
@@ -348,7 +348,7 @@ function addListeners() {
         newGroupName);
 
 
-      store.dispatch(deletePendingLabelGroup());
+      store.dispatch(deletePendingLabelGroup(activePartcode));
     }
 
 

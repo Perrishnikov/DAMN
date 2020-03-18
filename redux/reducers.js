@@ -74,9 +74,10 @@ export function createNewLabelGroup({group, partcode}){
   };
 }
 
-export function deletePendingLabelGroup(){
+export function deletePendingLabelGroup(activePartcode){
   return {
-    type: DELETE_PENDING_LABEL_GROUP
+    type: DELETE_PENDING_LABEL_GROUP,
+    activePartcode
   };
 }
 
@@ -112,7 +113,8 @@ export const mainReducer = (previous = {}, action) => produce(previous, draft =>
     }
 
     case DELETE_PENDING_LABEL_GROUP: {
-
+      console.log(action);
+      draft.activePartcode = action.activePartcode,
       draft.pendingLabelGroup = new Map();
       return;
     }

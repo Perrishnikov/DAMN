@@ -21,7 +21,7 @@ const weHaveLabels = (selectedLabel, labels, status) => {
 
 const label_group_list = (selectedLabel, labelGroups) => {
 
-  if (labelGroups && labelGroups.length > 1) {
+  if (labelGroups && labelGroups.length > 0) {
 
     return `
     <div id="" class="flex-row">

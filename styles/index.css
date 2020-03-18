@@ -57,7 +57,7 @@ section {
   /* flex: 0 1 auto; */
 }
 .grow{
-  flex-grow: 1;
+  /* flex-grow: 1; */
   flex-shrink: 0;
 }
 .component.empty {
