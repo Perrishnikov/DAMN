@@ -2,10 +2,10 @@ const weHaveLabels = (selectedLabel, labels, status) => {
 
   return `
     ${labels.map(label => {
-      // console.log(label);
-      const isSelected = selectedLabel.name == label.name ? 'selected' : '';
+    // console.log(label);
+    const isSelected = selectedLabel.name == label.name ? 'selected' : '';
 
-      return `
+    return `
         <div data-name=${label.prefix.name}${label.partcode}.${label.version} class="component-item ${isSelected}">
           <span style="font-weight: 600;">${label.prefix.type}</span>
           <span style="flex-grow:1"> - ${label.name}</span>
@@ -15,7 +15,7 @@ const weHaveLabels = (selectedLabel, labels, status) => {
           `: ``}
           
         </div>`;
-    }).join('')}
+  }).join('')}
     `;
 };
 
@@ -32,13 +32,13 @@ const label_group_list = (selectedLabel, labelGroups) => {
     ${[...labelGroups].map(group => {
       let status = '';
 
-      switch(group.status){
+      switch (group.status) {
         case 'ACTIVE': status = 'is-info';
-        break;
+          break;
         case 'PENDING': status = 'is-warning';
-        break;
+          break;
         case 'REJECTED': status = 'is-danger';
-        break;
+          break;
         default: '';
       }
 
@@ -51,7 +51,7 @@ const label_group_list = (selectedLabel, labelGroups) => {
 
             ${group.status === 'PENDING' ? `
               <div contenteditable="true" id="pendingName">${group.groupName}</div>
-              `:`
+              `: `
               <span class="">${group.groupName}</span>
               `}
 
@@ -62,10 +62,17 @@ const label_group_list = (selectedLabel, labelGroups) => {
               
             </div>
             
-            <span class="sinceDate">Since ${group.statusDate}</span>
+            <span class="sinceDate">Since ${group.date}</span>
 
           </div>
-          
+          <div class="component-subComp">
+            <div style="flex-shrink:0">Description:</div>
+            <div contenteditable="false" id="pendingLabelGroupDescription">${group.description}</div>
+          </div>
+          <div class="component-subComp">
+            <div style="flex-shrink:0">User:</div>
+            <div contenteditable="false" >${group.user}</div>
+          </div>
 
           ${weHaveLabels(selectedLabel, group.labels, group.status)}
           
@@ -78,7 +85,7 @@ const label_group_list = (selectedLabel, labelGroups) => {
 
           ${group.status === 'REJECTED' ? `
             <div style="margin-left:8px;padding:4px;">
-              <a class="button" id="labelActivate">ACTIVATE</a>
+              <!--<a class="button" id="labelPend">PENDING</a>-->
               <a style="margin-left:8px;" class="button" id="labelDelete">DELETE</a>
             </div>
             ` : ``}

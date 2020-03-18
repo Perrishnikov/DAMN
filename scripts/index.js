@@ -73,7 +73,7 @@ function rerenderDOM() {
   // console.log(associatedLabels);
 
   const associatedGroups = connect.labelGroups.getLabelGroupsByPartcode(activePartcode);
-  console.log(associatedGroups);
+  // console.log(associatedGroups);
 
   const prefixes = connect.prefixes.getAllPrefixes();
 
@@ -162,7 +162,8 @@ function handleLabelSelect(labelName) {
  * @param {*} groupName 
  * @param {*} newStatus 
  */
-function updateLabelGroupStatus(activePartcode, groupName, newStatus) {
+function updateLabelGroupStatus(activePartcode, metaData, newStatus) {
+  const { groupName, description, user = '', timeStamp } = metaData;
   const associatedGroups = connect.labelGroups.getLabelGroupsByPartcode(activePartcode);
   const groupToUpdate = associatedGroups.find(group => group.groupName === groupName);
 
@@ -175,15 +176,21 @@ function updateLabelGroupStatus(activePartcode, groupName, newStatus) {
     const otherActive = associatedGroups.find(group => group.status === newStatus);
     otherActive.status = 'HISTORY';
 
-    groupToUpdate.imageDate = 'Date.Now()';
-    groupToUpdate.imagePerson = 'Logged In User';
+    // groupToUpdate.imageDate = timeStampe;
+    // groupToUpdate.imagePerson = user;
+    groupToUpdate.user = user;
+    groupToUpdate.date = timeStamp;
     groupToUpdate.status = newStatus;
+    groupToUpdate.description = description;
 
   } else if (newStatus === 'REJECTED') {
 
-    groupToUpdate.labelPerson = 'Logged in User';
-    groupToUpdate.labelDate = 'Date.Now()';
+    // groupToUpdate.labelPerson = user;
+    // groupToUpdate.labelDate = timeStampe;
+    groupToUpdate.user = user;
+    groupToUpdate.date = timeStamp;
     groupToUpdate.status = newStatus;
+    groupToUpdate.description = description;
 
   } else if (newStatus === 'PENDING') {
     const otherPending = associatedGroups.find(group => group.status === newStatus);
@@ -196,7 +203,7 @@ function updateLabelGroupStatus(activePartcode, groupName, newStatus) {
     }
   }
 
-  console.log(groupToUpdate);
+  // console.log(groupToUpdate);
   rerenderDOM();
 }
 
@@ -286,6 +293,7 @@ function addListeners() {
     const createPartcode = e.target.closest('[data-createPartcode]');
     const cancelPartcode = document.querySelector('#cancelPartcode');
     const labelActivate = e.target.closest('#labelActivate');
+    const labelPend = e.target.closest('#labelPend');
     const labelReject = e.target.closest('#labelReject');
     const labelCreateGroup = e.target.closest('#labelCreateGroup');
     const labelDiscardGroup = e.target.closest('#labelDiscardGroup');
@@ -297,12 +305,37 @@ function addListeners() {
 
     // handleNewLabelDnd();
 
+    if (labelPend) {
+      console.log(`labelPend`);
+      // const activePartcode = store.getState().activePartcode;
+      // // console.log(`activePartcode: ${activePartcode}`);
+      // const pendGroupName = document.querySelector('#dataGroup').dataset.group;
+
+      // const updatedGroups = connect.labelGroups.addLabelGroupByPartcode({
+      //   activePartcode,
+      //   pendingLabelGroup,
+      //   newGroupName: pendGroupName,
+      //   user: 'Perry',
+      //   date: `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`,
+      //   description: document.querySelector('#pendingLabelGroupDescription').textContent,
+      // });
+
+    }
+
+
     if (labelActivate) {
       console.log(`labelActivate`);
       const activePartcode = store.getState().activePartcode;
-      const groupName = dataGroup.dataset.group;
+      console.dir(document.querySelector('#pendingLabelGroupDescription'));
+      // const groupName = dataGroup.dataset.group;
+      const metaData = {
+        groupName: dataGroup.dataset.group,
+        description: document.querySelector('#pendingLabelGroupDescription').textContent,
+        user: 'Perry',
+        timeStamp: `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`,
+      };
 
-      updateLabelGroupStatus(activePartcode, groupName, 'ACTIVE');
+      updateLabelGroupStatus(activePartcode, metaData, 'ACTIVE');
     }
 
     if (deleteComponentitem) {
@@ -323,9 +356,15 @@ function addListeners() {
     if (labelReject) {
       console.log(`labelReject`);
       const activePartcode = store.getState().activePartcode;
-      const groupName = dataGroup.dataset.group;
+      const metaData = {
+        groupName: dataGroup.dataset.group,
+        description: document.querySelector('#pendingLabelGroupDescription').textContent,
+        user: 'Perry',
+        timeStamp: `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`,
+      };
+      // const groupName = dataGroup.dataset.group;
 
-      updateLabelGroupStatus(activePartcode, groupName, 'REJECTED');
+      updateLabelGroupStatus(activePartcode, metaData, 'REJECTED');
     }
 
     if (labelDiscardGroup) {
@@ -336,17 +375,24 @@ function addListeners() {
     if (labelCreateGroup) {
       console.log(`labelCreateGroup`);
       const activePartcode = store.getState().activePartcode;
-      console.log(`activePartcode: ${activePartcode}`);
-      const newGroupName = document.querySelector('#newLabelGroupName').value;
+      // console.log(`activePartcode: ${activePartcode}`);
+      const newGroupName = document.querySelector('#newLabelGroupName').textContent;
 
+      // console.log(`newGroupName: ${newGroupName}`);
       const pendingLabelGroup = store.getState().pendingLabelGroup;
       // console.log(pendingLabelGroup);
 
-      const updatedGroups = connect.labelGroups.addLabelGroupByPartcode(
+      // console.dir(document.querySelector('#newLabelGroupDescription').textContent);
+      const updatedGroups = connect.labelGroups.addLabelGroupByPartcode({
         activePartcode,
         pendingLabelGroup,
-        newGroupName);
+        newGroupName,
+        user: 'Perry',
+        date: `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`,
+        description: document.querySelector('#newLabelGroupDescription').textContent,
+      });
 
+      // console.log(updatedGroups);
 
       store.dispatch(deletePendingLabelGroup(activePartcode));
     }

@@ -51,6 +51,12 @@ const label_details = params => {
           <div class="label-detail-detail" style="font-size:.8rem;" contenteditable="true"> ${selectedLabel.context}</div>
         </div>
         
+        <!-- url -->
+        <div class="label-detail-sub">
+          <span class="label-detail-label">url:</span>
+          <div class="label-detail-detail" style="font-size:.8rem;" contenteditable="true"> //location/...</div>
+        </div>
+
         <!-- meta -->
         <div class="label-detail-sub">
           <span class="label-detail-label">Meta:</span>

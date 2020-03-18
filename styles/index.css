@@ -53,10 +53,10 @@ section {
   min-height: 32px;
   margin-bottom: var(--p-12px);
   overflow-y: scroll;
-  
+
   /* flex: 0 1 auto; */
 }
-.grow{
+.grow {
   /* flex-grow: 1; */
   flex-shrink: 0;
 }
@@ -80,13 +80,49 @@ section {
   stroke-width: 2px;
 }
 .component-head>input {
+  /* width: 100%;
   margin-left: var(--p-12px);
   outline: 0;
   border: 0;
   border-radius: var(--p-4px);
   box-sizing: border-box;
   padding: var(--p-4px);
+  border: 1px solid var(--text-strong); */
+  background-color: red;
+}
+.component-subComp {
+  font-size: var(--size-small);
+  padding: var(--p-8px);
+  min-height: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: var(--weight-bold);
+  flex-wrap: nowrap;
+}
+.component-subComp>div[contenteditable="true"] {
+  font-weight: var(--weight-normal);
+  width: 100%;
+  font-size: var(--size-small);
+  margin-left: var(--p-4px);
+  outline: 0;
+  border-radius: var(--p-4px);
+  box-sizing: border-box;
+  padding: var(--p-4px);
   border: 1px solid var(--text-strong);
+}
+.component-subComp>div[contenteditable="false"] {
+  font-weight: var(--weight-normal);
+  width: 100%;
+  font-size: var(--size-small);
+  margin-left: var(--p-4px);
+  outline: 0;
+  border: 0;
+  border-radius: var(--p-4px);
+  box-sizing: border-box;
+  /* padding: var(--p-4px); */
+  /* border: 1px solid var(--text-strong); */
 }
 .component-item {
   font-size: var(--size-small);
@@ -106,7 +142,7 @@ section {
 .component-item.selected {
   background-color: var(--grey-lighter);
 }
-[data-deletecomponentitem]:hover{
+[data-deletecomponentitem]:hover {
   cursor: pointer;
   color: var(--danger);
   stroke: var(--danger);

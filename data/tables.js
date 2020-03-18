@@ -1,3 +1,4 @@
+
 const TYPE = {
   LABEL: 'LABEL',
   CARTON: 'CARTON',
@@ -208,8 +209,10 @@ export const labelGroups = new Map([
   ['00039', [
     {
       // partcode: partcodes.get('00039'),
-      date: '',
+      date: `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`,
       groupName: 'LG0005',
+      description: 'This was a fine label update. So much to do and so little time.',
+      user: 'Joe Employee',
       status: LABEL_GROUP_STATUS.PENDING,
       statusDate: '2020-10-03',
       labelDate: '2020-10-03',
@@ -225,6 +228,7 @@ export const labelGroups = new Map([
       // partcode: partcodes.get('00039'),
       date: '',
       groupName: 'LG0003',
+      description: '',
       status: LABEL_GROUP_STATUS.ACTIVE,
       statusDate: '2020-11-03',
       labelDate: '2020-10-03',
@@ -239,6 +243,7 @@ export const labelGroups = new Map([
       // partcode: partcodes.get('00039'),
       date: '',
       groupName: 'LG0002',
+      description: '',
       comment: '',
       status: LABEL_GROUP_STATUS.HISTORY,
       labels: [
@@ -251,6 +256,7 @@ export const labelGroups = new Map([
       // partcode: partcodes.get('00039'),
       date: '',
       groupName: 'LG0001',
+      description: '',
       status: LABEL_GROUP_STATUS.HISTORY,
       labels: [
         labels.get('LBN00039.N01')
@@ -260,11 +266,15 @@ export const labelGroups = new Map([
 ]);
 
 export class LabelGroup {
-  constructor(groupName, newLabels){
-    this.date = '2050-12-30';
-    this.groupName = groupName;
+  constructor(params){
+    const { newGroupName, newLabels, date, user, description } = params;
+
+    this.date = date;
+    this.user = user;
+    this.description = description;
+    this.groupName = newGroupName;
     this.status = LABEL_GROUP_STATUS.PENDING;
-    this.statusDate = 'Date.Now()';
+    this.statusDate = date;
     this.labelDate = '';
     this.labelPerson = 'Logged In User';
     this.imageDate = '';

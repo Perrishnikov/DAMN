@@ -34,9 +34,13 @@ const label_group_new = (partcode, pendingLabelGroup, selectedLabel) => {
 
     ${pendingLabelGroup.size > 0 ? `
       <div class="label-group">
-        <div id="" class="component-head">
-          <span>Group Name:</span>
-          <input id="newLabelGroupName" value="placeholder">
+        <div class="component-subComp">
+          <div style="flex-shrink:0">Group Name*:</div>
+          <div contenteditable="true" id="newLabelGroupName">required</div>
+        </div>
+        <div class="component-subComp">
+          <div style="flex-shrink:0">Description:</div>
+          <div contenteditable="true" id="newLabelGroupDescription"></div>
         </div>
 
       

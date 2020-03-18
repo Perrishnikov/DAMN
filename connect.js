@@ -18,15 +18,17 @@ const addToLabelGroup = (activePartcode, groupName, labelName) => {
 };
 
 
-const addLabelGroupByPartcode = (activePartcode, pendingLabelGroup, newGroupName) => {
+const addLabelGroupByPartcode = (params) => {
+  let { activePartcode, pendingLabelGroup, newGroupName, date, user, description } = params;
 
   if (labelGroups.has(activePartcode)) {
 
-    const ls = [...pendingLabelGroup].map(([key, value]) => {
+    const newLabels = [...pendingLabelGroup].map(([key, value]) => {
       return value;
     });
 
-    const newGroup = new LabelGroup(newGroupName, ls);
+    const newGroup = new LabelGroup({ newGroupName, newLabels, date, user, description });
+    // console.log(newGroup);
     const oldGroups = labelGroups.get(activePartcode);
 
     labelGroups.set(activePartcode, [newGroup, ...oldGroups]);
@@ -35,11 +37,11 @@ const addLabelGroupByPartcode = (activePartcode, pendingLabelGroup, newGroupName
   }
   else {
     console.warn('partcode not found');
-    const ls = [...pendingLabelGroup].map(([key, value]) => {
+    const newLabels = [...pendingLabelGroup].map(([key, value]) => {
       return value;
     });
 
-    const newGroup = new LabelGroup(newGroupName, ls);
+    const newGroup = new LabelGroup({ newGroupName, newLabels, date, user, description });
 
     labelGroups.set(activePartcode, [newGroup]);
 
