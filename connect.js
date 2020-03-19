@@ -1,4 +1,26 @@
-import { partcodes, labels, PREFIXES, labelGroups, LabelGroup } from '../data/tables.js';
+import { partcodes, labels, PREFIXES, labelGroups, LabelGroup, images } from '../data/tables.js';
+
+
+const getImagesByPartcode = partcode => {
+  const a = [];
+
+  if (images) {
+    // let i = images.get(partcode);
+
+    [...images.get(partcode)].forEach(image => {
+
+      // console.log(`partcode: ${partcode} - key: ${key}, value...`,value);
+
+      if (image.partcode === partcode) {
+
+        a.push(image);
+      }
+    });
+  }
+
+
+  return a;
+};
 
 
 const addToLabelGroup = (activePartcode, groupName, labelName) => {
@@ -175,6 +197,9 @@ const connect = {
     addLabelGroupByPartcode,
     addToLabelGroup,
     removeLabelGroupByGroupName,
+  },
+  images: {
+    getImagesByPartcode
   }
 };
 
