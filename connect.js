@@ -1,5 +1,5 @@
 // !github 
-import { partcodes, labels, PREFIXES, labelGroups, LabelGroup } from 'data/tables.js'; 
+import { partcodes, labels, PREFIXES, labelGroups, LabelGroup } from '/data/tables.js'; 
 //! local
 // import { partcodes, labels, PREFIXES, labelGroups, LabelGroup } from './data/tables.js'
 
