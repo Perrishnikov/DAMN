@@ -1,4 +1,3 @@
-
 const TYPE = {
   LABEL: 'LABEL',
   CARTON: 'CARTON',

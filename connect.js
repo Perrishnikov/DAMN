@@ -1,4 +1,4 @@
-import { partcodes, labels, PREFIXES, labelGroups, LabelGroup } from '../data/tables.js';
+import { partcodes, labels, PREFIXES, labelGroups, LabelGroup } from './tables.js';
 
 
 const addToLabelGroup = (activePartcode, groupName, labelName) => {
