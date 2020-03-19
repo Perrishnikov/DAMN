@@ -5,7 +5,7 @@ import { partcodes, labels, PREFIXES, labelGroups, LabelGroup, images } from '/D
 const getImagesByPartcode = partcode => {
   const a = [];
 
-  if (partcode) {
+  if (partcode && images.get(partcode)) {
     // let i = images.get(partcode);
 
     [...images.get(partcode)].forEach(image => {
