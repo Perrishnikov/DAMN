@@ -23,6 +23,7 @@ import label_new from '../components/label_new.js';
 import label_details from '../components/label_details.js';
 import image_new from '../components/image_new.js';
 import images_list from '../components/images_list.js';
+import image_groups from '../components/image_groups.js';
 import nav from '../components/nav.js';
 
 /** @type {import('../redux/types').Redux} */
@@ -42,6 +43,7 @@ const handle = {
   label_dnd: document.querySelector('#label_dnd'),
   image_new: document.querySelector('#image_new'),
   images_list: document.querySelector('#images_list'),
+  image_groups: document.querySelector('#image_groups'),
 };
 
 
@@ -62,24 +64,24 @@ function rerenderDOM() {
   const labelListPartcode = store.getState().labelListPartcode;
   // console.log(`labelListPartcode: ${labelListPartcode}`);
   const selectedLabel = store.getState().selectedLabel;
-
   const pendingLabelGroup = store.getState().pendingLabelGroup;
 
   //Database connections... 
   // if labelListSearchPartcode use it, if not, use activePartcode
   const associatedLabels = connect.labels.getLabelsByPartcode(
     labelListPartcode ? labelListPartcode : activePartcode);
-
   // console.log(associatedLabels);
-
   const associatedGroups = connect.labelGroups.getLabelGroupsByPartcode(activePartcode);
   // console.log(associatedGroups);
-
   const prefixes = connect.prefixes.getAllPrefixes();
 
-  const selectedImage = ''; //! 
-  const associatedImages = ''; //! 
-
+  /** Images */
+  const imageListPartcode = store.getState().imageListPartcode;
+  // console.log(`imageListPartcode: ${imageListPartcode}`);
+  const selectedImage = store.getState().selectedImage; 
+  const associatedImages = connect.images.getImagesByPartcode(
+    imageListPartcode == '' ? activePartcode : imageListPartcode
+  );
 
   /** Nav */
   render(handle.nav, nav({ activePartcode }));
@@ -94,15 +96,16 @@ function rerenderDOM() {
 
   /** 2nd col */
   /* New Label */
-  render(handle.label_new, label_new(activePartcode));
-  /* Labels List */
-  render(handle.labels_list, labels_list({
-    activePartcode,
-    selectedLabel,
-    associatedLabels
-  })
-  );
-
+  {
+    render(handle.label_new, label_new(activePartcode));
+    /* Labels List */
+    render(handle.labels_list, labels_list({
+      activePartcode,
+      selectedLabel,
+      associatedLabels
+    })
+    );
+  }
   /** 3rd col */
   {
     /* Label Groups New */
@@ -110,22 +113,23 @@ function rerenderDOM() {
     /* Label Groups for partcode */
     render(handle.label_group_list, label_group_list(
       selectedLabel,
-      // selectedLabelGroup,
       associatedGroups)
     );
   }
 
 
-
   /** 4th column Images */
   {
-    render(handle.image_new, image_new(activePartcode));
-    render(handle.images_list, images_list(
+    render(handle.images_list, images_list({
+      activePartcode,
       selectedImage,
       associatedImages
-    ));
+    }));
+    render(handle.image_groups, image_groups({activePartcode}));
   }
 
+  /** 5th column Images */
+  render(handle.image_new, image_new(activePartcode));
 
 
   if (store.getState().devMode) {

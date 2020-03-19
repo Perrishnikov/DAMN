@@ -1,22 +1,36 @@
-const image_list = (selectedLabel, labels) => {
+const images_list = (params) => {
 
-  // console.log(lables);
-  if (labels.length > 0) {
-    const partcode = labels[0].partcode;
+  const {activePartcode, selectedImage, associatedImages = null} = params;
+
+  // console.log(`activePartcode in imagea_list: ${activePartcode}`);
+  // console.log(associatedImages);
+  
+  if (activePartcode) {
+    const partcode = associatedImages && associatedImages.length > 0 ? associatedImages[0].partcode : '';
+    // console.log(`partcode: ${partcode}`);
+    const notMatched = partcode != activePartcode ? 'is-warning' : '' ;
 
     return `
       <div id="" class="flex-row">
-        <div class="component-head">Label List for 
-        <input value="${partcode}"></input>
+        <div class="component-head">Image List for 
+        <span>
+          <svg class="navIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7A7A7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="bevel">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input id="imagelListSearch" class="${notMatched} listSearch" value="${activePartcode}"></input>
+        </span>
+        
         </div>
       </div>
       <div class="label-group">
-        ${[...labels].map(label => {
+        ${associatedImages ? associatedImages.map(image => {
           // console.log(label);
-          const isSelected = selectedLabel.name == label.name ? 'selected' : '';
+          const isSelected = selectedImage.name == image.name ? 'selected' : '';
   
-          return `<div draggable="true" data-name=${label.prefix.name}${label.partcode}.${label.version} class="component-item dnd-item ${isSelected}">${label.name}</div>`;
-        }).join('')}
+          return `<div draggable="true" data-name=${image.name} class="component-item dnd-labelItem ${isSelected}">${image.name}</div>`;
+        }).join('') : ``}
+
       </div>
 
       `;
@@ -29,4 +43,4 @@ const image_list = (selectedLabel, labels) => {
   }
 };
 
-export default image_list;
+export default images_list;

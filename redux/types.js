@@ -68,7 +68,6 @@
 /** @type {State} */
 const defaultState = {
   devMode: false,
-  // isEditing: false,
   activePartcode: '00039',
   labelGroups: new Map(),
   pendingLabelGroup: new Map(),
@@ -77,7 +76,9 @@ const defaultState = {
     name: 'Perry',
     role: 'ADMIN' //ADMIN, LABEL, IMAGE
   },
+  selectedImage: '',
   selectedLabel: '',
+  imageListPartcode: '', //list search
 
   // {
   //   prefix: {

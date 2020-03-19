@@ -6,8 +6,8 @@ const TYPE = {
 
 const LABEL_GROUP_STATUS = {
   ACTIVE: 'ACTIVE',
-  HISTORY: 'HISTORY', 
-  PENDING:'PENDING', //label created group - its approved
+  HISTORY: 'HISTORY',
+  PENDING: 'PENDING', //label created group - its approved
   REJECTED: 'REJECTED' //kicked back from someone (image team)
 };
 
@@ -153,7 +153,7 @@ export const labels = new Map([
         LABEL_PDF_ACTIVE: '',
       }
     }
-  ],[
+  ], [
     'LBN00039C.A', {
       prefix: PREFIXES.get('LBN'),
       partcode: partcodes.get('00039C'),
@@ -171,7 +171,7 @@ export const labels = new Map([
         LABEL_PDF_ACTIVE: '',
       }
     }
-  ],[
+  ], [
     'LBN12434.V02', {
       prefix: PREFIXES.get('LBN'),
       partcode: partcodes.get('12434'),
@@ -192,8 +192,42 @@ export const labels = new Map([
   ]
 ]);
 
-const images = new Map([
-  ['00039', '00039.MAIN.01.jpg']
+export const images = new Map([
+  ['00039', [{
+    name: '00039.MAIN.01.jpg',
+    dateAdded: '',
+    bucket: 'MAIN',
+    partcode: partcodes.get('00039'),
+    number: '01',
+    extension: 'jpg',
+    user: '',
+    meta: {
+      misc: ''
+    }
+  }, {
+    name: '00039.MAIN.02.jpg',
+    dateAdded: '',
+    bucket: 'MAIN',
+    partcode: partcodes.get('00039'),
+    number: '02',
+    extension: 'jpg',
+    user: '',
+    meta: {
+      misc: ''
+    }
+  },]],
+  ['12434', [{
+    name: '12434.FACTS.01.jpg',
+    dateAdded: '',
+    bucket: 'FACTS',
+    partcode: partcodes.get('12434'),
+    number: '01',
+    extension: 'jpg',
+    user: '',
+    meta: {
+      misc: ''
+    }
+  }]]
 ]);
 
 /** 
@@ -265,7 +299,7 @@ export const labelGroups = new Map([
 ]);
 
 export class LabelGroup {
-  constructor(params){
+  constructor(params) {
     const { newGroupName, newLabels, date, user, description } = params;
 
     this.date = date;
@@ -279,6 +313,10 @@ export class LabelGroup {
     this.imageDate = '';
     this.imagePerson = '';
     this.labels = newLabels;
+    this.images = '';
   }
+
+  images = '';
+
 }
 

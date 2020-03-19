@@ -13,7 +13,7 @@ const labels_list = ({activePartcode, selectedLabel, associatedLabels = null}) =
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
-          <input id="labelListSearch" class="${notMatched}" value="${partcode}"></input>
+          <input id="labelListSearch" class="${notMatched} listSearch" value="${partcode}"></input>
         </span>
         
         </div>
