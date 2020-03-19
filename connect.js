@@ -1,5 +1,6 @@
-import { partcodes, labels, PREFIXES, labelGroups, LabelGroup, images } from '../data/tables.js';
-
+// import { partcodes, labels, PREFIXES, labelGroups, LabelGroup, images } from '../data/tables.js';
+//!for Github Pages
+import { partcodes, labels, PREFIXES, labelGroups, LabelGroup } from '/DAMN/data/tables.js'; 
 
 const getImagesByPartcode = partcode => {
   const a = [];
