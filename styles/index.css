@@ -60,11 +60,14 @@ section {
   /* flex-grow: 1; */
   flex-shrink: 0;
 }
-.component.empty {
+.empty {
   /* border:0; */
+  padding-left: var(--p-4px);
+  padding-right: var(--p-4px);
   min-height: 60px;
   border: 1px solid transparent;
   flex: 0 0 auto;
+  margin-bottom: var(--p-12px);
 }
 .component-head {
   font-size: var(--size-normal);
