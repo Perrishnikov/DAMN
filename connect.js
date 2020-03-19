@@ -1,5 +1,7 @@
-import { partcodes, labels, PREFIXES, labelGroups, LabelGroup } from './DAMN/data/tables.js';
-
+// !github 
+import { partcodes, labels, PREFIXES, labelGroups, LabelGroup } from './DAMN/data/tables.js'; 
+//! local
+// import { partcodes, labels, PREFIXES, labelGroups, LabelGroup } from './data/tables.js'
 
 const addToLabelGroup = (activePartcode, groupName, labelName) => {
   const theLabel = labels.get(labelName);
