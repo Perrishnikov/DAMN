@@ -1,7 +1,7 @@
 const image_list = (selectedLabel, labels) => {
 
   // console.log(lables);
-  if (labels.length > 1) {
+  if (labels.length > 0) {
     const partcode = labels[0].partcode;
 
     return `
